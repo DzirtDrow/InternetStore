@@ -17,11 +17,19 @@ public class AppController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    public String home(ModelMap model) {
+
+        return "index";
+    }
+
+
+    @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String listUsers(ModelMap model) {
         List<UserEntity> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        return "userslist";
+        //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!" + users);
+        return "list";
     }
 
 }

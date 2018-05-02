@@ -8,8 +8,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Users List</title>
-    <%--<link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>--%>
-    <%--<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>--%>
+    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -23,6 +23,8 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Email</th>
+                <th>Role</th>
+                <th>Birthdate</th>
 
             </tr>
             </thead>
@@ -32,6 +34,8 @@
                     <td>${user.name}</td>
                     <td>${user.lastName}</td>
                     <td>${user.email}</td>
+                    <td>${user.role}</td>
+                    <td>${user.date}</td>
                 </tr>
             </c:forEach>
             </tbody>
