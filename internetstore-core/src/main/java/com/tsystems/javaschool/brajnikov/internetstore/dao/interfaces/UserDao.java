@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.brajnikov.internetstore.dao;
+package com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces;
 
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.springframework.security.core.userdetails.User;

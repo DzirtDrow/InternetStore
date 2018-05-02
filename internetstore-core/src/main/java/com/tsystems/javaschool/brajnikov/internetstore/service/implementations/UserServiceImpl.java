@@ -1,14 +1,15 @@
-package com.tsystems.javaschool.brajnikov.internetstore.service;
+package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
-import com.tsystems.javaschool.brajnikov.internetstore.dao.UserDao;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
 
