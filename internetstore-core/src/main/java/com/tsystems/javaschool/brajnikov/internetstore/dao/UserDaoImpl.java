@@ -24,9 +24,6 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
 
     public UserEntity findById(int id) {
         UserEntity user = getByKey(id);
-//        if(user!=null){
-//            Hibernate.initialize(user.getName());
-//        }
         return user;
     }
 
@@ -36,7 +33,7 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
 
 
     public List<UserEntity> findAllUsers() {
-        Criteria criteria = createEntityCriteria().addOrder(Order.asc("firstName"));
+        Criteria criteria = createEntityCriteria().addOrder(Order.asc("email"));
         criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
         List<UserEntity> users = (List<UserEntity>) criteria.list();
 
