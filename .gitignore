@@ -27,3 +27,8 @@ hs_err_pid*
 /.idea/
 /src/
 /InternetStore.iml
+/internetstore-core/target/
+/out/
+/internetstore-core/lib/
+/internetstore-database/internetstore-database.iml
+/internetstore-web/internetstore-web.iml
