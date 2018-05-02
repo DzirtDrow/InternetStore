@@ -16,7 +16,14 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Testing");
+        System.out.println("Test");
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
+
+        session.beginTransaction();
+        UserEntity userEntity = session.get(UserEntity.class, 1);
+
+        session.close();
+        System.out.println(userEntity);
 
     }
 }
