@@ -9,7 +9,11 @@ public interface UserDao {
 
     UserEntity findById(int id);
 
+    UserEntity findByEmail(String email);
+
     void save(UserEntity user);
 
     List<UserEntity> findAllUsers();
+
+
 }

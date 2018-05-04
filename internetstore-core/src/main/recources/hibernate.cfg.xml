@@ -15,5 +15,6 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity"/>
+        <mapping class="com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity"/>
     </session-factory>
 </hibernate-configuration>

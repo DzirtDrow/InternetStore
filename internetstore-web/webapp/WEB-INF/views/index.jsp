@@ -9,9 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>AOUIBFousdnv;ousdbv;siodvn'sdojvb';o</title>
+    <title>Index</title>
   </head>
   <body>
-        Go to <a href="<c:url value='/list' />">Users List</a>
+        <input type="button" class="button" value="Show Users List" onclick="location.href='/list'" />
   </body>
 </html>

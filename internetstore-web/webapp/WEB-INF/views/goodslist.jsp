@@ -20,22 +20,17 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Birthdate</th>
+                <th>Name</th>
+                <th>Price</th>
 
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${users}" var="user">
+            <c:forEach items="${goods}" var="goods">
                 <tr>
-                    <td>${user.name}</td>
-                    <td>${user.lastName}</td>
-                    <td>${user.email}</td>
-                    <td>${user.role}</td>
-                    <td>${user.date}</td>
+                    <td>${goods.name}</td>
+                    <td>${goods.price}</td>
+
                 </tr>
             </c:forEach>
             </tbody>

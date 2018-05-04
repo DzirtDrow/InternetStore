@@ -19,7 +19,29 @@
             <version>1.0-SNAPSHOT</version>
 
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.flywaydb/flyway-core -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>4.2.0</version>
+        </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <configuration>
+                    <user>storedbuser</user>
+                    <password>lbkLk7PHhpoy4DUIk</password>
+                    <url>jdbc:mysql://localhost:3306/internet_store_db</url>
+                    <!--<baseDir>/database/script/</baseDir>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

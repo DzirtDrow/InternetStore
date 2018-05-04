@@ -27,10 +27,14 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
         return user;
     }
 
-    public void save(UserEntity user) {
-
+    public UserEntity findByEmail(String email) {
+        return null; //TODO
     }
 
+
+    public void save(UserEntity user) {
+        persist(user);
+    }
 
     public List<UserEntity> findAllUsers() {
         Criteria criteria = createEntityCriteria().addOrder(Order.asc("email"));
