@@ -6,7 +6,8 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 
 import java.util.List;
 
-public interface GoodsDao {
+public interface GoodsDao extends GenericDao<GoodsEntity, Integer> {
 
     List<GoodsEntity> findAllGoods();
+
 }

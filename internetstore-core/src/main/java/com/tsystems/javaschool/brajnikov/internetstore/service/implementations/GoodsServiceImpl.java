@@ -19,4 +19,17 @@ public class GoodsServiceImpl implements GoodsService {
     public List<GoodsEntity> findAllGoods() {
         return dao.findAllGoods();
     }
+
+    public void addGoods(GoodsEntity goodsEntity) {
+        dao.create(goodsEntity);
+    }
+
+    public void deleteGoods(GoodsEntity goodsEntity) {
+        dao.delete(goodsEntity);
+    }
+
+    public void deleteGoodsById(Integer id) {
+        dao.delete(dao.read(id));
+
+    }
 }

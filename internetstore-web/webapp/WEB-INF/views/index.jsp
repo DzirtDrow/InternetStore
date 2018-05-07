@@ -13,5 +13,6 @@
   </head>
   <body>
         <input type="button" class="button" value="Show Users List" onclick="location.href='/list'" />
+        <input type="button" class="button" value="Show Goods List" onclick="location.href='/goodslist'" />
   </body>
 </html>

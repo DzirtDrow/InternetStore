@@ -5,12 +5,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "goods", schema = "internet_store_db")
 public class GoodsEntity {
-    private int id;
-    private String name;
-    private Integer price;
-
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Basic
+    @Column(name = "name", nullable = false, length = 64)
+    private String name;
+
+    @Basic
+    @Column(name = "price", nullable = true)
+    private Integer price;
+
+
     public int getId() {
         return id;
     }
@@ -19,8 +27,7 @@ public class GoodsEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "name", nullable = false, length = 64)
+
     public String getName() {
         return name;
     }
@@ -29,8 +36,7 @@ public class GoodsEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "price", nullable = true)
+
     public Integer getPrice() {
         return price;
     }
