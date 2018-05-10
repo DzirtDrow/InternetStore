@@ -13,8 +13,8 @@ import java.util.List;
 
 @Repository("goodsDao")
 public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implements GoodsDao {
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -22,7 +22,5 @@ public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implem
     public List<GoodsEntity> findAllGoods() {
         return getList();
     }
-//    public List<GoodsEntity> findAllGoods() {
-//        return null;
-//    }
+
 }

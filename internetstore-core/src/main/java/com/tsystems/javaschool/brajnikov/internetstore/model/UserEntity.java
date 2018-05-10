@@ -3,11 +3,12 @@ package com.tsystems.javaschool.brajnikov.internetstore.model;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "id")
@@ -105,4 +106,4 @@ public class UserEntity {
                 ", role=" + role +
                 '}';
     }
-}
+    }

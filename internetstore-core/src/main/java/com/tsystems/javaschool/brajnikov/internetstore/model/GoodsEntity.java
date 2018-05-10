@@ -1,10 +1,11 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "goods", schema = "internet_store_db")
-public class GoodsEntity {
+public class GoodsEntity implements Serializable{
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,6 +19,8 @@ public class GoodsEntity {
     @Column(name = "price", nullable = true)
     private Integer price;
 
+    public GoodsEntity() {
+    }
 
     public int getId() {
         return id;

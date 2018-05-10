@@ -10,8 +10,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Goods List</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"/>
+    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/>
 </head>
 
 <body>
@@ -45,34 +45,7 @@
 <%--</div>--%>
 <%--</div>--%>
 <div id="add">
-    <h1> Add Goods </h1>
-
-    <c:url var="addAction" value="/addGoods" />
-    <form:form action="${addAction}" modelAttribute="newGoods">
-        <table>
-            <tr>
-                <th colspan="2">Add goods</th>
-            </tr>
-            <tr>
-                <td><form:label path="id">id</form:label></td>
-                <td><form:input path="id" readonly="true" size="8"  disabled="true" />
-                    <%--<form:hidden path="employeeId" />--%>
-                </td>
-            </tr>
-            <tr>
-                <td><form:label path="name">Goods Name:</form:label></td>
-                <td><form:input path="name"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="price">Price:</form:label></td>
-                <td><form:input path="price"/></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="submit" class="blue-button" /></td>
-
-            </tr>
-        </table>
-    </form:form>
+    <input type="button" class="button" value="Add New Goods" onclick="location.href='/addgoods'" />
 
 
     <%--<form action="AppController" method="POST" att>--%>

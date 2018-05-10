@@ -25,7 +25,7 @@ public abstract class AbstractGenericDao<T, PK extends Serializable> implements 
         return this.sessionFactory.getCurrentSession();
     }
 
-
+    @SuppressWarnings("unchecked")
     public PK create(T newInstance) {
         return (PK)getSession().save(newInstance);
     }

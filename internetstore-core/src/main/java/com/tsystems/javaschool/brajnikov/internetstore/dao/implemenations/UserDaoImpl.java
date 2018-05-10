@@ -16,11 +16,12 @@ import java.util.List;
 @Repository("userDao")
 public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements UserDao {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
     @Autowired
     private SessionFactory sessionFactory;
+
 
     public UserEntity findById(int id) {
         UserEntity user = getByKey(id);
@@ -42,5 +43,14 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
         List<UserEntity> users = (List<UserEntity>) criteria.list();
 
         return users;
+    }
+
+    public UserEntity getActiveUser(String email) {
+        UserEntity activeUserInfo = findByEmail(email);
+
+//        if(activeUserInfo != null) {
+//            activeUserInfo = (UserInfo)list.get(0);
+//        }
+        return activeUserInfo;
     }
 }

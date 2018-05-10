@@ -16,4 +16,5 @@ public interface UserDao {
     List<UserEntity> findAllUsers();
 
 
+    UserEntity getActiveUser(String email);
 }

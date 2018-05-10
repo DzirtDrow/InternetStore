@@ -12,7 +12,9 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.tsystems.javaschool.brajnikov.internetstore")
+//@ComponentScan("com.tsystems.javaschool.brajnikov.internetstore")
+@ComponentScan({"com.tsystems.javaschool.brajnikov.internetstore.controller",
+                "com.tsystems.javaschool.brajnikov.internetstore.configuration"})
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
@@ -25,6 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/list").setViewName("list");
         registry.addViewController("/goodslist").setViewName("goodslist");
+        registry.addViewController("/addgoods").setViewName("addgoods");
     }
 
     @Bean

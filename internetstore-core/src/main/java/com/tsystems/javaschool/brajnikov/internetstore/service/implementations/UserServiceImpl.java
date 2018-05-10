@@ -23,4 +23,8 @@ public class UserServiceImpl implements UserService {
     public List<UserEntity> findAllUsers() {
         return dao.findAllUsers();
     }
+
+    public UserEntity findByEmail(String useremail) {
+        return dao.findByEmail(useremail);
+    }
 }

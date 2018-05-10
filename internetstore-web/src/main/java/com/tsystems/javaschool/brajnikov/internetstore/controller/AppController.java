@@ -26,6 +26,7 @@ public class AppController {
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(ModelMap model) {
+
         return "index";
     }
 
@@ -36,36 +37,6 @@ public class AppController {
 
         return "list";
     }
-
-    @RequestMapping(value = {"/goodslist"}, method = RequestMethod.GET)
-    public String listGoods(ModelMap model) {
-        List<GoodsEntity> goods = goodsService.findAllGoods();
-
-        model.addAttribute("newGoods", new GoodsEntity());
-
-        model.addAttribute("goods", goods);
-        return "goodslist";
-    }
-
-    @RequestMapping(value = "/deleteGoods")
-    public String deleteGoods(Model model, @RequestParam("id") String id) {
-        if (id != null) {
-            goodsService.deleteGoodsById(Integer.parseInt(id));
-        }
-        return "redirect:/goodslist";
-    }
-
-    @RequestMapping(value = "addGoods", method = RequestMethod.POST)
-    public String addGoods(@ModelAttribute("newGoods") GoodsEntity goodsEntity) {
-
-
-        goodsService.addGoods(goodsEntity);
-
-
-        return "redirect:/goodslist";
-
-    }
-
 
 
 }
