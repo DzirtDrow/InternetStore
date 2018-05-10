@@ -49,4 +49,17 @@ public class ManageGoodsController {
         }
         return "redirect:/goodslist";
     }
+
+    @RequestMapping(value = "/editgoods", method = RequestMethod.GET)
+    public String editGoodsPage(Model model, @RequestParam("id") String id) {
+        if (id != null) {
+            model.addAttribute("goods", goodsService.findGoodsById(Integer.parseInt(id)));
+        }
+        return "/editgoods";
+    }
+    @RequestMapping(value = "/editgoods", method = RequestMethod.POST)
+    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity){
+        goodsService.updateGoods(goodsEntity);
+        return new ModelAndView("redirect:/goodslist");
+    }
 }

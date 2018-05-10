@@ -28,6 +28,14 @@ public class GoodsServiceImpl implements GoodsService {
         dao.delete(goodsEntity);
     }
 
+    public GoodsEntity findGoodsById(int id) {
+        return dao.read(id);
+    }
+
+    public void updateGoods(GoodsEntity goodsEntity) {
+        dao.update(goodsEntity);
+    }
+
     public void deleteGoodsById(Integer id) {
         dao.delete(dao.read(id));
 

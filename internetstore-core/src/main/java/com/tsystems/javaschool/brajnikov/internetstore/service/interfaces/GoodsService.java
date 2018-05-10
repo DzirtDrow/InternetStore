@@ -10,5 +10,8 @@ public interface GoodsService {
     void addGoods(GoodsEntity goodsEntity);
     void deleteGoods(GoodsEntity goodsEntity);
 
+    GoodsEntity findGoodsById(int id);
+
+    void updateGoods(GoodsEntity goodsEntity);
     void deleteGoodsById(Integer id);
 }

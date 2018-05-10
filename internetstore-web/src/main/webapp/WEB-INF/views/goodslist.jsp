@@ -34,9 +34,11 @@
             <td>${goods.name}</td>
             <td>${goods.price}</td>
             <td>
-                <a href="deleteGoods?id=${goods.id}" class="button">Delete</a>
+                <a href="deleteGoods?id=${goods.id}" class="btn btn-success custom-width">Delete</a>
 
-                <a class="button">Edit</a>
+            <a href="<c:url value='editgoods?id=${goods.id}'/>"
+                   class="btn btn-success custom-width">Edit</a>
+                <%--<a class="button">Edit</a>--%>
             </td>
         </tr>
     </c:forEach>
