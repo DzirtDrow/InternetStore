@@ -45,7 +45,7 @@
 <%--</div>--%>
 <%--</div>--%>
 <div id="add">
-    <input type="button" class="button" value="Add New Goods" onclick="location.href='/addgoods'" />
+    <input type="button" class="button" value="Add New Goods" onclick="location.href=' ${pageContext.request.contextPath}/addgoods'" />
 
 
     <%--<form action="AppController" method="POST" att>--%>

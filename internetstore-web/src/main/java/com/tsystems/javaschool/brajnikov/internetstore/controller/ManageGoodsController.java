@@ -29,19 +29,16 @@ public class ManageGoodsController {
     }
 
     @RequestMapping(value = "/addgoods", method = RequestMethod.POST)
-    public String addNewGoods(@ModelAttribute("goods") GoodsEntity goodsEntity, Model model) {
-
+    public ModelAndView addNewGoods(@ModelAttribute("goods") GoodsEntity goodsEntity, Model model) {
         goodsService.addGoods(goodsEntity);
-        return "redirect://goodslist";
+        return new ModelAndView("redirect:/goodslist/");
     }
 
     @RequestMapping(value = {"/goodslist"}, method = RequestMethod.GET)
     public String listGoods(Model model) {
         List<GoodsEntity> goods = goodsService.findAllGoods();
         model.addAttribute("goods", goods);
-        model.addAttribute("newGoods", new GoodsEntity());
-
-        return "goodslist";
+        return "/goodslist";
     }
 
 

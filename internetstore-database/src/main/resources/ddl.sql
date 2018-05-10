@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `internet_store_db`.`user` (
   `lastname` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `birtdate` DATE NOT NULL,
+  `birthdate` DATE NOT NULL,
   `role` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC)
