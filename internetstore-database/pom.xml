@@ -38,6 +38,7 @@
                     <user>storedbuser</user>
                     <password>lbkLk7PHhpoy4DUIk</password>
                     <url>jdbc:mysql://localhost:3306/internet_store_db</url>
+                    <locations>db/migration/</locations>
                     <!--<baseDir>/database/script/</baseDir>-->
                 </configuration>
             </plugin>

@@ -1,10 +1,12 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -34,6 +36,8 @@ public class UserEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    public List<OrderEntity> orders;
 
     public UserEntity() {
     }

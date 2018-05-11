@@ -19,6 +19,9 @@ public class GoodsEntity implements Serializable{
     @Column(name = "price", nullable = true)
     private Integer price;
 
+    @OneToOne(mappedBy = "goods")
+    private CartEntity cart;
+
     public GoodsEntity() {
     }
 
@@ -30,7 +33,6 @@ public class GoodsEntity implements Serializable{
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }
@@ -38,7 +40,6 @@ public class GoodsEntity implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
-
 
     public Integer getPrice() {
         return price;
