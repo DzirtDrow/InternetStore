@@ -11,10 +11,9 @@ public interface UserDao {
 
     UserEntity findByEmail(String email);
 
-    void save(UserEntity user);
+    //void save(UserEntity user);
 
     List<UserEntity> findAllUsers();
 
-
-    UserEntity getActiveUser(String email);
+    //UserEntity getActiveUser(String email);
 }

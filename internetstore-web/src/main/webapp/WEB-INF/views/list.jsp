@@ -36,6 +36,7 @@
                     <td>${user.email}</td>
                     <td>${user.role}</td>
                     <td>${user.date}</td>
+                    <td><a href="" class="btn btn-success custom-width">Orders</a></td>
                 </tr>
             </c:forEach>
             </tbody>
