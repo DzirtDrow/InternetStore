@@ -14,5 +14,6 @@
   <body>
         <input type="button" class="button" value="Show Users List" onclick="location.href=' ${pageContext.request.contextPath}/list'" />
         <input type="button" class="button" value="Show Goods List" onclick="location.href=' ${pageContext.request.contextPath}/goodslist'" />
+        <input type="button" class="button" value="Sign Up" onclick="location.href=' ${pageContext.request.contextPath}/signup'" />
   </body>
 </html>

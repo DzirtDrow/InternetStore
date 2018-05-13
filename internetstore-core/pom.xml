@@ -24,6 +24,7 @@
 
         <jstl.version>1.2</jstl.version>
         <logback.version>1.1.3</logback.version>
+        <lombok.versiom>1.16.18</lombok.versiom>
     </properties>
 
     <dependencies>
@@ -109,6 +110,16 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.versiom}</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
