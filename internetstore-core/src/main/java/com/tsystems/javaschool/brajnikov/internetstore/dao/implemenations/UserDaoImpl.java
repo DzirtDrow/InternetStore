@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractDao;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.hibernate.Criteria;
@@ -11,10 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements UserDao {
+public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> implements UserDao {
 
 //    @PersistenceContext
 //    private EntityManager entityManager;
@@ -24,24 +26,31 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
 
 
     public UserEntity findById(int id) {
-        UserEntity user = getByKey(id);
+        UserEntity user = read(id);
         return user;
     }
 
     public UserEntity findByEmail(String email) {
-        return null; //TODO
+        Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where email = :paramName");
+        query.setParameter("paramName", email);
+        return (UserEntity)query.getResultList().get(1); //TODO
+    }
+
+    public UserEntity findByName(String username) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where name = :paramName");
+        query.setParameter("paramName", username);
+        return (UserEntity)query.getResultList().get(0);
     }
 
 
     public void save(UserEntity user) {
-        persist(user);
+        save(user);
     }
 
     public List<UserEntity> findAllUsers() {
-        Criteria criteria = createEntityCriteria().addOrder(Order.asc("email"));
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
-        List<UserEntity> users = (List<UserEntity>) criteria.list();
-
+        //Criteria criteria = createEntityCriteria().addOrder(Order.asc("email"));
+        //criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
+        List<UserEntity> users = getList();//(List<UserEntity>) criteria.list();
         return users;
     }
 

@@ -1,9 +1,13 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -24,10 +28,14 @@ public class UserEntity implements Serializable {
     private String lastName;
 
     @Column(name = "email", unique = true)
+    @Email
     private String email;
 
     @Column(name = "password")
     private String password;
+
+    @Transient
+    private String confirmPassword;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birthdate")
@@ -37,7 +45,7 @@ public class UserEntity implements Serializable {
     private RoleEnum role;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    public List<OrderEntity> orders;
+    private List<OrderEntity> orders;
 
     public UserEntity() {
     }
@@ -110,4 +118,20 @@ public class UserEntity implements Serializable {
                 ", role=" + role +
                 '}';
     }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
+    }
+}

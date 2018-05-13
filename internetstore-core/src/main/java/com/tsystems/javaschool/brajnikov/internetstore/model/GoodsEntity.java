@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "goods", schema = "internet_store_db")
@@ -19,8 +20,8 @@ public class GoodsEntity implements Serializable{
     @Column(name = "price", nullable = true)
     private Integer price;
 
-    @OneToOne(mappedBy = "goods")
-    private CartEntity cart;
+    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<CartEntity> carts;
 
     public GoodsEntity() {
     }

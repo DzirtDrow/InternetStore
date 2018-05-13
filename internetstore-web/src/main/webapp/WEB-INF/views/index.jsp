@@ -8,12 +8,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title>Index</title>
-  </head>
-  <body>
-        <input type="button" class="button" value="Show Users List" onclick="location.href=' ${pageContext.request.contextPath}/list'" />
-        <input type="button" class="button" value="Show Goods List" onclick="location.href=' ${pageContext.request.contextPath}/goodslist'" />
-        <input type="button" class="button" value="Sign Up" onclick="location.href=' ${pageContext.request.contextPath}/signup'" />
-  </body>
+</head>
+<body>
+<strong>logged in user: ${loggedinuser}</strong>
+<br>
+<input type="button" class="button" value="Show Users List"
+       onclick="location.href=' ${pageContext.request.contextPath}/list'"/>
+<input type="button" class="button" value="Show Goods List"
+       onclick="location.href=' ${pageContext.request.contextPath}/goodslist'"/>
+<br>
+<br>
+<br>
+<input type="button" class="button" value="Sign Up"
+       onclick="location.href=' ${pageContext.request.contextPath}/signup'"/>
+<input type="button" class="button" value="Login" onclick="location.href=' ${pageContext.request.contextPath}/login'"/>
+
+</body>
 </html>

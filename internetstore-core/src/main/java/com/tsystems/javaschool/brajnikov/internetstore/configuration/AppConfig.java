@@ -40,16 +40,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     /**
      * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
      */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-    }
-
 //    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/userlist").setViewName("userlist");
-//        registry.addViewController("/").setViewName("home");
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 //    }
+
 
     /**
      * Configure Converter to be used.
@@ -64,12 +59,12 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     /**
      * Configure MessageSource to lookup any validation/error message in internationalized property files
      */
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename("messages");
-        return messageSource;
-    }
+//    @Bean
+//    public MessageSource messageSource() {
+//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+//        messageSource.setBasename("messages");
+//        return messageSource;
+//    }
 
     /**
      * Optional. It's only required when handling '.' in @PathVariables which otherwise ignore everything after last '.' in @PathVaidables argument.

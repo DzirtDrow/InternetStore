@@ -29,7 +29,19 @@ public class OrderEntity implements Serializable{
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "order")
-    private List<CartEntity> carts;
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<CartEntity> carts;
 
+    public OrderEntity() {
+    }
+
+    @Override
+    public String toString() {
+        return "OrderEntity{" +
+                "id=" + id +
+                ", order_date=" + order_date +
+                ", sum=" + sum +
+                ", user=" + user +
+                '}';
+    }
 }

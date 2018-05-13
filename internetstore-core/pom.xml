@@ -112,7 +112,7 @@
         </dependency>
 
 
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <!-- Lombok - is gor @Getter, @Setter and @Data annotations -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

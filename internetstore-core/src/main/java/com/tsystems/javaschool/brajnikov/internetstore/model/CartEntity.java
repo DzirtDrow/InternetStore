@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Setter @Getter
+//@Setter @Getter
 @Table(name = "cart")
 public class CartEntity implements Serializable {
     @Id
@@ -19,7 +19,7 @@ public class CartEntity implements Serializable {
     @JoinColumn(name = "order_id")
     private OrderEntity order;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "goods_id")
     private GoodsEntity goods;
 
@@ -27,4 +27,35 @@ public class CartEntity implements Serializable {
     @Column(name = "count")
     private int count;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public OrderEntity getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderEntity order) {
+        this.order = order;
+    }
+
+    public GoodsEntity getGoods() {
+        return goods;
+    }
+
+    public void setGoods(GoodsEntity goods) {
+        this.goods = goods;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }

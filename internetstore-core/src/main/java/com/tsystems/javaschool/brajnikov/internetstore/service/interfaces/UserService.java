@@ -9,5 +9,8 @@ public interface UserService {
 
     List<UserEntity> findAllUsers();
 
+    void save(UserEntity userEntity);
+
     UserEntity findByEmail(String useremail);
+    UserEntity findByName(String username);
 }

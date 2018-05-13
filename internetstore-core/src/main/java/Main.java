@@ -15,14 +15,13 @@ public class Main {
         session.beginTransaction();
         UserEntity userEntity = session.get(UserEntity.class, 1);
 
-
 //        UserEntity newUser = new UserEntity();
-//        newUser.setName("AAAA");
-//        newUser.setLastName("BBBB");
-//        newUser.setPassword("1234");
+//        newUser.setName("bbb");
+//        newUser.setLastName("bbb");
+//        newUser.setPassword("bbb");
 //        newUser.setDate(new Date());
-//        newUser.setEmail("a@a.ru");
-//        newUser.setRole(RoleEnum.user);
+//        newUser.setEmail("b@b.ru");
+//        newUser.setRole(RoleEnum.admin);
 //        session.save(newUser);
         System.out.println(userEntity);
 

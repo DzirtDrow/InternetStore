@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public abstract class AbstractGenericDao<T, PK extends Serializable> implements 
         getSession().delete(entity);
     }
 
+    protected Criteria createEntityCriteria(){
+        return getSession().createCriteria(entityClass);
+    }
+
+    @SuppressWarnings("unchecked")
     public List<T> getList() {
         return getSession().createCriteria(this.entityClass).list();
     }
