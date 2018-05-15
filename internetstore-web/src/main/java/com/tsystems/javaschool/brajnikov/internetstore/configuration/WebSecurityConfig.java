@@ -55,10 +55,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/index").permitAll()
+        http.authorizeRequests().antMatchers("/", "/index", "signup").permitAll()
                 //.access("hasRole('USER') or hasRole('ADMIN') or hasRole('MANAGER')")
-                .antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('MANAGER')")
+                .antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
                 .antMatchers("/list").access("hasRole('ROLE_admin')")
+                .antMatchers("/store").permitAll()
                 .and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
@@ -66,15 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenRepository(tokenRepository).tokenValiditySeconds(86400)
                 .and().csrf()
                 .and().exceptionHandling().accessDeniedPage("/accessdenied");
-
-//        http.authorizeRequests()
-//                .antMatchers("/login**").permitAll()
-//                .antMatchers("/list").access("hasRole('ROLE_ADMIN')")
-//                .antMatchers("/goodslist").permitAll()
-//                .and().formLogin().loginPage("/login")
-//                .usernameParameter("username")
-//                .passwordParameter("password")
-//                .and().exceptionHandling().accessDeniedPage("/accessdenied");
     }
 
     @Autowired
@@ -103,59 +95,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationTrustResolver getAuthenticationTrustResolver() {
         return new AuthenticationTrustResolverImpl();
     }
-    //.defaultSuccessUrl("/", false);
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/", "/index").permitAll()
-//                .anyRequest().authenticated();
-//        http
-//                .formLogin()
-//                .loginPage("/login")
-//                //.usernameParameter("username")//
-//                //.passwordParameter("password")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .permitAll();
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/list").access("hasRole('ROLE_ADMIN')");
-//
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/editgoods").access("hasAnyRole('MANAGER','ADMIN')");
-
-//        http.authorizeRequests().and()
-//                .rememberMe().tokenRepository(this.persistentTokenRepository())
-//                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
-
-//    }
-
-
-//    @Bean
-//    WebMvcConfigurer myWebMvcConfigurer() {
-//        return new WebMvcConfigurer() {
-//
-//            public void addViewControllers(ViewControllerRegistry registry) {
-//                registry.addViewController("/").setViewName("index");
-//                registry.addViewController("/list").setViewName("list");
-//                registry.addViewController("/goodslist").setViewName("goodslist");
-//                registry.addViewController("/addgoods").setViewName("addgoods");
-//                registry.addViewController("/editgoods").setViewName("editgoods");
-//                registry.addViewController("/signup").setViewName("signup");
-//                registry.addViewController("/login").setViewName("login");
-//            }
-//        };
-//    }
-
-//    @Bean
-//    public ViewResolver viewResolver() {
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/WEB-INF/views/");
-//        viewResolver.setSuffix(".jsp");
-//        viewResolver.setViewClass(JstlView.class);
-//        return viewResolver;
-//    }
-
 
 }

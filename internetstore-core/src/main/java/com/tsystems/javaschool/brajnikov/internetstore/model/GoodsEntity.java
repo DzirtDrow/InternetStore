@@ -1,12 +1,13 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "goods", schema = "internet_store_db")
-public class GoodsEntity implements Serializable{
+public class GoodsEntity implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +21,11 @@ public class GoodsEntity implements Serializable{
     @Column(name = "price", nullable = true)
     private Integer price;
 
-    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<CartEntity> carts;
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "left_count")
+    private int leftCount;
 
     public GoodsEntity() {
     }
@@ -79,5 +83,21 @@ public class GoodsEntity implements Serializable{
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getLeftCount() {
+        return leftCount;
+    }
+
+    public void setLeftCount(int leftCount) {
+        this.leftCount = leftCount;
     }
 }

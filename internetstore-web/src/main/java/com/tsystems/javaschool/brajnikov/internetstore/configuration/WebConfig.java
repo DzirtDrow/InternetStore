@@ -29,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer{ //extends WebMvcConfigurerAd
     //@Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
+        registry.addViewController("/index").setViewName("index");
         registry.addViewController("/list").setViewName("list");
         registry.addViewController("/goodslist").setViewName("goodslist");
         registry.addViewController("/addgoods").setViewName("addgoods");
@@ -36,6 +37,8 @@ public class WebConfig implements WebMvcConfigurer{ //extends WebMvcConfigurerAd
         registry.addViewController("/signup").setViewName("signup");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/logout").setViewName("logout");
+        registry.addViewController("/accessdenied").setViewName("accessdenied");
+        registry.addViewController("/store").setViewName("store");
     }
 
     @Bean

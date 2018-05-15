@@ -29,8 +29,8 @@ public class OrderEntity implements Serializable{
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<CartEntity> carts;
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
+//    private List<CartItemEntity> carts;
 
     public OrderEntity() {
     }

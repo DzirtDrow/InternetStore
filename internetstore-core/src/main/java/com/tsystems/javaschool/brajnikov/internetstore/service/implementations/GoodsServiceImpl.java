@@ -38,6 +38,5 @@ public class GoodsServiceImpl implements GoodsService {
 
     public void deleteGoodsById(Integer id) {
         dao.delete(dao.read(id));
-
     }
 }

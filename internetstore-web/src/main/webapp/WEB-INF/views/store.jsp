@@ -20,13 +20,14 @@
 <%--<div class="generic-container">--%>
 <%--<div class="panel panel-default">--%>
 <!-- Default panel contents -->
-<input type="button" class="button" value="Back" onclick="location.href=' ${pageContext.request.contextPath}/ '" />
+<input type="button" class="button" value="Back" onclick="location.href=' ${pageContext.request.contextPath}/ '"/>
 <div class="panel-heading"><span class="lead">List of Goods </span></div>
 <table class="table table-hover">
     <thead>
     <tr>
         <th>Name</th>
         <th>Price</th>
+        <th>Description</th>
         <th>Actions</th>
 
     </tr>
@@ -36,13 +37,9 @@
         <tr>
             <td>${goods.name}</td>
             <td>${goods.price}</td>
-            <%--<td>${goods.description}</td>--%>
+            <td>${goods.description}</td>
             <td>
-                <a href="deleteGoods?id=${goods.id}" class="btn btn-success custom-width">Delete</a>
-
-            <a href="<c:url value='editgoods?id=${goods.id}'/>"
-                   class="btn btn-success custom-width">Edit</a>
-                <%--<a class="button">Edit</a>--%>
+                <a href="addtocart?id=${goods.id}" class="btn btn-success">Add to cart</a>
             </td>
         </tr>
     </c:forEach>
@@ -50,27 +47,5 @@
 </table>
 <%--</div>--%>
 <%--</div>--%>
-<div id="add">
-    <input type="button" class="button" value="Add New Goods" onclick="location.href=' ${pageContext.request.contextPath}/addgoods'" />
-
-
-    <%--<form action="AppController" method="POST" att>--%>
-        <%--<table>--%>
-            <%--<tr>--%>
-                <%--<td> Goods Name:</td>--%>
-                <%--<td><input type="text" name="name"></td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td> Goods Price:</td>--%>
-                <%--<td><input type="text" name="price"></td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<td><input type="submit" name="addGoods" value="Add"></td>--%>
-
-            <%--</tr>--%>
-        <%--</table>--%>
-    <%--</form>--%>
-</div>
-
 </body>
 </html>

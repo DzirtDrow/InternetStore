@@ -11,7 +11,7 @@ public class EncrytedPasswordUtils {
     }
 
     public static void main(String[] args) {
-        String password = "admin";
+        String password = "user";
         String encrytedPassword = encrytePassword(password);
 
         System.out.println( password + " -- Encryted Password: " + encrytedPassword);

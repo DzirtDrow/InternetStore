@@ -14,6 +14,7 @@
     <title>Title</title>
 </head>
 <body>
+<%@include file="authheader.jsp" %>
 <form:form modelAttribute="goods" class="form-horizontal" method="post">
     <div class="row">
         <form:input type="text" path="name" id="name" />

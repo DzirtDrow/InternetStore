@@ -26,7 +26,7 @@ import java.util.List;
 
 @Controller("appController")
 @RequestMapping("/")
-public class AppController {
+public class AppController extends AbstractController{
 
     @Autowired
     UserService userService;
@@ -71,23 +71,13 @@ public class AppController {
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/login?logout";
+        return "redirect:/index";
     }
-    private String getPrincipal(){
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserEntity) {
-            userName = ((UserEntity)principal).getName();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
+    @RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+    public String accessDeniedPage(ModelMap model) {
+        model.addAttribute("loggedinuser", getPrincipal());
+        return "accessdenied";
     }
 
-    private boolean isCurrentAuthenticationAnonymous() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authenticationTrustResolver.isAnonymous(authentication);
-    }
 
 }

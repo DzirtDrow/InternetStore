@@ -15,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller("addGoodsController")
+@Controller("manageGoodsController")
 @RequestMapping
-public class ManageGoodsController {
+public class ManageGoodsController extends AbstractController{
 
     @Autowired
     GoodsService goodsService;
@@ -37,6 +37,9 @@ public class ManageGoodsController {
     @RequestMapping(value = {"/goodslist"}, method = RequestMethod.GET)
     public String listGoods(Model model) {
         List<GoodsEntity> goods = goodsService.findAllGoods();
+
+        model.addAttribute("loggedinuser", getPrincipal());
+
         model.addAttribute("goods", goods);
         return "/goodslist";
     }
@@ -57,6 +60,7 @@ public class ManageGoodsController {
         }
         return "/editgoods";
     }
+
     @RequestMapping(value = "/editgoods", method = RequestMethod.POST)
     public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity){
         goodsService.updateGoods(goodsEntity);

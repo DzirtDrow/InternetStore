@@ -3,11 +3,14 @@ package com.tsystems.javaschool.brajnikov.internetstore.model;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +24,7 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
     @Column(name = "name")
     private String name;
 
@@ -28,13 +32,16 @@ public class UserEntity implements Serializable {
     private String lastName;
 
     @Column(name = "email", unique = true)
-    @Email
+    //@NotEmpty
+    //@Email
     private String email;
 
+    //@NotEmpty
     @Column(name = "password")
     private String password;
 
     @Transient
+    //@NotEmpty
     private String confirmPassword;
 
     @Temporal(TemporalType.DATE)
@@ -46,6 +53,9 @@ public class UserEntity implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<OrderEntity> orders;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private AddressEntity address;
 
     public UserEntity() {
     }
@@ -104,6 +114,14 @@ public class UserEntity implements Serializable {
 
     public void setRole(RoleEnum role) {
         this.role = role;
+    }
+
+    public AddressEntity getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressEntity address) {
+        this.address = address;
     }
 
     @Override

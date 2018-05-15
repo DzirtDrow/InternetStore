@@ -1,31 +1,26 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-//@Setter @Getter
 @Table(name = "cart")
-public class CartEntity implements Serializable {
+public class CartEntity implements Serializable{
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    private List<CartItemEntity> cartItems;
 
-    @ManyToOne
-    @JoinColumn(name = "goods_id")
-    private GoodsEntity goods;
+    public CartEntity() {
+    }
 
-    @Basic
-    @Column(name = "count")
-    private int count;
 
     public int getId() {
         return id;
@@ -35,27 +30,14 @@ public class CartEntity implements Serializable {
         this.id = id;
     }
 
-    public OrderEntity getOrder() {
-        return order;
+    public List<CartItemEntity> getCartItems() {
+        return cartItems;
     }
 
-    public void setOrder(OrderEntity order) {
-        this.order = order;
+    public void setCartItems(List<CartItemEntity> cartItems) {
+        this.cartItems = cartItems;
     }
-
-    public GoodsEntity getGoods() {
-        return goods;
-    }
-
-    public void setGoods(GoodsEntity goods) {
-        this.goods = goods;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+    public void addCartItem(CartItemEntity cartItemEntity) {
+        this.cartItems.add(cartItemEntity);
     }
 }

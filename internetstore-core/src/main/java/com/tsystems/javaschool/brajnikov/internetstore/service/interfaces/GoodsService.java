@@ -8,7 +8,6 @@ public interface GoodsService {
     List<GoodsEntity> findAllGoods();
 
     void addGoods(GoodsEntity goodsEntity);
-    void deleteGoods(GoodsEntity goodsEntity);
 
     GoodsEntity findGoodsById(int id);
 

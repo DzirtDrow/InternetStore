@@ -11,6 +11,7 @@ import org.springframework.validation.Validator;
 
 @Component
 public class UserValidator implements Validator {
+
     @Autowired
     private UserService userService;
 
@@ -25,7 +26,7 @@ public class UserValidator implements Validator {
         if (user.getEmail().length() < 6 || user.getEmail().length() > 32) { //TODO, make email validation? not length
             errors.rejectValue("email", "Size.userForm.username");
         }
-        if (userService.findByEmail(user.getEmail()) != null) { //Email == Username
+        if (userService.findByName(user.getName()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
 
