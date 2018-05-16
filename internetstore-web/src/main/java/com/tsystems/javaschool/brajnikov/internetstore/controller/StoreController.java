@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -92,6 +93,18 @@ public class StoreController extends AbstractController {
         List<CartItemEntity> userCart;
         userCart = cartService.getCartItems(user.getId());
         model.addAttribute("userCart", userCart);
+
+        model.addAttribute("loggedinuser", getPrincipal());
         return "/cart";
+    }
+
+    @RequestMapping(value = "/deleteItemFromCart")
+    public String deleteItemFromCart(Model model, @RequestParam("id") String id) {
+        UserEntity user = userService.findByName(getPrincipal());
+
+        if (id != null) {
+            cartService.deleteCartItem(user.getId(), Integer.parseInt(id));
+        }
+        return "redirect:/cart";
     }
 }

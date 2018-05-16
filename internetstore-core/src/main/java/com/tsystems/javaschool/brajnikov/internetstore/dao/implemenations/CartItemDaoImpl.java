@@ -12,4 +12,7 @@ public class CartItemDaoImpl extends AbstractGenericDao<CartItemEntity, Integer>
     @Autowired
     private SessionFactory sessionFactory;
 
+    public void deleteItemById(int id) {
+        delete(read(id));
+    }
 }

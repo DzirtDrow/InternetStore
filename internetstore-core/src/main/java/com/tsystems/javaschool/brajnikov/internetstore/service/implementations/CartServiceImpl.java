@@ -44,6 +44,7 @@ public class CartServiceImpl implements CartService {
             item = new CartItemEntity();
             item.setGoods(goodsEntity);
             item.setCart(cartEntity);
+            item.setCount(1);
             cartItemDao.create(item);
 
             cartEntity.addCartItem(item); // adding
@@ -58,7 +59,7 @@ public class CartServiceImpl implements CartService {
     public List<CartItemEntity> getCartItems(int userId) {
         UserEntity user = userDao.findById(userId);
         CartEntity cart = user.getCart();
-        if(cart == null){
+        if (cart == null) {
             cart = new CartEntity();
             cart.setUser(user);
             cartDao.create(cart); //creating cart if not exist
@@ -67,7 +68,9 @@ public class CartServiceImpl implements CartService {
         return cart.getCartItems();
     }
 
-    public void deleteCartItem(int userId, GoodsEntity goodsEntity) {
-
+    public void deleteCartItem(int userId, int itemId) {
+//        UserEntity user = userDao.findById(userId);
+//        CartEntity cart = user.getCart();
+        cartItemDao.deleteItemById(itemId);
     }
 }

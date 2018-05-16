@@ -18,7 +18,7 @@
 <%@include file="authheader.jsp" %>
 
 <input type="button" class="button" value="Back" onclick="location.href=' ${pageContext.request.contextPath}/ '" />
-<div class="panel-heading"><span class="lead">List of Goods </span></div>
+<div class="panel-heading"><span class="lead">Cart</span></div>
 <table class="table table-hover">
     <thead>
     <tr>
