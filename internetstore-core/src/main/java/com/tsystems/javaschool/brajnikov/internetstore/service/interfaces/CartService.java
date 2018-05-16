@@ -1,0 +1,14 @@
+package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
+
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+
+import java.util.List;
+
+public interface CartService {
+    void addGoodsToCart(int userId, GoodsEntity goodsEntity);
+    List<CartItemEntity> getCartItems(int userId);
+
+    void deleteCartItem(int userId, GoodsEntity goodsEntity);
+
+}

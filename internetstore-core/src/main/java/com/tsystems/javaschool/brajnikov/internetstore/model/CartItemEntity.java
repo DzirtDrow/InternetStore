@@ -19,6 +19,10 @@ public class CartItemEntity implements Serializable {
     @JoinColumn(name = "goods_id")
     private GoodsEntity goods;
 
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private CartEntity cart;
+
     @Basic
     @Column(name = "count")
     private int count;
@@ -45,5 +49,13 @@ public class CartItemEntity implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public CartEntity getCart() {
+        return cart;
+    }
+
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
     }
 }

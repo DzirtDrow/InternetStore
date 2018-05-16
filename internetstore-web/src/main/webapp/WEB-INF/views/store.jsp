@@ -16,7 +16,21 @@
 
 <body>
 <%@include file="authheader.jsp" %>
+<%--<table class="table table-bordered glyphicon-align-right">--%>
+    <%--<thead>--%>
+    <%--<tr>--%>
+        <%--<th>Name</th>--%>
 
+    <%--</tr>--%>
+    <%--</thead>--%>
+    <%--<tbody>--%>
+    <%--<c:forEach items="${cartItems}" var="cartItems">--%>
+        <%--<tr>--%>
+            <%--<td>${cartItems.goods.name}</td>--%>
+        <%--</tr>--%>
+    <%--</c:forEach>--%>
+    <%--</tbody>--%>
+</table>
 <%--<div class="generic-container">--%>
 <%--<div class="panel panel-default">--%>
 <!-- Default panel contents -->

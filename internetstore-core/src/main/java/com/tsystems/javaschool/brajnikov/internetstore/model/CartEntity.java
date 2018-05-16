@@ -1,5 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import org.hibernate.annotations.ManyToAny;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +19,14 @@ public class CartEntity implements Serializable{
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private List<CartItemEntity> cartItems;
+
+    @Column(name = "sum")
+    private int sum;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
 
     public CartEntity() {
     }
@@ -37,7 +47,25 @@ public class CartEntity implements Serializable{
     public void setCartItems(List<CartItemEntity> cartItems) {
         this.cartItems = cartItems;
     }
+
+
     public void addCartItem(CartItemEntity cartItemEntity) {
-        this.cartItems.add(cartItemEntity);
+        this.cartItems.add(cartItemEntity); //TODO ???
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum(int sum) {
+        this.sum = sum;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
                 .antMatchers("/list").access("hasRole('ROLE_admin')")
                 .antMatchers("/store").permitAll()
+                .antMatchers("/cart").permitAll()
                 .and().formLogin().loginPage("/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")

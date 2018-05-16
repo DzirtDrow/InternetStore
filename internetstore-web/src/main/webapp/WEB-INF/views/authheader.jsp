@@ -10,6 +10,8 @@
             <span><a href="<c:url value="/logout" />">Logout</a></span>
         </c:otherwise>
     </c:choose>
-
+    <input type="button" class="button" value="Cart"
+           onclick="location.href=' ${pageContext.request.contextPath}/cart'"/>
+<br>
 </div>
 

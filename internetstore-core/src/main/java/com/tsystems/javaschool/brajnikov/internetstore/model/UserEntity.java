@@ -54,6 +54,9 @@ public class UserEntity implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<OrderEntity> orders;
 
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.REMOVE)
+    private CartEntity cart;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private AddressEntity address;
 
@@ -151,5 +154,13 @@ public class UserEntity implements Serializable {
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
+    }
+
+    public CartEntity getCart() {
+        return cart;
+    }
+
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
     }
 }
