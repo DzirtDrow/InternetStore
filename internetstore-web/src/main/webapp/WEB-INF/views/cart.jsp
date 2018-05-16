@@ -17,7 +17,7 @@
 <body>
 <%@include file="authheader.jsp" %>
 
-<input type="button" class="button" value="Back" onclick="location.href=' ${pageContext.request.contextPath}/ '" />
+<input type="button" class="button" value="Home" onclick="location.href=' ${pageContext.request.contextPath}/ '" />
 <div class="panel-heading"><span class="lead">Cart</span></div>
 <table class="table table-hover">
     <thead>
@@ -34,7 +34,10 @@
         <tr>
             <td>${cartItem.goods.name}</td>
             <td>${cartItem.goods.price}</td>
-            <td>${cartItem.count}</td>
+            <td>
+                <a href="decreaseItemsCount?id=${cartItem.id}" class="btn btn-success">-</a>
+                  ${cartItem.count}
+                <a href="increaseItemsCount?id=${cartItem.id}" class="btn btn-success">+</a></td>
                 <%--<td>${goods.description}</td>--%>
             <td>
                 <a href="deleteItemFromCart?id=${cartItem.id}" class="btn btn-success custom-width">Delete</a>
@@ -44,6 +47,6 @@
     </tbody>
 </table>
 
-
+<a href="createOrder" class="btn btn-success">Create Order</a>
 </body>
 </html>

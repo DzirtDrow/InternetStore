@@ -68,9 +68,25 @@ public class CartServiceImpl implements CartService {
         return cart.getCartItems();
     }
 
-    public void deleteCartItem(int userId, int itemId) {
+    public void deleteCartItem(int itemId) {
 //        UserEntity user = userDao.findById(userId);
 //        CartEntity cart = user.getCart();
         cartItemDao.deleteItemById(itemId);
+    }
+
+    public void increaseItemsCount(int itemId) {
+        CartItemEntity item = cartItemDao.read(itemId);
+        item.setCount(item.getCount() + 1);
+        cartItemDao.update(item);
+    }
+
+    public void decreaseItemsCount(int itemId) {
+        CartItemEntity item = cartItemDao.read(itemId);
+        if (item.getCount() > 1) {
+            item.setCount(item.getCount() - 1);
+            cartItemDao.update(item);
+        } else {
+            deleteCartItem(itemId);
+        }
     }
 }

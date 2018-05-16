@@ -12,7 +12,7 @@
     <title>Index</title>
 </head>
 <body>
-
+<%@include file="authheader.jsp" %>
 <br>
 <input type="button" class="button" value="Show Users List"
        onclick="location.href=' ${pageContext.request.contextPath}/list'"/>

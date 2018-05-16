@@ -10,6 +10,9 @@ public interface CartService {
 
     List<CartItemEntity> getCartItems(int userId);
 
-    void deleteCartItem(int userId, int itemId);
+    void deleteCartItem(int itemId);
+
+    void increaseItemsCount(int itemId);
+    void decreaseItemsCount(int itemId);
 
 }

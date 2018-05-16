@@ -103,8 +103,25 @@ public class StoreController extends AbstractController {
         UserEntity user = userService.findByName(getPrincipal());
 
         if (id != null) {
-            cartService.deleteCartItem(user.getId(), Integer.parseInt(id));
+            cartService.deleteCartItem(Integer.parseInt(id));
         }
         return "redirect:/cart";
     }
+
+    @RequestMapping(value = "/increaseItemsCount")
+    public String increaseItemCount(Model model, @RequestParam("id") String id) {
+        if (id != null) {
+            cartService.increaseItemsCount(Integer.parseInt(id));
+        }
+        return "redirect:/cart";
+    }
+
+    @RequestMapping(value = "/decreaseItemsCount")
+    public String decreaseItemCount(Model model, @RequestParam("id") String id) {
+        if (id != null) {
+            cartService.decreaseItemsCount(Integer.parseInt(id));
+        }
+        return "redirect:/cart";
+    }
+
 }
