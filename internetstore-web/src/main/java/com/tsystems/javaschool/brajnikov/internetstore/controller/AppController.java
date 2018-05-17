@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
@@ -35,6 +36,9 @@ public class AppController extends AbstractController{
     GoodsService goodsService;
 
     @Autowired
+    SessionCart sessionCart;
+
+    @Autowired
     PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
     @Autowired
@@ -52,7 +56,7 @@ public class AppController extends AbstractController{
         if (isCurrentAuthenticationAnonymous()) {
             return "login";
         } else {
-            return "redirect:/list";
+            return "redirect:/index";
         }
     }
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)

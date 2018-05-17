@@ -11,6 +11,23 @@ CREATE TABLE IF NOT EXISTS `internet_store_db`.`user` (
 )
   ENGINE = InnoDB;
 
+create table  IF NOT EXISTS user_address
+(
+  id int auto_increment
+    primary key,
+  user_id int not null,
+  address varchar(255) null,
+  coordinates varchar(255) null,
+  constraint user_address_user_id_uindex
+  unique (user_id),
+  constraint user_address_user_id_fk
+  foreign key (user_id) references user (id)
+    on update cascade on delete cascade
+)
+  engine=InnoDB
+;
+
+
 
 CREATE TABLE IF NOT EXISTS `internet_store_db`.`goods` (
   `id` INT AUTO_INCREMENT NOT NULL ,
@@ -30,16 +47,62 @@ CREATE TABLE IF NOT EXISTS internet_store_db.order (
 )
   ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS internet_store_db.cart (
-  id INT AUTO_INCREMENT NOT NULL ,
-  goods_id INT NOT NULL ,
-  order_id INT NOT NULL ,
-  count INT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (goods_id) REFERENCES goods(id),
-  FOREIGN KEY (order_id) REFERENCES internet_store_db.order (id)
+create table IF NOT EXISTS cart_item
+(
+  id int auto_increment
+    primary key,
+  goods_id int null,
+  count int null,
+  cart_id int null,
+  constraint cart_item_goods_id_fk
+  foreign key (goods_id) references goods (id),
+  constraint cart_item_cart_id_fk
+  foreign key (cart_id) references cart (id)
 )
-  ENGINE = InnoDB;
+  engine=InnoDB
+;
+
+create index cart_item_goods_id_fk
+  on cart_item (goods_id)
+;
+
+create index cart_item_cart_id_fk
+  on cart_item (cart_id)
+;
+
+
+create table IF NOT EXISTS cart
+(
+  id int auto_increment
+    primary key,
+  sum int null,
+  user_id int null,
+  constraint cart_user_id_fk
+  foreign key (user_id) references user (id)
+)
+  engine=InnoDB
+;
+
+create index cart_user_id_fk
+  on cart (user_id)
+;
+
+create table IF NOT EXISTS persistent_logins
+(
+  id int auto_increment
+    primary key,
+  username varchar(64) not null,
+  token varchar(64) not null,
+  last_used datetime null,
+  constraint persistent_logins_username_uindex
+  unique (username),
+  constraint persistent_logins_token_uindex
+  unique (token)
+)
+  engine=InnoDB
+;
+
+
 
 
 

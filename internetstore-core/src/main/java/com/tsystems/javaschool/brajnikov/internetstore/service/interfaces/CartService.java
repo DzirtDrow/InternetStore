@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 
@@ -15,4 +16,5 @@ public interface CartService {
     void increaseItemsCount(int itemId);
     void decreaseItemsCount(int itemId);
 
+    void loadSessionCart(int id, SessionCart sessionCart);
 }

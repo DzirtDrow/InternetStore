@@ -23,7 +23,7 @@
     </div>
 
     <div class="row">
-        Price(cent): <form:input type="text" path="price" id="price"/>
+        Price(cent): <form:input type="number" path="price" id="price"/>
     </div>
 
     <div class="row">

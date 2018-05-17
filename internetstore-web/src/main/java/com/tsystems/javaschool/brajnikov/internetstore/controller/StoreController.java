@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,22 +48,10 @@ public class StoreController extends AbstractController {
         model.addAttribute("loggedinuser", getPrincipal());
 
         model.addAttribute("goods", goods);
-
-        //String testString = "Before";
-
+        List<CartItemEntity> cartItemsList;
         if (!isCurrentAuthenticationAnonymous()) {
             UserEntity user = userService.findByName(getPrincipal());// logged in user
-            List<CartItemEntity> cartItemsList = cartService.getCartItems(user.getId());
-
-            // = "After";
-            //model.addAttribute("testAttribute", testString);
-
-            model.addAttribute("cartItems", cartItemsList);
-
         } else {
-            //TODO SessionCartHere
-
-
         }
 
         return "/store";
@@ -72,27 +59,37 @@ public class StoreController extends AbstractController {
 
     @RequestMapping(value = "/addtocart")
     public String deleteGoods(Model model, @RequestParam("id") String id) {
-        UserEntity user = userService.findByName(getPrincipal());
+        //UserEntity user = userService.findByName(getPrincipal());
         if (id != null) {
             if (!isCurrentAuthenticationAnonymous()) {
-//                CartEntity userCart = user.getCart();
-//                CartItemEntity item = new CartItemEntity();
-//                item.setGoods(goodsService.findGoodsById(Integer.parseInt(id)));
+                UserEntity user = userService.findByName(getPrincipal());
+
                 cartService.addGoodsToCart(user.getId(), goodsService.findGoodsById(Integer.parseInt(id)));
+            } else {
+                sessionCart.addItemToSessionCart(goodsService.findGoodsById(Integer.parseInt(id)));
             }
         }
-
-
         return "redirect:/store";
     }
 
     @RequestMapping(value = "/cart")
     public String showUserCart(Model model) {
-        UserEntity user = userService.findByName(getPrincipal());
+        List<CartItemEntity> cartItemsList;
+        if (!isCurrentAuthenticationAnonymous()) {
+            UserEntity user = userService.findByName(getPrincipal());
+            cartItemsList = cartService.getCartItems(user.getId());
 
-        List<CartItemEntity> userCart;
-        userCart = cartService.getCartItems(user.getId());
-        model.addAttribute("userCart", userCart);
+            model.addAttribute("userCart", cartItemsList);
+
+        } else {
+            //TODO SessionCartHere
+            cartItemsList = sessionCart.getCartItemsList();
+            model.addAttribute("userCart", cartItemsList);
+
+        }
+//        List<CartItemEntity> userCart;
+//        userCart = cartService.getCartItems(user.getId());
+//        model.addAttribute("userCart", userCart);
 
         model.addAttribute("loggedinuser", getPrincipal());
         return "/cart";
@@ -100,26 +97,38 @@ public class StoreController extends AbstractController {
 
     @RequestMapping(value = "/deleteItemFromCart")
     public String deleteItemFromCart(Model model, @RequestParam("id") String id) {
-        UserEntity user = userService.findByName(getPrincipal());
-
-        if (id != null) {
-            cartService.deleteCartItem(Integer.parseInt(id));
+        if (!isCurrentAuthenticationAnonymous()) {
+            UserEntity user = userService.findByName(getPrincipal());
+            if (id != null) {
+                cartService.deleteCartItem(Integer.parseInt(id));
+            }
+        } else {
+            sessionCart.deleteItemFromCart(Integer.parseInt(id));
         }
+
         return "redirect:/cart";
     }
 
     @RequestMapping(value = "/increaseItemsCount")
     public String increaseItemCount(Model model, @RequestParam("id") String id) {
-        if (id != null) {
-            cartService.increaseItemsCount(Integer.parseInt(id));
+        if (!isCurrentAuthenticationAnonymous()) {
+            if (id != null) {
+                cartService.increaseItemsCount(Integer.parseInt(id));
+            }
+        } else {
+            sessionCart.increaseItemCount(Integer.parseInt(id));
         }
         return "redirect:/cart";
     }
 
     @RequestMapping(value = "/decreaseItemsCount")
     public String decreaseItemCount(Model model, @RequestParam("id") String id) {
-        if (id != null) {
-            cartService.decreaseItemsCount(Integer.parseInt(id));
+        if (!isCurrentAuthenticationAnonymous()) {
+            if (id != null) {
+                cartService.decreaseItemsCount(Integer.parseInt(id));
+            }
+        } else {
+            sessionCart.decreaseItemCount(Integer.parseInt(id));
         }
         return "redirect:/cart";
     }

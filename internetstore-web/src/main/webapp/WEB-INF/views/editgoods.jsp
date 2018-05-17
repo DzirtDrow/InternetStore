@@ -15,12 +15,13 @@
 </head>
 <body>
 <%@include file="authheader.jsp" %>
+
 <form:form modelAttribute="goods" class="form-horizontal" method="post">
     <div class="row">
-        <form:input type="text" path="name" id="name" />
+        Name: <form:input type="text" path="name" id="name" />
     </div>
     <div class="row">
-        <form:input type="text" path="price" id="price"/>
+        Price: <form:input type="text" path="price" id="price"/>
     </div>
 
     <div class="row">
