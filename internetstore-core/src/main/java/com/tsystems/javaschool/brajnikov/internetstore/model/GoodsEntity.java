@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "goods", schema = "internet_store_db")
+@Data
 public class GoodsEntity implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
@@ -27,32 +28,36 @@ public class GoodsEntity implements Serializable {
     @Column(name = "left_count")
     private int leftCount;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private CategoryEntity category;
+
     public GoodsEntity() {
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
+//
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public Integer getPrice() {
+//        return price;
+//    }
+//
+//    public void setPrice(Integer price) {
+//        this.price = price;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -85,19 +90,19 @@ public class GoodsEntity implements Serializable {
                 '}';
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getLeftCount() {
-        return leftCount;
-    }
-
-    public void setLeftCount(int leftCount) {
-        this.leftCount = leftCount;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public int getLeftCount() {
+//        return leftCount;
+//    }
+//
+//    public void setLeftCount(int leftCount) {
+//        this.leftCount = leftCount;
+//    }
 }

@@ -10,8 +10,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Users List</title>
-    <link href="<c:url value='/static/css/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css2/bootstrap.css' />" rel="stylesheet"></link>
+    <link href="<c:url value='/static/css2/app.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
         </table>
     <%--</div>--%>
 <%--</div>--%>
-<h5>user: ${loggedinuser}</h5>
+<h5>User: ${loggedinuser}</h5>
 <p>Time: ${time}</p>
 </body>
 </html>

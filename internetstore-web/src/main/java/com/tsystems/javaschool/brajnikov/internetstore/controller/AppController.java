@@ -1,8 +1,9 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,8 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.WebUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +26,7 @@ import java.util.List;
 
 @Controller("appController")
 @RequestMapping("/")
-public class AppController extends AbstractController{
+public class AppController extends AbstractController {
 
     @Autowired
     UserService userService;
@@ -39,26 +38,36 @@ public class AppController extends AbstractController{
     SessionCart sessionCart;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
     @Autowired
     AuthenticationTrustResolver authenticationTrustResolver;
 
 
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/home","/index"}, method = RequestMethod.GET)
     public String home(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        if (!isCurrentAuthenticationAnonymous()) {
+            model.addAttribute("loggedinuser", getPrincipal());
+        } else {
+            model.addAttribute("loggedinuser", "anonymousUser");
+        }
+        List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
+        model.addAttribute("categories", categoryEntityList);//TODO replace all Entities to DTO or VB
         return "index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
+    public String loginPage(ModelMap model) {
         if (isCurrentAuthenticationAnonymous()) {
             return "login";
         } else {
             return "redirect:/index";
         }
     }
+
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
     public String listUsers(ModelMap model, Principal principal) {
         List<UserEntity> users = userService.findAllUsers();
@@ -69,14 +78,17 @@ public class AppController extends AbstractController{
 
         return "list";
     }
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+        model.addAttribute("loggedinuser", "anonymousUser");
         return "redirect:/index";
     }
+
     @RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
         model.addAttribute("loggedinuser", getPrincipal());

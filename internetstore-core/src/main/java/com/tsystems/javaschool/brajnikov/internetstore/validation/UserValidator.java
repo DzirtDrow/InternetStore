@@ -35,8 +35,8 @@ public class UserValidator implements Validator {
             errors.rejectValue("password", "Size.userForm.password");
         }
 
-        if (!user.getConfirmPassword().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
-        }
+//        if (!user.getConfirmPassword().equals(user.getPassword())) {
+//            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+//        }
     }
 }

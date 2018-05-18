@@ -16,7 +16,7 @@ public class CartEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private List<CartItemEntity> cartItems;
 

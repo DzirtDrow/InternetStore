@@ -40,9 +40,9 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Transient
-    //@NotEmpty
-    private String confirmPassword;
+//    @Transient
+//    //@NotEmpty
+//    private String confirmPassword;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birthdate")
@@ -54,7 +54,7 @@ public class UserEntity implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<OrderEntity> orders;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private CartEntity cart;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
@@ -140,13 +140,13 @@ public class UserEntity implements Serializable {
                 '}';
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
+//    public String getConfirmPassword() {
+//        return confirmPassword;
+//    }
+//
+//    public void setConfirmPassword(String confirmPassword) {
+//        this.confirmPassword = confirmPassword;
+//    }
 
     public List<OrderEntity> getOrders() {
         return orders;
