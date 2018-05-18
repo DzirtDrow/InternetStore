@@ -29,13 +29,37 @@ create table  IF NOT EXISTS user_address
 
 
 
-CREATE TABLE IF NOT EXISTS `internet_store_db`.`goods` (
-  `id` INT AUTO_INCREMENT NOT NULL ,
-  `name` VARCHAR(64) NOT NULL,
-  `price` INT NULL,
-  PRIMARY KEY (`id`)
+create table IF NOT EXISTS goods
+(
+  id int auto_increment
+    primary key,
+  name varchar(64) not null,
+  price int null,
+  description varchar(255) null,
+  left_count int null,
+  category_id int null,
+  constraint goods_category_id_fk
+  foreign key (category_id) references category (id)
 )
-  ENGINE = InnoDB;
+  engine=InnoDB
+;
+
+create index  goods_category_id_fk
+  on goods (category_id)
+;
+
+
+
+create table if NOT EXISTS category
+(
+  id int auto_increment
+    primary key,
+  name varchar(64) null
+)
+  engine=InnoDB
+;
+
+
 
 CREATE TABLE IF NOT EXISTS internet_store_db.order (
   id INT AUTO_INCREMENT NOT NULL ,
