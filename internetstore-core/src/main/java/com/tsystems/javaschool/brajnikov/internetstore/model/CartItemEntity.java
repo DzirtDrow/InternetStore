@@ -1,5 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +9,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Setter @Getter
+@Setter
+@Getter
 @Table(name = "cart_item")
 public class CartItemEntity implements Serializable {
     @Id
@@ -26,6 +29,14 @@ public class CartItemEntity implements Serializable {
     @Basic
     @Column(name = "count")
     private int count;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "order_id")
+//    private OrderEntity order;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private CartItemTypeEnum type;
 
 //    public int getId() {
 //        return id;

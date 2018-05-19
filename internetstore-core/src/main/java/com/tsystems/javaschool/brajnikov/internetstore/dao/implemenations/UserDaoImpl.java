@@ -26,20 +26,19 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
 
 
     public UserEntity findById(int id) {
-        UserEntity user = read(id);
-        return user;
+        return read(id);
     }
 
     public UserEntity findByEmail(String email) {
         Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where email = :paramName");
         query.setParameter("paramName", email);
-        return (UserEntity)query.getResultList().get(0); //TODO
+        return (UserEntity)query.getSingleResult(); //TODO
     }
 
     public UserEntity findByName(String username) {
         Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where name = :paramName");
         query.setParameter("paramName", username);
-        return (UserEntity)query.getResultList().get(0);
+        return (UserEntity)query.getSingleResult();
     }
 
 

@@ -13,4 +13,5 @@ public interface CartDao extends GenericDao<CartEntity, Integer> {
 
     CartItemEntity getCartItemFromCartByGoods(CartEntity cartEntity, GoodsEntity goodsEntity);
 
+    //int getCartTotalPrice(CartEntity cartEntity);
 }

@@ -43,8 +43,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         grantList.add(new SimpleGrantedAuthority("ROLE_"+currentUser.getRole().toString()));
 
 
-        //TODO load session cart when user load
-        cartService.loadSessionCart(currentUser.getId(), sessionCart);
+//        TODO load session cart when user load
+//        cartService.loadSessionCart(currentUser.getId());
 
         return new User(currentUser.getName(), currentUser.getPassword(),
                 true, true,true,true,

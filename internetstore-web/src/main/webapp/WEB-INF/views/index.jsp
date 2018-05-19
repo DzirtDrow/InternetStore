@@ -19,8 +19,8 @@
        onclick="location.href=' ${pageContext.request.contextPath}/list'"/>
 <input type="button" class="button" value="Show Goods List"
        onclick="location.href=' ${pageContext.request.contextPath}/goodslist'"/>
-<input type="button" class="button" value="Show Store"
-       onclick="location.href=' ${pageContext.request.contextPath}/store'"/>
+<%--<input type="button" class="button" value="Show Store"--%>
+       <%--onclick="location.href=' ${pageContext.request.contextPath}/store'"/>--%>
 <br>
 <br>
 <br>

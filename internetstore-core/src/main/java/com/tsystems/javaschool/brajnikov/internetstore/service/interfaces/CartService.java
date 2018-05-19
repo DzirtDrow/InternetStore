@@ -16,5 +16,7 @@ public interface CartService {
     void increaseItemsCount(int itemId);
     void decreaseItemsCount(int itemId);
 
-    void loadSessionCart(int id, SessionCart sessionCart);
+    void loadSessionCart(int id);
+
+    int getCartTotalPrice(int userId) ;
 }

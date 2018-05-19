@@ -98,13 +98,15 @@ public class StoreController extends AbstractController {
             cartItemsList = cartService.getCartItems(user.getId());
 
             model.addAttribute("userCart", cartItemsList);
-
+            model.addAttribute("totalPrice", cartService.getCartTotalPrice(user.getId()));
             model.addAttribute("loggedinuser", getPrincipal());
 
         } else {
             //TODO SessionCartHere
             cartItemsList = sessionCart.getCartItemsList();
+
             model.addAttribute("userCart", cartItemsList);
+            model.addAttribute("totalPrice",sessionCart.getCartTotalPrice());
             model.addAttribute("loggedinuser", "anonymousUser");
         }
 //        List<CartItemEntity> userCart;

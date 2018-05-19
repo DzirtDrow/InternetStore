@@ -30,7 +30,15 @@ public class SignupController extends AbstractController{
      */
     @RequestMapping(value = { "/signup" }, method = RequestMethod.GET)
     public String newUser(ModelMap model) {
-        model.addAttribute("user", new UserDto());
+        UserDto userDto = new UserDto();
+
+        userDto.setEmail("q@q.q");
+        userDto.setName("qqq");
+        userDto.setLastname("www");
+        userDto.setPassword("1234");
+        userDto.setConfirmPassword("1234");
+
+        model.addAttribute("user", userDto);
         return "signup";
     }
 
@@ -42,7 +50,7 @@ public class SignupController extends AbstractController{
     public String saveUser(@ModelAttribute("user")UserDto user, BindingResult result,
                            ModelMap model) {
         //try {
-            userService.registerUser(user);
+            //userService.registerUser(user);
         //} catch (EmailIsUsedException e) {
         //    return "signup";
         //}

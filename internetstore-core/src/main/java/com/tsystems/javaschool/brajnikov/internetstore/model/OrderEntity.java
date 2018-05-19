@@ -25,9 +25,12 @@ public class OrderEntity implements Serializable{
     @Column(name = "sum")
     private int sum;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private UserEntity user;
+
+//    @OneToMany(mappedBy = "order")
+//    private List<CartItemEntity> orderItems;
 
 //    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
 //    private List<CartItemEntity> carts;
@@ -41,7 +44,7 @@ public class OrderEntity implements Serializable{
                 "id=" + id +
                 ", order_date=" + order_date +
                 ", sum=" + sum +
-                ", user=" + user +
+               // ", user=" + user +
                 '}';
     }
 }

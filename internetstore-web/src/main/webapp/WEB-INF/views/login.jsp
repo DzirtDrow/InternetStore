@@ -50,7 +50,8 @@
                             </tr>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <tr>
-                                <td colspan='2'><input name="submit" type="submit" value="Login" class="btn btn-black"></td>
+                                <td colspan='2'><input name="submit" type="submit" value="Login" class="btn btn-black">
+                                    <a href="<c:url value='/signup'/>" class="btn-link  ">   Registration</a> </td>
                             </tr>
                         </table>
                     </form>

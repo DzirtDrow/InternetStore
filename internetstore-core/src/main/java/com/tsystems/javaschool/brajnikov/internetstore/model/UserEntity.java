@@ -51,8 +51,8 @@ public class UserEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<OrderEntity> orders;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+//    private List<OrderEntity> orders;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
     private CartEntity cart;
@@ -148,13 +148,13 @@ public class UserEntity implements Serializable {
 //        this.confirmPassword = confirmPassword;
 //    }
 
-    public List<OrderEntity> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<OrderEntity> orders) {
-        this.orders = orders;
-    }
+//    public List<OrderEntity> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(List<OrderEntity> orders) {
+//        this.orders = orders;
+//    }
 
     public CartEntity getCart() {
         return cart;

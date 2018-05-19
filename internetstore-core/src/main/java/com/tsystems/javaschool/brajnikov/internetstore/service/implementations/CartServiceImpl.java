@@ -9,6 +9,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
+import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,8 @@ public class CartServiceImpl implements CartService {
     private CartItemDao cartItemDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private SessionCart sessionCart;
 
     public void addGoodsToCart(int userId, GoodsEntity goodsEntity) {
 
@@ -44,13 +47,17 @@ public class CartServiceImpl implements CartService {
             item = new CartItemEntity();
             item.setGoods(goodsEntity);
             item.setCart(cartEntity);
+            item.setType(CartItemTypeEnum.type_cart);
             item.setCount(1);
+
             cartItemDao.create(item);
 
             cartEntity.addCartItem(item); // adding
         } else {
             item.setCount(item.getCount() + 1);
         }
+
+        cartEntity.setSum(getCartTotalPrice(userId)); // set cart total price
 
         cartDao.update(cartEntity);//TODO ????
 
@@ -68,9 +75,17 @@ public class CartServiceImpl implements CartService {
         return cart.getCartItems();
     }
 
+    public int getCartTotalPrice(int userId) {
+        CartEntity cartEntity = userDao.findById(userId).getCart();
+        int result = 0;
+        List<CartItemEntity> items = cartEntity.getCartItems();
+        for (CartItemEntity item: items) {
+            result += item.getGoods().getPrice() * item.getCount();
+        }
+        return result;
+    }
+
     public void deleteCartItem(int itemId) {
-//        UserEntity user = userDao.findById(userId);
-//        CartEntity cart = user.getCart();
         cartItemDao.deleteItemById(itemId);
     }
 
@@ -90,8 +105,8 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    public void loadSessionCart(int userId, SessionCart sessionCart) {
-        //List<CartItemEntity> itemList = sessionCart.getCartItemsList();
+    public void loadSessionCart(int userId) {
+        List<CartItemEntity> itemList = sessionCart.getCartItemsList();
 //        for (CartItemEntity item : itemList) {
 //            addGoodsToCart(userId, item.getGoods()); //TODO need to save count of items
 //        }

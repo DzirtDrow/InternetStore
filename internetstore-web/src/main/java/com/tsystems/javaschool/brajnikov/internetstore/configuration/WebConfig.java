@@ -40,6 +40,7 @@ public class WebConfig implements WebMvcConfigurer{ //extends WebMvcConfigurerAd
         registry.addViewController("/accessdenied").setViewName("accessdenied");
         registry.addViewController("/store").setViewName("store");
         registry.addViewController("/cart").setViewName("cart");
+        registry.addViewController("/order").setViewName("order");
     }
 
     @Bean

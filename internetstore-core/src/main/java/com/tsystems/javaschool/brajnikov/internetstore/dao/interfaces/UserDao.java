@@ -17,5 +17,5 @@ public interface UserDao extends GenericDao<UserEntity, Integer>{
 
     List<UserEntity> findAllUsers();
 
-    //UserEntity getActiveUser(String email);
+
 }

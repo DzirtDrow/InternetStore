@@ -39,4 +39,13 @@ public class CartDaoImpl extends AbstractGenericDao<CartEntity,Integer> implemen
 
         return cartItemEntity;
     }
+
+//    public int getCartTotalPrice(CartEntity cartEntity) {
+//        int result = 0;
+//        List<CartItemEntity> items = cartEntity.getCartItems();
+//        for (CartItemEntity item: items) {
+//            result += item.getGoods().getPrice() * item.getCount();
+//        }
+//        return result;
+//    }
 }

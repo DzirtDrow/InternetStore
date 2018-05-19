@@ -20,6 +20,18 @@ import java.util.Map;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
 public class SessionCart {
+
+
+    private int cartTotalPrice;
+
+    public int getCartTotalPrice() {
+        cartTotalPrice = 0;
+        for (CartItemEntity item : goodsInCart.values()) {
+            cartTotalPrice += item.getCount() * item.getGoods().getPrice();
+        }
+        return cartTotalPrice;
+    }
+
     private Map<Integer, CartItemEntity> goodsInCart = new HashMap<Integer, CartItemEntity>();
 
     public void addItemToSessionCart(GoodsEntity goodsEntity) {
