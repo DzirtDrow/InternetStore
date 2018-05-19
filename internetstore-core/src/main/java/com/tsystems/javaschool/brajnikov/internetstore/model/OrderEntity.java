@@ -32,8 +32,9 @@ public class OrderEntity implements Serializable{
 //    @OneToMany(mappedBy = "order")
 //    private List<CartItemEntity> orderItems;
 
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE)
-//    private List<CartItemEntity> carts;
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+//    @JoinColumn(name = "order_id", referencedColumnName = "id")
+//    private List<CartItemEntity> orderItems;
 
     public OrderEntity() {
     }

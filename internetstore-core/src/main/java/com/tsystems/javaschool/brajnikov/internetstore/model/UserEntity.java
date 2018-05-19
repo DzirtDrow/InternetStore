@@ -41,9 +41,6 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     private String password;
 
-//    @Transient
-//    //@NotEmpty
-//    private String confirmPassword;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "birthdate")

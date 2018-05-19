@@ -29,7 +29,7 @@ public class CartItemEntity implements Serializable {
     @Basic
     @Column(name = "count")
     private int count;
-//
+
 //    @ManyToOne
 //    @JoinColumn(name = "order_id")
 //    private OrderEntity order;
