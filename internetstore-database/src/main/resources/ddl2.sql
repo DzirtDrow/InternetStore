@@ -68,6 +68,8 @@ CREATE TABLE IF NOT EXISTS `internet_store_db`.`order` (
 )
   ENGINE = InnoDB;
 
+ALTER TABLE `internet_store_db`.`order` RENAME TO `internet_store_db`.`orders`;
+
 create table IF NOT EXISTS `internet_store_db`.`cart`
 (
   id int auto_increment
@@ -146,8 +148,8 @@ create table IF NOT EXISTS `internet_store_db`.`persistent_logins`
 ;
 
 
-
-
+ALTER TABLE `internet_store_db`.`orders` ADD status
+  ENUM('PROCESSING', 'PENDING_PAYMENT', 'PENDING_SHIPPING', 'SHIPPED', 'DELIVERED') DEFAULT 'PROCESSING' NOT NULL;
 
 
 

@@ -6,11 +6,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Setter @Getter
-@Table(name = "order", schema = "internet_store_db")
+@Table(name = "orders", schema = "internet_store_db")
 public class OrderEntity implements Serializable{
     @Id
     @Column(name = "id")
@@ -25,9 +24,9 @@ public class OrderEntity implements Serializable{
     @Column(name = "sum")
     private int sum;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private UserEntity user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
 //    @OneToMany(mappedBy = "order")
 //    private List<CartItemEntity> orderItems;

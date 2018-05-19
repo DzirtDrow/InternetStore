@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.validation;
 
+import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

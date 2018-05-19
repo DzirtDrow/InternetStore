@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;

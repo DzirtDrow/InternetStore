@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 
 import java.util.List;

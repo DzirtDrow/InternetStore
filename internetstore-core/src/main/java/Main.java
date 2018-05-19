@@ -1,11 +1,7 @@
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.util.HibernateSessionFactory;
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import org.hibernate.Session;
-
-import java.util.Date;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {

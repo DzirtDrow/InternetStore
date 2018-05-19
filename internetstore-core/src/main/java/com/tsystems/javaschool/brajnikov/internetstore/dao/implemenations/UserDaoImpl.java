@@ -1,17 +1,13 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
-import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
+import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -47,8 +43,6 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
     }
 
     public List<UserEntity> findAllUsers() {
-        //Criteria criteria = createEntityCriteria().addOrder(Order.asc("email"));
-        //criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
         List<UserEntity> users = getList();//(List<UserEntity>) criteria.list();
         return users;
     }

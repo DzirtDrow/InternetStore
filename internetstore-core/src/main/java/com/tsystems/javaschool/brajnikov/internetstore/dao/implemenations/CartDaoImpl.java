@@ -3,14 +3,12 @@ package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
-import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-import java.util.List;
 
 @Repository("cartDao")
 public class CartDaoImpl extends AbstractGenericDao<CartEntity,Integer> implements CartDao{

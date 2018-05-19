@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+
 @Entity
 @Data
 @Table(name = "user")
@@ -49,6 +50,8 @@ public class UserEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<OrderEntity> orders;
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 //    private List<OrderEntity> orders;
 

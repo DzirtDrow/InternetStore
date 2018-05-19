@@ -16,6 +16,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     public List<GoodsEntity> getGoodsListByCategory(CategoryEntity category) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from GoodsEntity where category = :categoryParam");

@@ -1,8 +1,13 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="PERSISTENT_LOGINS")
@@ -51,6 +56,5 @@ public class PersistentLogin implements Serializable {
     public void setLast_used(Date last_used) {
         this.last_used = last_used;
     }
-
 
 }

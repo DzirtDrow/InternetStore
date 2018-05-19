@@ -42,6 +42,7 @@
                     <ul class="list-unstyled">
 
                         <li><a href="#">My Account</a></li>
+                        <li><a href="<c:url value='/orders-list'/> ">My Orders</a></li>
                         <li><a href="<c:url value='/cart'/> ">My Cart</a></li>
                             <c:choose>
                             <c:when test="${(loggedinuser == 'anonymousUser')}">

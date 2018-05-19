@@ -1,27 +1,30 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsDao;
-import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrderDao;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
+import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("orderService")
 @Transactional
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
     @Autowired
-    private OrderDao orderDao;
+    private OrdersDao orderDao;
 
     @Autowired
     private GoodsDao goodsDao;
+    @Autowired
+    private UserDao userDao;
 
     public void createOrder(OrderEntity orderEntity) {
         orderDao.create(orderEntity);
@@ -38,6 +41,20 @@ public class OrderServiceImpl implements OrderService{
         orderDao.create(order);
 
         return order.getId();
+    }
+
+    public List<OrderEntity> getAllOrders() {
+        List<OrderEntity> orders;
+        try {
+            orders = orderDao.getList();
+            return orders;
+        } catch (NoResultException ex) {
+            return new ArrayList<OrderEntity>();
+        }
+    }
+
+    public List<OrderEntity> getOrdersListByUser(UserEntity user) throws OrdersNotFoundException {
+        return orderDao.getOrdersByUser(user);
     }
 
     public void addGoodsToOrder(GoodsEntity goodsEntity) {
