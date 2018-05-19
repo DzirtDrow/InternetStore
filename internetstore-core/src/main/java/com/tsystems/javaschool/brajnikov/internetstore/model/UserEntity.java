@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "user")
 public class UserEntity implements Serializable {
 
@@ -63,69 +64,69 @@ public class UserEntity implements Serializable {
     public UserEntity() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public RoleEnum getRole() {
-        return role;
-    }
-
-    public void setRole(RoleEnum role) {
-        this.role = role;
-    }
-
-    public AddressEntity getAddress() {
-        return address;
-    }
-
-    public void setAddress(AddressEntity address) {
-        this.address = address;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
+//
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
+//
+//    public RoleEnum getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(RoleEnum role) {
+//        this.role = role;
+//    }
+//
+//    public AddressEntity getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(AddressEntity address) {
+//        this.address = address;
+//    }
 
     @Override
     public String toString() {
@@ -155,12 +156,12 @@ public class UserEntity implements Serializable {
 //    public void setOrders(List<OrderEntity> orders) {
 //        this.orders = orders;
 //    }
-
-    public CartEntity getCart() {
-        return cart;
-    }
-
-    public void setCart(CartEntity cart) {
-        this.cart = cart;
-    }
+//
+//    public CartEntity getCart() {
+//        return cart;
+//    }
+//
+//    public void setCart(CartEntity cart) {
+//        this.cart = cart;
+//    }
 }

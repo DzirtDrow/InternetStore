@@ -27,6 +27,16 @@ create table  IF NOT EXISTS `internet_store_db`.`user_address`
   engine=InnoDB
 ;
 
+
+create table if NOT EXISTS `internet_store_db`.`category`
+(
+  id int auto_increment
+    primary key,
+  name varchar(64) null
+)
+  engine=InnoDB
+;
+
 create table IF NOT EXISTS `internet_store_db`.`goods`
 (
   id int auto_increment
@@ -43,16 +53,7 @@ create table IF NOT EXISTS `internet_store_db`.`goods`
 ;
 
 create index  goods_category_id_fk
-  on goods (category_id)
-;
-
-create table if NOT EXISTS `internet_store_db`.`category`
-(
-  id int auto_increment
-    primary key,
-  name varchar(64) null
-)
-  engine=InnoDB
+  on `internet_store_db`.`goods` (category_id)
 ;
 
 
@@ -66,6 +67,19 @@ CREATE TABLE IF NOT EXISTS `internet_store_db`.`order` (
   FOREIGN KEY (user_id) REFERENCES user(id)
 )
   ENGINE = InnoDB;
+
+create table IF NOT EXISTS `internet_store_db`.`cart`
+(
+  id int auto_increment
+    primary key,
+  sum int null,
+  user_id int null,
+  constraint cart_user_id_fk
+  foreign key (user_id) references user (id)
+)
+  engine=InnoDB
+;
+
 
 create table IF NOT EXISTS `internet_store_db`.`cart_item`
 (
@@ -88,42 +102,32 @@ create table IF NOT EXISTS `internet_store_db`.`cart_item`
 
 
 create index cart_item_goods_id_fk
-  on cart_item (goods_id)
+  on `internet_store_db`.`cart_item` (goods_id)
 ;
 
 create index cart_item_cart_id_fk
-  on cart_item (cart_id)
+  on `internet_store_db`.`cart_item` (cart_id)
 ;
 
 create index cart_item_order_id_fk
-  on cart_item (order_id)
+  on `internet_store_db`.`cart_item` (order_id)
 ;
 
 
 
 create index cart_item_goods_id_fk
-  on cart_item (goods_id)
+  on `internet_store_db`.`cart_item` (goods_id)
 ;
 
 create index cart_item_cart_id_fk
-  on cart_item (cart_id)
+  on `internet_store_db`.`cart_item` (cart_id)
 ;
 
 
-create table IF NOT EXISTS `internet_store_db`.`cart`
-(
-  id int auto_increment
-    primary key,
-  sum int null,
-  user_id int null,
-  constraint cart_user_id_fk
-  foreign key (user_id) references user (id)
-)
-  engine=InnoDB
-;
+
 
 create index cart_user_id_fk
-  on cart (user_id)
+  on `internet_store_db`.`cart` (user_id)
 ;
 
 create table IF NOT EXISTS `internet_store_db`.`persistent_logins`
