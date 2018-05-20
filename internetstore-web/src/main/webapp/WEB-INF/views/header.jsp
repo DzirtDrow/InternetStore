@@ -36,31 +36,41 @@
 
 <header class="header-style-2">
     <div class="top-bar animate-dropdown">
+        <%--<div class="container">--%>
+        <%--<c:choose>--%>
+        <%--<c:when test="${userRole} == 'manager'}">--%>
+        <%--<a href="/">${userRole}  </a> MANAGERRRRRRRRR--%>
+        <%--</c:when>--%>
+        <%--<c:otherwise>--%>
+        <%--${userRole} wgwrgw--%>
+        <%--</c:otherwise>--%>
+        <%--</c:choose>--%>
+        <%--</div>--%>
         <div class="container">
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
 
-                        <li><a href="#">My Account</a></li>
+                        <li><a href="<c:url value='/account'/> ">My Account</a></li>
                         <li><a href="<c:url value='/orders-list'/> ">My Orders</a></li>
                         <li><a href="<c:url value='/cart'/> ">My Cart</a></li>
-                            <c:choose>
+                        <c:choose>
                             <c:when test="${(loggedinuser == 'anonymousUser')}">
                                 <li><a href="<c:url value='/login'/> ">Login</a></li>
                             </c:when>
-                                <c:otherwise>
-                                    <li><a href="<c:url value='/logout'/> ">Logout</a></li>
-                                    <span>Dear <strong>${loggedinuser}</strong>, Welcome!</span>
-                                </c:otherwise>
-                            </c:choose>
+                            <c:otherwise>
+                                <li><a href="<c:url value='/logout'/> ">Logout</a></li>
+                                <span>Dear <strong>${loggedinuser}</strong>, Welcome!</span>
+                            </c:otherwise>
+                        </c:choose>
 
                     </ul>
                 </div><!-- /.cnt-account -->
 
                 <%--<div class="cnt-block">--%>
-                    <%--<ul class="list-unstyled list-inline">--%>
+                <%--<ul class="list-unstyled list-inline">--%>
 
-                    <%--</ul><!-- /.list-unstyled -->--%>
+                <%--</ul><!-- /.list-unstyled -->--%>
                 <%--</div><!-- /.cnt-cart -->--%>
                 <%--<div class="clearfix"></div>--%>
             </div><!-- /.header-top-inner -->
@@ -71,15 +81,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
-                    <!-- ============================================================= LOGO ============================================================= -->
-                    <div class="logo">
-                        <a href="<c:url value='/index'/>">
+                <!-- ============================================================= LOGO ============================================================= -->
+                <div class="logo">
+                <a href="<c:url value='/index'/>">
 
-                            <img src="<c:url value='/static/images/logo.png'/>" alt="">
+                <img src="<c:url value='/static/images/logo.png'/>" alt="">
 
-                        </a>
-                    </div><!-- /.logo -->
-                    <!-- ============================================================= LOGO : END ============================================================= -->
+                </a>
+                </div><!-- /.logo -->
+                <!-- ============================================================= LOGO : END ============================================================= -->
                 </div><!-- /.logo-holder -->
 
                 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
@@ -153,8 +163,10 @@
         </div><!-- /.main-header -->
 
     </div>
-</header>
 
+
+
+</header>
 
 
 <%--<div class="authbar">--%>

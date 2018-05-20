@@ -85,7 +85,7 @@
                                     <div class="shopping-cart-btn">
                                         <span class="">
 
-                                            <a href="<c:url value='/order'/>" class="btn btn-upper btn-primary  outer-right-xs">Make Order</a>
+                                            <a href="<c:url value='/createorderfromcart'/>" class="btn btn-upper btn-primary  outer-right-xs">Make Order</a>
 
                                             <a href="<c:url value='/index'/>"
                                                class="btn btn-upper btn-primary pull-right">Continue Shopping</a>

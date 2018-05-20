@@ -102,8 +102,8 @@ a:active,
 a:focus {
   text-decoration: none;
 }
-img[src="assets/images/blank.gif"] {
-  background: url("../assets/images/ajax.gif") no-repeat scroll center center #ffffff;
+img[src="/static/images/blank.gif"] {
+  background: url("./images/ajax.gif") no-repeat scroll center center #ffffff;
 }
 
 .btn-upper {
@@ -2991,7 +2991,7 @@ age-container #owl-main .owl-next {
   font-family: 'Open Sans', sans-serif;
 }
 .cnt-strip .new-label {
-  background: url("../assets/images/label.png") no-repeat scroll right top;
+  background: url("../images/label.png") no-repeat scroll right top;
   height: 72px;
   position: absolute;
   left: -1px;
@@ -3120,7 +3120,7 @@ age-container #owl-main .owl-next {
   font-size: 12px;
   line-height: 18px;
   color: #666666;
-  margin-bottom: 70px;
+    margin-bottom: 70px;
 }
 
 .social {

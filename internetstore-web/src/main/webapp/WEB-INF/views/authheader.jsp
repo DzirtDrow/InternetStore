@@ -7,6 +7,8 @@
 
 
 <div class="authbar">
+
+
     <c:choose>
         <c:when test="${loggedinuser == 'anonymousUser'}">
             <span class="bar"><a href="<c:url value="/login" />" class="btn">Login</a></span>

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
 <%@include file="header.jsp" %>
@@ -31,9 +31,9 @@
 <%--</form>--%>
 <div class="body-content">
     <div class="container">
-        <div class="sign-in-page col-md-6 col-sm-6">
-            <div class="row">
-                <div class="col-md-6 col-sm-6 sign-in">
+        <div class="sign-in-page col-md-4 col-sm-4">
+            <%--<div class="row">--%>
+                <%--<div class="col-md-6 col-sm-6 sign-in">--%>
                     <h4 class="">Login</h4>
                     <p class="">Hello, Welcome to your account.</p>
                     <div class="social-sign-in outer-top-xs">
@@ -55,23 +55,9 @@
                             </tr>
                         </table>
                     </form>
-                    <%--<form class="register-form outer-top-xs" role="form"--%>
-                          <%--action="${pageContext.request.contextPath}/login" method="post">--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="info-title" for="exampleInputEmail1">Email Address--%>
-                                <%--(name)<span>*</span></label>--%>
-                            <%--<input type="email" class="form-control unicase-form-control text-input"--%>
-                                   <%--id="exampleInputEmail1">--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>--%>
-                            <%--<input type="password" class="form-control unicase-form-control text-input"--%>
-                                   <%--id="exampleInputPassword1">--%>
-                        <%--</div>--%>
-                        <%--<button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>--%>
-                    <%--</form>--%>
-                </div>
-            </div>
+
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
     </div>
 </div>

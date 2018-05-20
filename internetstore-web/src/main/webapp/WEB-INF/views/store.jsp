@@ -16,9 +16,9 @@
 
 <body>
 <%@include file="header.jsp" %>
-<div>
-    <%@include file="categories-bar.jsp" %>
-</div>
+<%@include file="categories-bar.jsp" %>
+
+
 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
     <!-- /.contact-row -->
     <div class="search-area">
@@ -101,7 +101,5 @@
 <%--</c:forEach>--%>
 <%--</tbody>--%>
 <%--</table>--%>
-
-
 </body>
 </html>

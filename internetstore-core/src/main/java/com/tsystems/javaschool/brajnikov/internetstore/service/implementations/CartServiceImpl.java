@@ -82,6 +82,10 @@ public class CartServiceImpl implements CartService {
         return result;
     }
 
+    public CartEntity getCartByUser(UserEntity user) {
+       return cartDao.findCartByUser(user);
+    }
+
     public void deleteCartItem(int itemId) {
         cartItemDao.deleteItemById(itemId);
     }

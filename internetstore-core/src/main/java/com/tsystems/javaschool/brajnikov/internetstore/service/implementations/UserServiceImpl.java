@@ -2,7 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
-import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
@@ -40,17 +40,20 @@ public class UserServiceImpl implements UserService {
         return dao.findByName(username);
     }
 
-    public void registerUser(UserDto user) {
+    public void registerUser(UserDto user) throws EmailIsUsedException {
+
+        if (dao.findByEmail(user.getEmail()) != null) {
+            throw new EmailIsUsedException();
+        }
 
         //TODO сделать проверку на существующего юзера, если есть - эксепшн
         UserEntity userEntity = new UserEntity();
         userEntity.setName(user.getName());
-        userEntity.setLastName(user.getLastname());
+        //userEntity.setLastName(user.getLastname());
         userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userEntity.setRole(RoleEnum.user); //TODO ???
         userEntity.setEmail(user.getEmail());
-        userEntity.setDate(user.getBirthdate());
-
+        //userEntity.setDate(user.getBirthdate());
 
         dao.create(userEntity);
 

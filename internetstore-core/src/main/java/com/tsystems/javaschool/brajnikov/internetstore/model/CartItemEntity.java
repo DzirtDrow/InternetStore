@@ -30,9 +30,9 @@ public class CartItemEntity implements Serializable {
     @Column(name = "count")
     private int count;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-//    private OrderEntity order;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity order;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")

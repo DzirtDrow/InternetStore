@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -28,7 +29,14 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
     public UserEntity findByEmail(String email) {
         Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where email = :paramName");
         query.setParameter("paramName", email);
-        return (UserEntity)query.getSingleResult(); //TODO
+
+        UserEntity userEntity = null; //TODO
+        try {
+            userEntity = (UserEntity)query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        return userEntity;
     }
 
     public UserEntity findByName(String username) {

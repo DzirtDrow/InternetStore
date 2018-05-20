@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 
@@ -16,5 +17,5 @@ public interface UserService {
     UserEntity findByEmail(String useremail);
     UserEntity findByName(String username);
 
-    void registerUser(UserDto user);
+    void registerUser(UserDto user) throws EmailIsUsedException;
 }

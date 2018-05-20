@@ -1,6 +1,8 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
+import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
@@ -13,7 +15,15 @@ public abstract class AbstractController {
     AuthenticationTrustResolver authenticationTrustResolver;
 
     @Autowired
-    SessionCart sessionCart;
+    private SessionCart sessionCart;
+
+    @Autowired
+    private UserDao userDao;
+//
+//    protected UserEntity getLoggedInUserEntity(){
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        return userDao.findByName(getPrincipal());
+//    }
 
     protected String getPrincipal(){
         String userName = null;

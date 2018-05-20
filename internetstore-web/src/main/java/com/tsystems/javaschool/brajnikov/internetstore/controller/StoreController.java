@@ -1,7 +1,11 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
-import com.tsystems.javaschool.brajnikov.internetstore.model.*;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
@@ -38,6 +42,9 @@ public class StoreController extends AbstractController {
     CategoryService categoryService;
 
     @Autowired
+    private CustomAuthentificationSuccessHandler authHandler;
+
+    @Autowired
     PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
     @Autowired
@@ -49,10 +56,9 @@ public class StoreController extends AbstractController {
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);//TODO replace all Entities to DTO or VB
 
-            List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
-            model.addAttribute("goods", goodsByCategory);
+        List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
+        model.addAttribute("goods", goodsByCategory);
 
-//        List<CartItemEntity> cartItemsList;
         if (!isCurrentAuthenticationAnonymous()) {
             model.addAttribute("loggedinuser", getPrincipal());
             UserEntity user = userService.findByName(getPrincipal());// logged in user
@@ -61,13 +67,6 @@ public class StoreController extends AbstractController {
         }
         return "/store";
     }
-//
-//    @RequestMapping(value = {"/store"}, method = RequestMethod.GET)
-//    public String storeList(Model model){
-//        List<GoodsEntity> goods = goodsService.findAllGoods();//TODO replace all Entities to DTO or VB
-//        model.addAttribute("goods", goods);
-//        return "/store";
-//    }
 
     @RequestMapping(value = "/addtocart")
     public String deleteGoods(Model model, @RequestParam("id") Integer id) {
@@ -103,7 +102,7 @@ public class StoreController extends AbstractController {
             cartItemsList = sessionCart.getCartItemsList();
 
             model.addAttribute("userCart", cartItemsList);
-            model.addAttribute("totalPrice",sessionCart.getCartTotalPrice());
+            model.addAttribute("totalPrice", sessionCart.getCartTotalPrice());
             model.addAttribute("loggedinuser", "anonymousUser");
         }
 //        List<CartItemEntity> userCart;

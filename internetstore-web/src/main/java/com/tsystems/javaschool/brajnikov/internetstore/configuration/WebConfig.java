@@ -42,6 +42,10 @@ public class WebConfig implements WebMvcConfigurer{ //extends WebMvcConfigurerAd
         registry.addViewController("/cart").setViewName("cart");
         registry.addViewController("/order").setViewName("order");
         registry.addViewController("/orders-list").setViewName("orders-list");
+        registry.addViewController("/manageorders").setViewName("manageorders");
+        registry.addViewController("/account").setViewName("account");
+        registry.addViewController("/orderPay").setViewName("orderPay");
+
     }
 
     @Bean

@@ -50,8 +50,10 @@ public class AppController extends AbstractController {
 
     @RequestMapping(value = {"/", "/home","/index"}, method = RequestMethod.GET)
     public String home(ModelMap model) {
+//        model.addAttribute("userRole", getLoggedInUserEntity().getRole().toString());
         if (!isCurrentAuthenticationAnonymous()) {
             model.addAttribute("loggedinuser", getPrincipal());
+
         } else {
             model.addAttribute("loggedinuser", "anonymousUser");
         }

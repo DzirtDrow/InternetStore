@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.configuration;
 
+import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     PersistentTokenRepository tokenRepository;
 
+    @Autowired
+    private CustomAuthentificationSuccessHandler customAuthentificationSuccessHandler;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -58,14 +62,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/", "/index", "signup").permitAll()
                 //.access("hasRole('USER') or hasRole('ADMIN') or hasRole('MANAGER')")
                 .antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+                .antMatchers("/manageorders").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
                 .antMatchers("/list").access("hasRole('ROLE_admin')")
                 .antMatchers("/store").permitAll()
                 .antMatchers("/cart").permitAll()
                 .antMatchers("/order").authenticated()
+                .antMatchers("/account").authenticated()
                 .antMatchers("/orders-list").authenticated()
                 .and().formLogin().loginPage("/login")
-                .loginProcessingUrl("/login")
+                //.successHandler(customAuthentificationSuccessHandler)
+                //.loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
+                //
                 .and().rememberMe().rememberMeParameter("remember-me")
                 .tokenRepository(tokenRepository).tokenValiditySeconds(86400)
                 .and().csrf()
@@ -100,3 +108,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+
+//
+//.antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+//        .antMatchers("/manageorders").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+//        .antMatchers("/list").access("hasRole('ROLE_admin')")
+//        .antMatchers("/store").permitAll()
+//        .antMatchers("/cart").permitAll()
+//        .antMatchers("/order").authenticated()
+//        .antMatchers("/account").authenticated()
+//        .antMatchers("/orders-list").authenticated()
+//        .and().formLogin().loginPage("/login").defaultSuccessUrl( "/index" )
+//        //.loginProcessingUrl("/login")
+//        .successHandler(customAuthentificationSuccessHandler)
+//        .usernameParameter("username").passwordParameter("password")
+//        .and().rememberMe().rememberMeParameter("remember-me")
+//        .tokenRepository(tokenRepository).tokenValiditySeconds(86400)
+//        .and().csrf()
+//        .and().exceptionHandling().accessDeniedPage("/accessdenied");
