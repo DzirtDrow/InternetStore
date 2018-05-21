@@ -92,4 +92,23 @@ public class OrderServiceImpl implements OrderService {
     public void updateOrder(OrderEntity orderEntity) {
         orderDao.update(orderEntity);
     }
+
+    public void pushOrderStatus(OrderEntity orderEntity) {
+        OrderStatusEnum status = orderEntity.getStatus();
+        if(status == OrderStatusEnum.PROCESSING){
+            status = OrderStatusEnum.PENDING_PAYMENT;
+
+        } else if(status == OrderStatusEnum.PENDING_PAYMENT){
+            status = OrderStatusEnum.PENDING_SHIPPING;
+
+        }  else if(status == OrderStatusEnum.PENDING_SHIPPING){
+            status = OrderStatusEnum.SHIPPED;
+
+        }  else if(status == OrderStatusEnum.SHIPPED){
+            status = OrderStatusEnum.DELIVERED;
+
+        }
+        orderEntity.setStatus(status);
+        orderDao.update(orderEntity);
+    }
 }

@@ -32,7 +32,7 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
     public List<OrderEntity> getOrdersByUser(UserEntity userEntity) throws OrdersNotFoundException {
 
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("from OrderEntity where user = :userParam");
+                .createQuery("from OrderEntity where user = :userParam order by order_date desc ");
         query.setParameter("userParam", userEntity);
         List<OrderEntity> ordersList = (List<OrderEntity>)query.getResultList();
 

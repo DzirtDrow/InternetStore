@@ -13,43 +13,43 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="header.jsp" %>
 <%--<div class="body-content outer-top-xl">--%>
-    <%--<div class="container">--%>
-        <%--<div class="row ">--%>
-            <%--<form:form modelAttribute="order" method="post">--%>
-                <%--<div class="row">--%>
-                    <%--Date: <h4>${order.order_date}</h4>--%>
-                <%--</div>--%>
-                <%--<div class="row">--%>
-                    <%--Price: <h4>$${order.sum}</h4>--%>
-                <%--</div>--%>
-                <%--<div class="row">--%>
-                    <%--Status:--%>
-                    <%--<select class="selectpicker" data-width="fit" data-id="${order.id}">--%>
-                        <%--&lt;%&ndash;<option value="option1"> OPtion 1</option>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<option value="option2"> OPtion 2</option>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<option value="option3"> OPtion 3</option>&ndash;%&gt;--%>
-                        <%--<c:forEach items="${orderStatuses}" var="orderStatus">--%>
-                            <%--<option value="${orderStatus}" ${order.status.equals(orderStatus) ? 'selected' : ''}>${orderStatus}</option>--%>
-                        <%--</c:forEach>--%>
-                    <%--</select>--%>
-                <%--</div>--%>
-                <%--&lt;%&ndash;<c:choose>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<c:when test="${order.status == 'PENDING_PAYMENT'}">&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;<div class="row">&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<a href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;&lt;%&ndash;<div class="form-actions floatRight">&ndash;%&gt;&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;&lt;%&ndash;<input type="submit" value="Pay" class="btn btn-primary btn-sm">&ndash;%&gt;&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;</c:when>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</c:choose>&ndash;%&gt;--%>
+<%--<div class="container">--%>
+<%--<div class="row ">--%>
+<%--<form:form modelAttribute="order" method="post">--%>
+<%--<div class="row">--%>
+<%--Date: <h4>${order.order_date}</h4>--%>
+<%--</div>--%>
+<%--<div class="row">--%>
+<%--Price: <h4>$${order.sum}</h4>--%>
+<%--</div>--%>
+<%--<div class="row">--%>
+<%--Status:--%>
+<%--<select class="selectpicker" data-width="fit" data-id="${order.id}">--%>
+<%--&lt;%&ndash;<option value="option1"> OPtion 1</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<option value="option2"> OPtion 2</option>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<option value="option3"> OPtion 3</option>&ndash;%&gt;--%>
+<%--<c:forEach items="${orderStatuses}" var="orderStatus">--%>
+<%--<option value="${orderStatus}" ${order.status.equals(orderStatus) ? 'selected' : ''}>${orderStatus}</option>--%>
+<%--</c:forEach>--%>
+<%--</select>--%>
+<%--</div>--%>
+<%--&lt;%&ndash;<c:choose>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<c:when test="${order.status == 'PENDING_PAYMENT'}">&ndash;%&gt;--%>
+<%--&lt;%&ndash;<div class="row">&ndash;%&gt;--%>
+<%--&lt;%&ndash;<a href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;<div class="form-actions floatRight">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;<input type="submit" value="Pay" class="btn btn-primary btn-sm">&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
+<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;</c:when>&ndash;%&gt;--%>
+<%--&lt;%&ndash;</c:choose>&ndash;%&gt;--%>
 
 
-            <%--</form:form>--%>
-        <%--</div>--%>
-    <%--</div>--%>
+<%--</form:form>--%>
+<%--</div>--%>
+<%--</div>--%>
 <%--</div>--%>
 
 <div class="body-content outer-top-xl">
@@ -57,67 +57,95 @@
         <div class="row ">
             <h2>Order Info</h2>
             <form:form modelAttribute="order" method="post">
-            <div class="body-content outer-top-xs">
-                <div class="container">
-                    <div class="row ">
-                        <div class="shopping-cart">
-                            <div class="shopping-cart-table ">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                            <%--<table class="table table-hover">--%>
-                                        <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Sum</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${items}" var="items">
+                <div class="body-content outer-top-xs">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="shopping-cart">
+                                <div class="shopping-cart-table ">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                                <%--<table class="table table-hover">--%>
+                                            <h4>Goods in order:</h4>
+                                            <thead>
                                             <tr>
-                                                <td>${items.goods.name}</td>
-                                                <td>${items.goods.price}</td>
-                                                <td>${items.count}</td>
-                                                <td>${items.count * items.goods.price}</td>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Sum</th>
 
                                             </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${items}" var="items">
+                                                <tr>
+                                                    <td class="text-center">${items.goods.name}</td>
+                                                    <td class="text-center">${items.goods.price}</td>
+                                                    <td class="text-center">${items.count}</td>
+                                                    <td class="text-center">${items.count * items.goods.price}</td>
+
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <div class="table"><h4>Order date: <a>${order.order_date}</a></h4>
-                </div>
+                <div>
+                    <div class="table">
+                        <h4>Order date:
+                            <a>
+                                <fmt:formatDate value="${order.order_date}" pattern="dd.MM.yyyy"/>
+                            </a>
+                        </h4>
+                    </div>
 
-                <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
-                <div class="table">
-                    <h4>Status:
-                    <select class="selectpicker" data-width="fit" data-id="${order.id}">
-                            <%--<option value="option1"> OPtion 1</option>--%>
-                            <%--<option value="option2"> OPtion 2</option>--%>
-                            <%--<option value="option3"> OPtion 3</option>--%>
-                        <c:forEach items="${orderStatuses}" var="orderStatus">
-                            <option value="${orderStatus}" ${order.status.equals(orderStatus) ? 'selected' : ''}>${orderStatus}</option>
-                        </c:forEach>
-                    </select>
-                    </h4>
-                </div>
-                <%--<div class="table"><h4>Status: <a>${order.status}</a></h4></div>--%>
-                <%--<div class="row">--%>
+                    <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
+                    <div class="table">
+                        <h4>Status:
 
-            </div>
+                            <%--<select name="status_select" class="selectpicker" data-width="fit" data-id="${order.id}">--%>
+                                <%--<c:forEach items="${orderStatuses}" var="orderStatus">--%>
+                                    <%--<option value="${orderStatus}" ${order.status.equals(orderStatus) ? 'selected' : ''}>${orderStatus}</option>--%>
+                                <%--</c:forEach>--%>
+                            <%--</select>--%>
+
+                            <c:choose>
+                                <c:when test="${order.status == 'PROCESSING'}">
+                                    <font color="blue"><span class="cart-product-info center-block">Обработка</span></font>
+                                </c:when>
+                                <c:when test="${order.status == 'PENDING_PAYMENT'}">
+                                    <font color="red"><span class="cart-product-info center-block">Ожидается оплата</span></font>
+                                </c:when>
+                                <c:when test="${order.status == 'PENDING_SHIPPING'}">
+                                    <font color="blue"><span class="cart-product-info center-block">Ожидается доставка</span></font>
+                                </c:when>
+
+                                <c:when test="${order.status == 'SHIPPED'}">
+                                    <font color="green"><span class="cart-product-info center-block">Доставлено</span></font>
+                                </c:when>
+                                <c:when test="${order.status == 'DELIVERED'}">
+                                    <font color="blue"><span class="cart-product-info center-block">Выдано покупателю</span></font>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="cart-product-info center-block">${order.status}</span>
+                                </c:otherwise>
+                            </c:choose>
+                            <a href="<c:url value='/changeorderstatus?id=${order.id}'/>" class="btn-black">Push order Status</a>
+                        </h4>
+                    </div>
+
+                </div>
                 <div class="form-actions floatRight">
                     <input type="submit" value="Save changes" class="btn btn-primary btn-sm">
                 </div>
                 <%--</div>--%>
-                </form:form>
+                <i hidden>
+                    <form:input path="user.id" type="user.id"/>
+                </i>
+            </form:form>
         </div>
     </div>
 </div>

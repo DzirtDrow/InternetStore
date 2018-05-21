@@ -19,4 +19,6 @@ public interface OrderService {
     List<CartItemEntity> getCarts();
 
     void updateOrder(OrderEntity orderEntity);
+
+    void pushOrderStatus(OrderEntity orderEntity);
 }

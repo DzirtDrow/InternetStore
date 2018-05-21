@@ -1,8 +1,8 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.AddressDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
-import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,9 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
 
     @Autowired
     private SessionFactory sessionFactory;
+
+    @Autowired
+    private AddressDao adressDao;
 
 
     public UserEntity findById(int id) {
@@ -44,6 +47,8 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
         query.setParameter("paramName", username);
         return (UserEntity)query.getSingleResult();
     }
+
+
 
 
     public void save(UserEntity user) {

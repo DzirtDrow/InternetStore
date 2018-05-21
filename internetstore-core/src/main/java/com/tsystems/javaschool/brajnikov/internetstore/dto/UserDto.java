@@ -15,7 +15,7 @@ public class UserDto {
     @Size(min = 2, max = 64)
     private String lastname;
 
-    private Date birthdate;
+    private Date date;
 
     @Email
     private String email;

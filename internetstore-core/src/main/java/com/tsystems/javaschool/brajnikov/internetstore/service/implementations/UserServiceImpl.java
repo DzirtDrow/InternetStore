@@ -1,8 +1,10 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.AddressDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
+import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao dao;
+
+    @Autowired
+    private AddressDao addressDao;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -57,6 +62,23 @@ public class UserServiceImpl implements UserService {
 
         dao.create(userEntity);
 
+    }
+
+    public void updateUser(UserEntity userEntity) {
+        dao.update(userEntity);
+    }
+
+    public AddressEntity getUserAddress(UserEntity user) {
+        if(user.getAddress() == null) {
+            AddressEntity newAddress = new AddressEntity();
+            newAddress.setAddress("");
+            newAddress.setCoordinates("");
+            newAddress.setUser(user);
+            addressDao.create(newAddress);
+            user.setAddress(newAddress);
+
+        }
+        return user.getAddress();
     }
 
     public void save(UserEntity userEntity) {

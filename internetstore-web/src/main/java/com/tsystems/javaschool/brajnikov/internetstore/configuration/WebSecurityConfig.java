@@ -68,6 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/list").access("hasRole('ROLE_admin')")
                 .antMatchers("/store").permitAll()
                 .antMatchers("/cart").permitAll()
+                .antMatchers("/details").permitAll()
                 .antMatchers("/order").authenticated()
                 .antMatchers("/account").authenticated()
                 .antMatchers("/orders-list").authenticated()

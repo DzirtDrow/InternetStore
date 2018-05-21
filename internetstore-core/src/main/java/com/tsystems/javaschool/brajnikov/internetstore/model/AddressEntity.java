@@ -1,8 +1,11 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
+@Data
 @Table(name = "user_address")
 public class AddressEntity {
     @Id
@@ -10,19 +13,14 @@ public class AddressEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @Basic
     @Column(name = "address")
     private String address;
 
-    @Basic
     @Column(name = "coordinates")
     private String coordinates;
-
-
 
 }

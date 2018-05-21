@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -8,10 +7,9 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Goods List</title>
-    <link href="<c:url value='/static/css2/bootstrap.css' />" rel="stylesheet"/>
-    <link href="<c:url value='/static/css2/app.css' />" rel="stylesheet"/>
+    <%--<link href="<c:url value='/static/css2/bootstrap.css' />" rel="stylesheet"/>--%>
+    <%--<link href="<c:url value='/static/css2/app.css' />" rel="stylesheet"/>--%>
 </head>
 
 <body>
@@ -42,11 +40,11 @@
                                                     <!-- /.col -->
                                                     <div class="col col-sm-8 col-lg-8">
                                                         <div class="product-info">
-                                                            <h3 class="name"><a href="detail.html">${goods.name}</a>
+                                                            <h3 class="name"><a href="details?id=${goods.id}">${goods.name}</a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="product-price"><span
-                                                                    class="price">Price:  $${goods.price}</span>
+                                                                    class="price">Price: $${goods.price}</span>
                                                             </div>
                                                             <!-- /.product-price -->
                                                             <div class="description m-t-10">

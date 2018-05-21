@@ -39,22 +39,6 @@ public class OrderController extends AbstractController {
     @Autowired
     private CustomAuthentificationSuccessHandler authHandler;
 
-//    @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
-//    public String showOrder(Model model) {
-//        if (!isCurrentAuthenticationAnonymous()) {
-//            model.addAttribute("loggedinuser", "anonymousUser");
-//            //model.addAttribute("userRole", getLoggedInUserEntity().getRole().toString());
-//            UserEntity user = userService.findByName(getPrincipal()); //TODO make DTO!
-//
-////            int orderId = orderService.createOrderByCart(user.getCart());
-//
-//            return "/order";
-//        } else {
-//            model.addAttribute("loggedinuser", getPrincipal());
-//            return "/login";
-//        }
-//    }
-
     @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
     public String showOneOrder(Model model, @RequestParam("id") Integer orderId) {
         if (!isCurrentAuthenticationAnonymous()) {
@@ -86,13 +70,6 @@ public class OrderController extends AbstractController {
         }
         return "redirect:/order?id=" + orderId;
     }
-//    @RequestMapping(value = "/order", method = RequestMethod.POST)
-//    public ModelAndView updateOrder(@ModelAttribute("order") OrderEntity orderEntity, Model model) {
-//        //orderEntity.setStatus(OrderStatusEnum.PENDING_SHIPPING);
-//
-//        //orderService.updateOrder(orderEntity);
-//        return new ModelAndView("/order?id="+7);
-//    }
 
     @RequestMapping(value = {"/orders-list"}, method = RequestMethod.GET)
     public String listUserOrders(Model model) {

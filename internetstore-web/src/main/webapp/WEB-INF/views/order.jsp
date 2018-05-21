@@ -56,13 +56,43 @@
                 </div>
             </div>
             <div>
-                <div class="table"><h4>Order date: <a>${order.order_date}</a></h4>
+                <div class="table">
+                    <h4>Order date:
+                        <a><fmt:formatDate value="${order.order_date}" pattern="dd.MM.yyyy"/>
+                        </a>
+                    </h4>
                 </div>
 
                 <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
 
-                <div class="table"><h4>Status: <a>${order.status}</a></h4></div>
+                <div class="table"><h4>Status: <a>
 
+
+                    <c:choose>
+                        <c:when test="${order.status == 'PROCESSING'}">
+                            <font color="blue"><span class="cart-product-info center-block">Обработка</span></font>
+                        </c:when>
+                        <c:when test="${order.status == 'PENDING_PAYMENT'}">
+                            <font color="red"><span
+                                    class="cart-product-info center-block">Ожидается оплата</span></font>
+                        </c:when>
+                        <c:when test="${order.status == 'PENDING_SHIPPING'}">
+                            <font color="#483d8b"><span
+                                    class="cart-product-info center-block">Ожидается доставка</span></font>
+                        </c:when>
+
+                        <c:when test="${order.status == 'SHIPPED'}">
+                            <font color="green"><span class="cart-product-info center-block">Доставлено</span></font>
+                        </c:when>
+                        <c:when test="${order.status == 'DELIVERED'}">
+                            <font color="blue"><span
+                                    class="cart-product-info center-block">Выдано покупателю</span></font>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="cart-product-info center-block">${order.status}</span>
+                        </c:otherwise>
+                    </c:choose>
+                </a></h4></div>
                 <c:choose>
                     <c:when test="${order.status == 'PENDING_PAYMENT'}">
                         <a class="btn  btn-primary " href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>
@@ -73,7 +103,6 @@
         </div>
     </div>
 </div>
-
 
 
 </body>

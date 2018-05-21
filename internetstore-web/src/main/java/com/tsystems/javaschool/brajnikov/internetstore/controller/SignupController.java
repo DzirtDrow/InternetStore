@@ -44,7 +44,7 @@ public class SignupController extends AbstractController{
         } catch (EmailIsUsedException ex) {
             return "signup";
         }
-        return "/index";
+        return "redirect:/index";
     }
 
 

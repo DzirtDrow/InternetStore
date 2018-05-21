@@ -140,15 +140,22 @@ public class StoreController extends AbstractController {
     }
 
     @RequestMapping(value = "/decreaseItemsCount")
-    public String decreaseItemCount(Model model, @RequestParam("id") String id) {
+    public String decreaseItemCount(Model model, @RequestParam("id") Integer id) {
         if (!isCurrentAuthenticationAnonymous()) {
             if (id != null) {
-                cartService.decreaseItemsCount(Integer.parseInt(id));
+                cartService.decreaseItemsCount(id);
             }
         } else {
-            sessionCart.decreaseItemCount(Integer.parseInt(id));
+            sessionCart.decreaseItemCount(id);
         }
         return "redirect:/cart";
     }
+
+    @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
+    public String goodsDetails(Model model, @RequestParam("id") Integer goodsId) {
+        model.addAttribute("goods", goodsService.findGoodsById(goodsId));
+        return "/details?id=" + goodsId;
+    }
+
 
 }

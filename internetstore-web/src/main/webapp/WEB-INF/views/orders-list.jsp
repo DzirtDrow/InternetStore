@@ -45,7 +45,10 @@
                             <c:forEach items="${orders}" var="orders">
                                 <tr>
                                     <td class="cart-product-name-info">
-                                        <h4 class='cart-product-description'><a href="order?id=${orders.id}">${orders.order_date}</a>
+                                        <h4 class='cart-product-description'>
+                                            <a href="order?id=${orders.id}">
+                                                <fmt:formatDate value="${orders.order_date}" pattern="dd.MM.yyyy"/>
+                                            </a>
                                         </h4>
                                         <div class="row">
                                             <div class="col-sm-4">
@@ -61,11 +64,21 @@
 
                                     <td>
                                         <c:choose>
-                                            <c:when test="${orders.status == 'PENDING_PAYMENT'}">
-                                                <font color="red"><span class="cart-product-info center-block">${orders.status}</span></font>
+                                            <c:when test="${orders.status == 'PROCESSING'}">
+                                                <font color="blue"><span class="cart-product-info center-block">Обработка</span></font>
                                             </c:when>
+                                            <c:when test="${orders.status == 'PENDING_PAYMENT'}">
+                                                <font color="red"><span class="cart-product-info center-block">Ожидается оплата</span></font>
+                                            </c:when>
+                                            <c:when test="${orders.status == 'PENDING_SHIPPING'}">
+                                                <font color="#483d8b"><span class="cart-product-info center-block">Ожидается доставка</span></font>
+                                            </c:when>
+
                                             <c:when test="${orders.status == 'SHIPPED'}">
-                                                <font color="green"><span class="cart-product-info center-block">${orders.status}</span></font>
+                                                <font color="green"><span class="cart-product-info center-block">Доставлено</span></font>
+                                            </c:when>
+                                            <c:when test="${orders.status == 'DELIVERED'}">
+                                                <font color="blue"><span class="cart-product-info center-block">Выдано покупателю</span></font>
                                             </c:when>
                                             <c:otherwise>
                                                 <span class="cart-product-info center-block">${orders.status}</span>

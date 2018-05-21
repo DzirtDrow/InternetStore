@@ -27,6 +27,13 @@
                         <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
                         <%--<input type="text" class="">--%>
                     </div>
+                    <%--<div class="form-group">--%>
+                        <%--<label class="info-title">Birth Date </label>--%>
+                            <%--&lt;%&ndash;<fmt:formatDate value="${user.date}" type="date" pattern="dd.MM.yyyy"/>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<form:input path="date" type="date" class="form-control unicase-form-control text-input"/>&ndash;%&gt;--%>
+                        <%--<form:input type="date" path="date" class="form-control unicase-form-control text-input"/>--%>
+                            <%--&lt;%&ndash;<input type="text" class="">&ndash;%&gt;--%>
+                    <%--</div>--%>
                     <div class="form-group">
                         <label class="info-title">Password <span>*</span></label>
                         <form:input path="password" type="password" class="form-control unicase-form-control text-input"/>
