@@ -24,5 +24,11 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         return (List<GoodsEntity>) query.getResultList();
     }
 
+    public List<CategoryEntity> getCategoryList() {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from CategoryEntity");
+        return (List<CategoryEntity>) query.getResultList();
+    }
+
 
 }

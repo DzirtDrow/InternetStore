@@ -40,7 +40,7 @@
                                                     <!-- /.col -->
                                                     <div class="col col-sm-8 col-lg-8">
                                                         <div class="product-info">
-                                                            <h3 class="name"><a href="details?id=${goods.id}">${goods.name}</a>
+                                                            <h3 class="name"><a href="#">${goods.name}</a>
                                                             </h3>
                                                             <div class="rating rateit-small"></div>
                                                             <div class="product-price"><span

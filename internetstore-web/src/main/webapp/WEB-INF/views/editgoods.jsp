@@ -14,22 +14,62 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="authheader.jsp" %>
+<%@include file="header.jsp" %>
 
-<form:form modelAttribute="goods" class="form-horizontal" method="post">
-    <div class="row">
-        Name: <form:input type="text" path="name" id="name" />
-    </div>
-    <div class="row">
-        Price: <form:input type="text" path="price" id="price"/>
-    </div>
+<%--<form:form modelAttribute="goods" class="form-horizontal" method="post">--%>
+<%--<div class="row">--%>
+<%--Name: <form:input type="text" path="name" id="name" />--%>
+<%--</div>--%>
+<%--<div class="row">--%>
+<%--Price: <form:input type="text" path="price" id="price"/>--%>
+<%--</div>--%>
 
-    <div class="row">
-        <div class="form-actions floatRight">
-            <input type="submit" value="Save changes" class="btn btn-primary btn-sm">
+<%--<div class="row">--%>
+<%--<div class="form-actions floatRight">--%>
+<%--<input type="submit" value="Save changes" class="btn btn-primary btn-sm">--%>
+<%--</div>--%>
+<%--</div>--%>
+
+<%--</form:form>--%>
+<form:form class="register-form outer-top-xs" role="form" modelAttribute="goods" method="post">
+
+<div class="body-content">
+    <div class="container">
+        <div class="sign-in-page col-md-4 col-sm-4 ">
+
+            <h4 class="checkout-subtitle">Goods Changing</h4>
+            <p class="text title-tag-line">Change this goods</p>
+                <div class="form-group">
+                    <label class="info-title">Name </label>
+                    <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
+                        <%--<input type="text" class="">--%>
+                </div>
+                <div class="form-group">
+                    <label class="info-title">Price </label>
+                    <form:input path="price" type="number" class="form-control unicase-form-control text-input"/>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="info-title">Description </label>
+                    <form:input path="description" type="text" class="form-control unicase-form-control text-input"/>
+                        <%--<input type="text" class="">--%>
+                </div>
+                <div class="form-group">
+                    <label class="info-title">Left Count </label>
+                    <form:input path="leftCount" type="number" class="form-control unicase-form-control text-input"/>
+                        <%--<input type="text" class="">--%>
+                </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+            <%--</div>--%>
         </div>
-    </div>
 
+    </div>
+</div>
 </form:form>
 </body>
 </html>

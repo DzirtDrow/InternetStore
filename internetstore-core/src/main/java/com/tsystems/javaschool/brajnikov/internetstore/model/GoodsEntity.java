@@ -28,7 +28,7 @@ public class GoodsEntity implements Serializable {
     @Column(name = "left_count")
     private int leftCount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 

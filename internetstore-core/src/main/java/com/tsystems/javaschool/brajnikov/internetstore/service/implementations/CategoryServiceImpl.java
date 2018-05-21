@@ -22,6 +22,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public List<CategoryEntity> getCategoryList() {
-        return categoryDao.getList();
+        return categoryDao.getCategoryList();
     }
 }

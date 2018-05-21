@@ -1,12 +1,11 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +16,13 @@ import java.util.List;
 
 @Controller("manageGoodsController")
 @RequestMapping
-public class ManageGoodsController extends AbstractController{
+public class ManageGoodsController extends AbstractController {
 
     @Autowired
-    GoodsService goodsService;
+    private GoodsService goodsService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping(value = "/addgoods", method = RequestMethod.GET)
     public String addGoodsPage(Model model) {
@@ -54,15 +56,19 @@ public class ManageGoodsController extends AbstractController{
     }
 
     @RequestMapping(value = "/editgoods", method = RequestMethod.GET)
-    public String editGoodsPage(Model model, @RequestParam("id") String id) {
+    public String editGoodsPage(Model model, @RequestParam("id") Integer id) {
         if (id != null) {
-            model.addAttribute("goods", goodsService.findGoodsById(Integer.parseInt(id)));
+            // model.addAttribute("category", goodsService.findGoodsById(id).getCategory());
+            model.addAttribute("goods", goodsService.findGoodsById(id));
         }
         return "/editgoods";
     }
 
     @RequestMapping(value = "/editgoods", method = RequestMethod.POST)
-    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity){
+    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity) {
+
+        GoodsEntity oldGoods = goodsService.findGoodsById(goodsEntity.getId());
+        goodsEntity.setCategory(oldGoods.getCategory());
         goodsService.updateGoods(goodsEntity);
         return new ModelAndView("redirect:/goodslist");
     }

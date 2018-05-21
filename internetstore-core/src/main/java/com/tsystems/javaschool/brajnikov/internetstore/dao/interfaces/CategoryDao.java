@@ -9,4 +9,6 @@ import java.util.List;
 public interface CategoryDao extends GenericDao<CategoryEntity, Integer> {
 
     List<GoodsEntity> getGoodsListByCategory(CategoryEntity category);
+
+    List<CategoryEntity> getCategoryList();
 }

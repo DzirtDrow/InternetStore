@@ -7,8 +7,12 @@ import com.tsystems.javaschool.brajnikov.internetstore.util.OrderStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller("manageOrdersController")
@@ -32,7 +36,9 @@ public class ManageOrdersController extends AbstractController {
         OrderEntity order = orderService.getOrderById(orderId);
         model.addAttribute("loggedinuser", getPrincipal());
 
+        //List<OrderStatusEnum> list = Arrays.asList(OrderStatusEnum.values());
         model.addAttribute("orderStatuses", OrderStatusEnum.values());
+
         model.addAttribute("orderStatus", order.getStatus());
 
         model.addAttribute("order", order);
@@ -43,14 +49,14 @@ public class ManageOrdersController extends AbstractController {
     }
 
     @RequestMapping(value = {"/manageoneorder"}, method = RequestMethod.POST)
-    public String saveOrder(Model model, @ModelAttribute("order") OrderEntity orderEntity,
-                            @RequestBody OrderStatusEnum requestBody) {
+    public String saveOrder(Model model, @ModelAttribute("order") OrderEntity orderEntity) {
 
         orderService.updateOrder(orderEntity);
         return "/manageoneorder?id=" + orderEntity.getId();
     }
+
     @RequestMapping(value = {"/changeorderstatus"}, method = RequestMethod.GET)
-    public String changeOrderStatus(Model model, @RequestParam("id") Integer orderId){
+    public String changeOrderStatus(Model model, @RequestParam("id") Integer orderId) {
 
         orderService.pushOrderStatus(orderService.getOrderById(orderId));
         return "redirect:/manageoneorder?id=" + orderId;
