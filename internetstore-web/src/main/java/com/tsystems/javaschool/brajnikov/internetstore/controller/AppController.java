@@ -50,6 +50,7 @@ public class AppController extends AbstractController {
 
     @RequestMapping(value = {"/", "/home","/index"}, method = RequestMethod.GET)
     public String home(ModelMap model) {
+
 //        model.addAttribute("userRole", getLoggedInUserEntity().getRole().toString());
         if (!isCurrentAuthenticationAnonymous()) {
             model.addAttribute("loggedinuser", getPrincipal());
@@ -59,6 +60,7 @@ public class AppController extends AbstractController {
         }
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);//TODO replace all Entities to DTO or VB
+
         return "index";
     }
 
@@ -66,7 +68,7 @@ public class AppController extends AbstractController {
     public String loginPage(ModelMap model) {
         if (isCurrentAuthenticationAnonymous()) {
             return "login";
-        } else {
+            } else {
             return "redirect:/index";
         }
     }
