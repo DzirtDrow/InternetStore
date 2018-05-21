@@ -17,21 +17,6 @@
 <%@include file="categories-bar.jsp" %>
 
 <h1>Welcome to WEB SHOP!</h1><br>
-<input type="button" class="button" value="Show Users List"
-       onclick="location.href=' ${pageContext.request.contextPath}/list'"/>
-<input type="button" class="button" value="Show Goods List"
-       onclick="location.href=' ${pageContext.request.contextPath}/goodslist'"/>
-<%--<input type="button" class="button" value="Show Store"--%>
-<%--onclick="location.href=' ${pageContext.request.contextPath}/store'"/>--%>
-<br>
-<br>
-<br>
-<input type="button" class="button" value="Sign Up"
-       onclick="location.href=' ${pageContext.request.contextPath}/signup'"/>
-<input type="button" class="button" value="Login" onclick="location.href=' ${pageContext.request.contextPath}/login'"/>
-
-<input type="button" class="button" value="Orders Managment" onclick="location.href=' ${pageContext.request.contextPath}/manageorders'"/>
-
 
 <%--<%@include file="footer.jsp"%>--%>
 </body>

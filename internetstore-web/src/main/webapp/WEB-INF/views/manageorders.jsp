@@ -35,7 +35,7 @@
                             <c:forEach items="${orders}" var="orders">
                                 <tr>
                                     <td class="cart-product-name-info">
-                                        <h4 class='cart-product-description'><a href="manageoneorder?id=${goods.id}">${orders.order_date}</a>
+                                        <h4 class='cart-product-description'><a href="manageoneorder?id=${orders.id}">${orders.order_date}</a>
                                         </h4>
                                         <div class="row">
                                             <div class="col-sm-4">
@@ -67,8 +67,8 @@
 
 
                                     <td>
-                                        <a href="<c:url value='#'/>"
-                                           class="btn btn-upper btn-primary center-block">Change Status</a>
+                                        <a href="<c:url value='/manageoneorder?id=${orders.id}'/>"
+                                           class="btn btn-upper btn-primary center-block">Manage Order</a>
                                     </td>
 
                                 </tr>

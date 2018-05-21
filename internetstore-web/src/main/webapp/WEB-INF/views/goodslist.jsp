@@ -20,8 +20,9 @@
 <%--<div class="generic-container">--%>
 <%--<div class="panel panel-default">--%>
 <!-- Default panel contents -->
-<input type="button" class="button" value="Back" onclick="location.href=' ${pageContext.request.contextPath}/ '" />
-<div class="panel-heading"><span class="lead">List of Goods </span></div>
+<input type="button" class="button" value="Back" onclick="location.href=' ${pageContext.request.contextPath}/ '"/>
+<div class="panel-heading"><span class="lead">List of Goods </span>
+</div>
 <table class="table table-hover">
     <thead>
     <tr>
@@ -36,13 +37,13 @@
         <tr>
             <td>${goods.name}</td>
             <td>${goods.price}</td>
-            <%--<td>${goods.description}</td>--%>
+                <%--<td>${goods.description}</td>--%>
             <td>
                 <a href="deleteGoods?id=${goods.id}" class="btn btn-success custom-width">Delete</a>
 
-            <a href="<c:url value='editgoods?id=${goods.id}'/>"
+                <a href="<c:url value='editgoods?id=${goods.id}'/>"
                    class="btn btn-success custom-width">Edit</a>
-                <%--<a class="button">Edit</a>--%>
+                    <%--<a class="button">Edit</a>--%>
             </td>
         </tr>
     </c:forEach>
@@ -51,7 +52,8 @@
 <%--</div>--%>
 <%--</div>--%>
 <div id="add">
-    <input type="button" class="button" value="Add New Goods" onclick="location.href=' ${pageContext.request.contextPath}/addgoods'" />
+    <input type="button" class="button" value="Add New Goods"
+           onclick="location.href=' ${pageContext.request.contextPath}/addgoods'"/>
 </div>
 
 </body>

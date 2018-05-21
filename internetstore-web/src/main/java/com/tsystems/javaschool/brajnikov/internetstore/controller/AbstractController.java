@@ -8,6 +8,10 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.io.IOException;
 
 public abstract class AbstractController {
 
@@ -43,4 +47,10 @@ public abstract class AbstractController {
     }
 
 
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleIOException(Exception exception) {
+        ModelAndView modelAndView = new ModelAndView("error");
+        modelAndView.addObject("message", exception.getMessage());
+        return modelAndView;
+    }
 }

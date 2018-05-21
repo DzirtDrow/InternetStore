@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderEntity> getAllOrders() {
         List<OrderEntity> orders;
         try {
-            orders = orderDao.getList();
+            orders = orderDao.getOrdersList();
             return orders;
         } catch (NoResultException ex) {
             return new ArrayList<OrderEntity>();

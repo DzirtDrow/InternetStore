@@ -6,8 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,31 +16,65 @@
 <div class="body-content outer-top-xl">
     <div class="container">
         <div class="row ">
+            <h2>Order Info</h2>
             <form:form modelAttribute="order" method="post">
-                <div class="row">
-                    Date: <h4>${order.order_date}</h4>
+
+
+            <div class="body-content outer-top-xs">
+                <div class="container">
+                    <div class="row ">
+                        <div class="shopping-cart">
+                            <div class="shopping-cart-table ">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                            <%--<table class="table table-hover">--%>
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                            <th>Sum</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach items="${items}" var="items">
+                                            <tr>
+                                                <td>${items.goods.name}</td>
+                                                <td>${items.goods.price}</td>
+                                                <td>${items.count}</td>
+                                                <td>${items.count * items.goods.price}</td>
+
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="row">
-                    Price: <h4>$${order.sum}</h4>
+            </div>
+            <div>
+                <div class="table"><h4>Order date: <a>${order.order_date}</a></h4>
                 </div>
-                <div class="row">
-                    Status: <h4>${order.status}</h4>
-                </div>
+
+                <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
+
+                <div class="table"><h4>Status: <a>${order.status}</a></h4></div>
+
                 <c:choose>
                     <c:when test="${order.status == 'PENDING_PAYMENT'}">
-                        <div class="row">
-                            <a href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>
-                            <%--<div class="form-actions floatRight">--%>
-                                <%--<input type="submit" value="Pay" class="btn btn-primary btn-sm">--%>
-                            <%--</div>--%>
-                        </div>
+                        <a class="btn  btn-primary " href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>
                     </c:when>
                 </c:choose>
-
-
-            </form:form>
+                </form:form>
+            </div>
         </div>
     </div>
 </div>
+
+
+
 </body>
 </html>

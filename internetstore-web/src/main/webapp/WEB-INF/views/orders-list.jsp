@@ -60,13 +60,27 @@
                                     </td>
 
                                     <td>
-                                        <span class="cart-product-info center-block">${orders.status}</span>
+                                        <c:choose>
+                                            <c:when test="${orders.status == 'PENDING_PAYMENT'}">
+                                                <font color="red"><span class="cart-product-info center-block">${orders.status}</span></font>
+                                            </c:when>
+                                            <c:when test="${orders.status == 'SHIPPED'}">
+                                                <font color="green"><span class="cart-product-info center-block">${orders.status}</span></font>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="cart-product-info center-block">${orders.status}</span>
+                                            </c:otherwise>
+                                        </c:choose>
+
                                     </td>
 
 
                                     <td>
+                                        <a href="<c:url value='/order?id=${orders.id}'/>"
+                                           class="btn  btn-primary ">Order Page</a>
                                         <a href="<c:url value='#'/>"
-                                           class="btn btn-upper btn-primary center-block">Reorder</a>
+                                           class="btn  btn-primary " disabled="true">Reorder</a>
+
                                     </td>
 
                                 </tr>

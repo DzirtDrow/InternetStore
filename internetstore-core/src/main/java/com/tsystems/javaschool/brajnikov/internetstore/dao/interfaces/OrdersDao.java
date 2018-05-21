@@ -13,4 +13,6 @@ public interface OrdersDao extends GenericDao<OrderEntity, Integer> {
     void createOrder();
     void addGoodsToOrder(GoodsEntity goodsEntity, Integer num);
     List<OrderEntity> getOrdersByUser(UserEntity userEntity) throws OrdersNotFoundException;
+
+    List<OrderEntity> getOrdersList();
 }

@@ -3,6 +3,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.controller;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
@@ -60,8 +61,12 @@ public class OrderController extends AbstractController {
             UserEntity user = userService.findByName(getPrincipal());
             model.addAttribute("loggedinuser", getPrincipal());
             OrderEntity order = orderService.getOrderById(orderId);
+
+            List<CartItemEntity> items = orderService.getOrderById(orderId).getOrderItems();
+
             if (order.getUser().getId() == user.getId()) {
                 model.addAttribute("order", order);
+                model.addAttribute("items", items);
             } else {
                 return "/accessdenied";
             }
@@ -113,11 +118,14 @@ public class OrderController extends AbstractController {
 
     @RequestMapping(value = "/createorderfromcart", method = RequestMethod.GET)
     public String createOrderFromCart(Model model) {
+        int id;
         if (!isCurrentAuthenticationAnonymous()) {
             UserEntity user = userService.findByName(getPrincipal());
             CartEntity cart = cartService.getCartByUser(user);
+
             try {
-                orderService.createOrderByCart(cart);
+                 id = orderService.createOrderByCart(cart);
+
             } catch (CartIsEmptyException e) {
                 return "/cart";
             }
@@ -126,6 +134,6 @@ public class OrderController extends AbstractController {
             return "/login";
             //TODO create order from session cart with login
         }
-        return "/order";
+        return "redirect:/order?id="+id;
     }
 }
