@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.validation;
 
-import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
-import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -21,23 +21,30 @@ public class UserValidator implements Validator {
     }
 
     public void validate(Object o, Errors errors) {
-        UserEntity user = (UserEntity) o;
+        UserDto user = (UserDto) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getEmail().length() < 6 || user.getEmail().length() > 32) { //TODO, make email validation? not length
-            errors.rejectValue("email", "Size.userForm.username");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.user.Name");
+        if (user.getName().length() < 4 || user.getName().length() > 32) {
+            errors.rejectValue("name", "Size.userForm.username");
         }
+
         if (userService.findByName(user.getName()) != null) {
-            errors.rejectValue("username", "Duplicate.userForm.username");
+            errors.rejectValue("name", "Duplicate.userForm.username");
         }
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.user.email");
+        if (userService.findByEmail(user.getEmail()) != null) {
+            errors.rejectValue("name", "Duplicate.userForm.email");
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.user.password");
+        if (user.getPassword().length() < 4 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
         }
 
-//        if (!user.getConfirmPassword().equals(user.getPassword())) {
-//            errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
-//        }
+
+        if (!user.getConfirmPassword().equals(user.getPassword())) {
+            errors.rejectValue("confirmPassword", "Diff.userForm.passwordConfirm");
+        }
     }
 }

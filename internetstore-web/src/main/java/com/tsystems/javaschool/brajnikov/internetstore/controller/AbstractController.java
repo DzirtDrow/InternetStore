@@ -13,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 
+/**
+ * 
+ */
 public abstract class AbstractController {
 
     @Autowired
@@ -23,11 +26,6 @@ public abstract class AbstractController {
 
     @Autowired
     private UserDao userDao;
-//
-//    protected UserEntity getLoggedInUserEntity(){
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        return userDao.findByName(getPrincipal());
-//    }
 
     protected String getPrincipal(){
         String userName = null;

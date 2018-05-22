@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Service("userService")
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserEntity findByName(String username) {
+        try {
+            UserEntity userEntity = dao.findByName(username);
+        } catch (NoResultException ex){
+            return null;
+        }
         return dao.findByName(username);
     }
 

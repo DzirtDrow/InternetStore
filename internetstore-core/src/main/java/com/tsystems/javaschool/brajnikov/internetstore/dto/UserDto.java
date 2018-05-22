@@ -9,10 +9,10 @@ import java.sql.Date;
 @Data
 public class UserDto {
 
-    @Size(min = 2, max = 64)
+    @Size(min = 4, max = 64)
     private String name;
 
-    @Size(min = 2, max = 64)
+    @Size(min = 4, max = 64)
     private String lastname;
 
     private Date date;

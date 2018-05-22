@@ -3,9 +3,11 @@ package com.tsystems.javaschool.brajnikov.internetstore.configuration;
 import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -85,8 +87,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        //.inMemoryAuthentication().withUser("user").password("user").roles("USER");
-        //auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(authenticationProvider());
     }
@@ -110,22 +110,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthenticationTrustResolverImpl();
     }
 
-}
 
-//
-//.antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-//        .antMatchers("/manageorders").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-//        .antMatchers("/list").access("hasRole('ROLE_admin')")
-//        .antMatchers("/store").permitAll()
-//        .antMatchers("/cart").permitAll()
-//        .antMatchers("/order").authenticated()
-//        .antMatchers("/account").authenticated()
-//        .antMatchers("/orders-list").authenticated()
-//        .and().formLogin().loginPage("/login").defaultSuccessUrl( "/index" )
-//        //.loginProcessingUrl("/login")
-//        .successHandler(customAuthentificationSuccessHandler)
-//        .usernameParameter("username").passwordParameter("password")
-//        .and().rememberMe().rememberMeParameter("remember-me")
-//        .tokenRepository(tokenRepository).tokenValiditySeconds(86400)
-//        .and().csrf()
-//        .and().exceptionHandling().accessDeniedPage("/accessdenied");
+}
