@@ -15,9 +15,19 @@
 <%@include file="header.jsp" %>
 
 <%@include file="categories-bar.jsp" %>
+<div class="body-content">
+    <div class="container">
+        <div class="checkout-box faq-page">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="heading-title">Welcome to Internet Shop!</h2>
+                    <span class="title-tag">To get started, select the product category!</span>
 
-<h1>Welcome to WEB SHOP!</h1><br>
+                </div>
+            </div><!-- /.row -->
+        </div><!-- /.checkout-box -->
+    </div><!-- /.container -->
+</div><!-- /.body-content -->
 
-<%--<%@include file="footer.jsp"%>--%>
 </body>
 </html>

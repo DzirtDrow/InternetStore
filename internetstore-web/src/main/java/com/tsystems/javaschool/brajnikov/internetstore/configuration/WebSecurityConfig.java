@@ -50,8 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -63,11 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/", "/index", "signup").permitAll()
-                //.access("hasRole('USER') or hasRole('ADMIN') or hasRole('MANAGER')")
                 .antMatchers("/goodslist","/manageorders","/manageoneorder","/admin").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                //.antMatchers("/manageorders").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                //.antMatchers("/manageoneorder").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                //.antMatchers("/admin").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
                 .antMatchers("/list","/edituserbyadmin").access("hasRole('ROLE_admin')")
                 .antMatchers("/store").permitAll()
                 .antMatchers("/cart").permitAll()
@@ -79,7 +74,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.successHandler(customAuthentificationSuccessHandler)
                 //.loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
-                //
                 .and().rememberMe().rememberMeParameter("remember-me")
                 .tokenRepository(tokenRepository).tokenValiditySeconds(86400)
                 .and().csrf()
@@ -118,9 +112,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public PersistentTokenBasedRememberMeServices getPersistentTokenBasedRememberMeServices() {
-        PersistentTokenBasedRememberMeServices tokenBasedservice = new PersistentTokenBasedRememberMeServices(
+        return new PersistentTokenBasedRememberMeServices(
                 "remember-me", userDetailsService, tokenRepository);
-        return tokenBasedservice;
     }
 
     /**

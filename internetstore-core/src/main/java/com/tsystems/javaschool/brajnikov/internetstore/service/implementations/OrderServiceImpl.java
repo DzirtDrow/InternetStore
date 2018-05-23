@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(cartEntity.getUser());
         order.setStatus(OrderStatusEnum.PENDING_PAYMENT);
         order.setSum(cartEntity.getSum());
-        order.setOrder_date(new Date()); // TODO date?
+        order.setOrder_date(new Date());
 
         orderDao.create(order);
 

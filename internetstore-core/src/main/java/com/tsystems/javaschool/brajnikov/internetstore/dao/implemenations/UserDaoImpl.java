@@ -1,7 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
-import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.AddressDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.hibernate.SessionFactory;
@@ -14,14 +13,8 @@ import java.util.List;
 
 @Repository("userDao")
 public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> implements UserDao {
-
-
     @Autowired
     private SessionFactory sessionFactory;
-
-    @Autowired
-    private AddressDao adressDao;
-
 
     public UserEntity findById(int id) {
         return read(id);
@@ -46,21 +39,8 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
         return (UserEntity)query.getSingleResult();
     }
 
-
-
-
-    public void save(UserEntity user) {
-        save(user);
-    }
-
     public List<UserEntity> findAllUsers() {
-        List<UserEntity> users = getList();
-        return users;
+        return getList();
     }
 
-    public UserEntity getActiveUser(String email) {
-        UserEntity activeUserInfo = findByEmail(email);
-
-        return activeUserInfo;
-    }
 }

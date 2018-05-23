@@ -11,7 +11,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Edit Goods</title>
 </head>
 <body>
 <%@include file="header.jsp" %>

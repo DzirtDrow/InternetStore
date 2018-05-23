@@ -14,11 +14,8 @@ import java.util.Map;
  * Session cart - need to support cart in session scope
  */
 @Component("sessionCart")
-//@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
 public class SessionCart {
-
-   // private int cartTotalPrice;
 
     /**
      * Gets cart total price.

@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public abstract class AbstractController {
 
+
+    public static final String LOGGED_IN_USER_ATTRIBUTE_NAME = "loggedinuser";
     /**
      * The {@link AuthenticationTrustResolver}.
      */

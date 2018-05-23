@@ -24,17 +24,15 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from OrderEntity where user = :userParam order by order_date desc ");
         query.setParameter("userParam", userEntity);
-        List<OrderEntity> ordersList = (List<OrderEntity>)query.getResultList();
 
-        return ordersList;
+        return (List<OrderEntity>)query.getResultList();
 
     }
 
     public List<OrderEntity> getOrdersList() {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from OrderEntity");
-        List<OrderEntity> ordersList = (List<OrderEntity>)query.getResultList();
-        return ordersList;
+        return (List<OrderEntity>)query.getResultList();
     }
 }
 

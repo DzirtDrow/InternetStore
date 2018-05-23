@@ -43,12 +43,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserEntity findByName(String username) {
+        UserEntity userEntity;
         try {
-            UserEntity userEntity = dao.findByName(username);
+           userEntity = dao.findByName(username);
         } catch (NoResultException ex){
             return null;
         }
-        return dao.findByName(username);
+        return userEntity;
     }
 
     public void registerUser(UserDto user) throws EmailIsUsedException {
@@ -85,6 +86,6 @@ public class UserServiceImpl implements UserService {
 
     public void save(UserEntity userEntity) {
         userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
-        dao.create(userEntity); //TODO save = create + update???
+        dao.create(userEntity);
     }
 }

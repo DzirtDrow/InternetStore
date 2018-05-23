@@ -77,10 +77,10 @@ public class AppController extends AbstractController {
     public String home(ModelMap model) {
 
         if (!isCurrentAuthenticationAnonymous()) {
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
 
         } else {
-            model.addAttribute("loggedinuser", "anonymousUser");
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         }
         logger.info("Showing index page");
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
@@ -117,7 +117,7 @@ public class AppController extends AbstractController {
         List<UserEntity> users = userService.findAllUsers();
         model.addAttribute("time", new Date().toString());
 
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         model.addAttribute("users", users);
 
         return "list";
@@ -137,7 +137,7 @@ public class AppController extends AbstractController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        model.addAttribute("loggedinuser", "anonymousUser");
+        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         return "redirect:/index";
     }
 
@@ -149,7 +149,7 @@ public class AppController extends AbstractController {
      */
     @RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
+        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         return "accessdenied";
     }
 

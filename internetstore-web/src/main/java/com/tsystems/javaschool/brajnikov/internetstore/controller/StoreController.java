@@ -83,14 +83,13 @@ public class StoreController extends AbstractController {
     public String storeCategoryList(Model model, @RequestParam("id") Integer categoryId) {
 
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
-        model.addAttribute("categories", categoryEntityList);//TODO replace all Entities to DTO or VB
+        model.addAttribute("categories", categoryEntityList);
 
         List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
         model.addAttribute("goods", goodsByCategory);
 
         if (!isCurrentAuthenticationAnonymous()) {
             model.addAttribute("loggedinuser", getPrincipal());
-            UserEntity user = userService.findByName(getPrincipal());// logged in user
         } else {
             model.addAttribute("loggedinuser", "anonymousUser");
         }
@@ -107,7 +106,6 @@ public class StoreController extends AbstractController {
      */
     @RequestMapping(value = "/addtocart")
     public String deleteGoods(Model model, @RequestParam("id") Integer id) {
-        //UserEntity user = userService.findByName(getPrincipal());
 
         if (id != null) {
             if (!isCurrentAuthenticationAnonymous()) {
@@ -119,7 +117,7 @@ public class StoreController extends AbstractController {
             }
         }
 
-        int cat = goodsService.findGoodsById(id).getCategory().getId(); //TODO monster construction, need to refactor
+        int cat = goodsService.findGoodsById(id).getCategory().getId();
         return "redirect:/store?id=" + cat;
     }
 
@@ -138,21 +136,16 @@ public class StoreController extends AbstractController {
 
             model.addAttribute("userCart", cartItemsList);
             model.addAttribute("totalPrice", cartService.getCartTotalPrice(user.getId()));
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
 
         } else {
-            //TODO SessionCartHere
+
             cartItemsList = sessionCart.getCartItemsList();
 
             model.addAttribute("userCart", cartItemsList);
             model.addAttribute("totalPrice", sessionCart.getCartTotalPrice());
-            model.addAttribute("loggedinuser", "anonymousUser");
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         }
-//        List<CartItemEntity> userCart;
-//        userCart = cartService.getCartItems(user.getId());
-//        model.addAttribute("userCart", userCart);
-
-        //model.addAttribute("loggedinuser", getPrincipal());
         return "/cart";
     }
 
@@ -166,7 +159,6 @@ public class StoreController extends AbstractController {
     @RequestMapping(value = "/deleteItemFromCart")
     public String deleteItemFromCart(Model model, @RequestParam("id") String id) {
         if (!isCurrentAuthenticationAnonymous()) {
-            UserEntity user = userService.findByName(getPrincipal());
             if (id != null) {
                 cartService.deleteCartItem(Integer.parseInt(id));
             }

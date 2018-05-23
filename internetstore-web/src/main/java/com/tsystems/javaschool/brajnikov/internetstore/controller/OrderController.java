@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * The Order controller.
+ */
 @Controller("orderController")
 @RequestMapping
 public class OrderController extends AbstractController {
@@ -37,13 +40,23 @@ public class OrderController extends AbstractController {
     @Autowired
     private CustomAuthentificationSuccessHandler authHandler;
 
+    /**
+     * The Logger.
+     */
     static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
+    /**
+     * Show one order.
+     *
+     * @param model   the model
+     * @param orderId the order id
+     * @return the string
+     */
     @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
     public String showOneOrder(Model model, @RequestParam("id") Integer orderId) {
         if (!isCurrentAuthenticationAnonymous()) {
             UserEntity user = userService.findByName(getPrincipal());
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
             OrderEntity order = orderService.getOrderById(orderId);
 
             List<CartItemEntity> items = orderService.getOrderById(orderId).getOrderItems();
@@ -59,10 +72,18 @@ public class OrderController extends AbstractController {
         }
         return "/order";
     }
+
+    /**
+     * Order pay.
+     *
+     * @param model   the model
+     * @param orderId the order id
+     * @return the string
+     */
     @RequestMapping(value = "/orderPay", method = RequestMethod.GET)
     public String orderPay(Model model,@RequestParam("id") Integer orderId){
         if (!isCurrentAuthenticationAnonymous()) {
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
 
             OrderEntity order = orderService.getOrderById(orderId);
             orderService.pushOrderStatus(order);
@@ -70,11 +91,17 @@ public class OrderController extends AbstractController {
         return "redirect:/order?id=" + orderId;
     }
 
+    /**
+     * List user orders.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(value = {"/orders-list"}, method = RequestMethod.GET)
     public String listUserOrders(Model model) {
 
         if (!isCurrentAuthenticationAnonymous()) {
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
 
             UserEntity user = userService.findByName(getPrincipal());
             try {
@@ -85,12 +112,18 @@ public class OrderController extends AbstractController {
             }
             return "/orders-list";
         } else {
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
             return "/login";
         }
 
     }
 
+    /**
+     * Create order from cart.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(value = "/createorderfromcart", method = RequestMethod.GET)
     public String createOrderFromCart(Model model) {
         int id;
@@ -107,7 +140,6 @@ public class OrderController extends AbstractController {
         } else {
             authHandler.setOrderFlag(true);
             return "/login";
-            //TODO create order from session cart with login
         }
         return "redirect:/order?id="+id;
     }

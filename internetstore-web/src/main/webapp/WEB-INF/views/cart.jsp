@@ -19,7 +19,7 @@
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
 
-    <title>Internet Store</title>
+    <title>Cart</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="<c:url value='/static/css/bootstrap.min.css' />">
@@ -108,13 +108,17 @@
                                             </div>
 
                                         </div><!-- /.row -->
-                                            <%--<div class="cart-product-info">--%>
-                                            <%--<span class="product-color">COLOR:<span>Blue</span></span>--%>
-                                            <%--</div>--%>
+
                                     </td>
 
                                     <td class="cart-product-quantity">
-
+                                        <%--<div class="quant-input">--%>
+                                            <%--<div class="arrows">--%>
+                                                <%--<div class="arrow plus gradient"><span class="ir" ><i class="icon fa fa-sort-asc" href="<c:url value='/increaseItemsCount?id=${cartItem.id}'/>"></i></span></div>--%>
+                                                <%--<div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc" href="/decreaseItemsCount?id=${cartItem.id}"></i></span></div>--%>
+                                            <%--</div>--%>
+                                            <%--<input type="text" value="${cartItem.count}" />--%>
+                                        <%--</div>--%>
                                         <a href="increaseItemsCount?id=${cartItem.id}" class="btn btn-black ">+</a>
                                         <i>${cartItem.count}</i>
                                         <a href="decreaseItemsCount?id=${cartItem.id}" class="btn btn-black">-</a>
@@ -149,50 +153,4 @@
 
 </body>
 </html>
-
-<%--<html>--%>
-
-<%--<head>--%>
-<%--<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">--%>
-<%--<title>Goods List</title>--%>
-<%--<link href="<c:url value='/static/css2/bootstrap.css' />" rel="stylesheet"/>--%>
-<%--<link href="<c:url value='/static/css2/app.css' />" rel="stylesheet"/>--%>
-<%--</head>--%>
-
-<%--<body>--%>
-<%--<%@include file="authheader.jsp" %>--%>
-
-<%--<input type="button" class="button" value="Home" onclick="location.href=' ${pageContext.request.contextPath}/ '" />--%>
-<%--<div class="panel-heading"><span class="lead">Cart</span></div>--%>
-<%--<table class="table table-hover">--%>
-<%--<thead>--%>
-<%--<tr>--%>
-<%--<th>Name</th>--%>
-<%--<th>Price</th>--%>
-<%--<th>Count</th>--%>
-<%--<th>Actions</th>--%>
-
-<%--</tr>--%>
-<%--</thead>--%>
-<%--<tbody>--%>
-<%--<c:forEach items="${userCart}" var="cartItem">--%>
-<%--<tr>--%>
-<%--<td>${cartItem.goods.name}</td>--%>
-<%--<td>${cartItem.goods.price}</td>--%>
-<%--<td>--%>
-<%--<a href="decreaseItemsCount?id=${cartItem.id}" class="btn btn-success">-</a>--%>
-<%--${cartItem.count}--%>
-<%--<a href="increaseItemsCount?id=${cartItem.id}" class="btn btn-success">+</a></td>--%>
-<%--&lt;%&ndash;<td>${goods.description}</td>&ndash;%&gt;--%>
-<%--<td>--%>
-<%--<a href="deleteItemFromCart?id=${cartItem.id}" class="btn btn-success custom-width">Delete</a>--%>
-<%--</td>--%>
-<%--</tr>--%>
-<%--</c:forEach>--%>
-<%--</tbody>--%>
-<%--</table>--%>
-
-<%--<a href="createOrder" class="btn btn-success">Create Order</a>--%>
-<%--</body>--%>
-<%--</html>--%>
 

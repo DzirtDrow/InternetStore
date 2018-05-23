@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ExceptionHandlingController {
 
     @ExceptionHandler(value = Exception.class)
-    public ModelAndView deafaulHandler(HttpServletRequest req, Exception e) throws Exception {
+    public ModelAndView deafaulHandler(HttpServletRequest req, Exception e){
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);

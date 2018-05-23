@@ -21,23 +21,14 @@ public class ErrorController {
         String errorMsg = "test";
         int httpErrorCode = getErrorCode(httpRequest);
 
-        switch (httpErrorCode) {
-            case 400: {
-                errorMsg = "Http Error Code: 400. Bad Request";
-                break;
-            }
-            case 401: {
-                errorMsg = "Http Error Code: 401. Unauthorized";
-                break;
-            }
-            case 404: {
-                errorMsg = "Http Error Code: 404. Resource not found";
-                break;
-            }
-            case 500: {
-                errorMsg = "Http Error Code: 500. Internal Server Error";
-                break;
-            }
+        if (httpErrorCode == 400) {
+            errorMsg = "Http Error Code: 400. Bad Request";
+        } else if (httpErrorCode == 401) {
+            errorMsg = "Http Error Code: 401. Unauthorized";
+        } else if (httpErrorCode == 404) {
+            errorMsg = "Http Error Code: 404. Resource not found";
+        } else if (httpErrorCode == 500) {
+            errorMsg = "Http Error Code: 500. Internal Server Error";
         }
         errorPage.addObject("errorMsg", errorMsg);
         return errorPage;

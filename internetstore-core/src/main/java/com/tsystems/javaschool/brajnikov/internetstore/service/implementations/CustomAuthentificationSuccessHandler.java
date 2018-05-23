@@ -16,16 +16,14 @@ public class CustomAuthentificationSuccessHandler implements AuthenticationSucce
     private boolean orderFlag = false;
 
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-      boolean o = orderFlag;
-
-      orderFlag = false;
+        orderFlag = false;
     }
 
-        public boolean isOrderFlag() {
-            return orderFlag;
-        }
+    public boolean isOrderFlag() {
+        return orderFlag;
+    }
 
-        public void setOrderFlag(boolean orderFlag) {
-            this.orderFlag = orderFlag;
-        }
+    public void setOrderFlag(boolean orderFlag) {
+        this.orderFlag = orderFlag;
+    }
 }

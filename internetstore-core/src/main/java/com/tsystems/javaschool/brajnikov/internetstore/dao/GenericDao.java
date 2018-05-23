@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * The interface Generic dao.
  *
- * @param <T>  the Entity parameter type
- * @param <PK> the Primary Key parameter type
+ * @param <T>  the Entity class
+ * @param <PK> the Primary Key parameter
  */
 public interface GenericDao<T, PK extends Serializable> {
 

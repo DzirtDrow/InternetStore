@@ -1,4 +1,5 @@
-<!-- ================================== TOP NAVIGATION ================================== -->
+
+<br>
 <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
     <div class="side-menu outer-bottom-xs">
         <div class="head">Categories</div>

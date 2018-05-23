@@ -8,21 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Orders List</title>
 </head>
 <body>
 <%@include file="header.jsp" %>
-<%--User orders list--%>
-<%--<br>--%>
-<%--<c:forEach items="${orders}" var="orders">--%>
-<%--<tr>--%>
-<%--<td>${orders.id}</td>--%>
-<%--&lt;%&ndash;<td>${orders.user}</td>&ndash;%&gt;--%>
-<%--<td>${orders.sum}</td>--%>
-<%--<td>${orders.order_date}</td>--%>
-<%--</tr>--%>
-<%--</c:forEach>--%>
-
 
 <div class="body-content outer-top-xs">
     <div class="container">

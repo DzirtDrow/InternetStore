@@ -111,6 +111,5 @@ public class CartServiceImpl implements CartService {
 
     public void loadSessionCart(int userId) {
             //TODO load session cart to user order here
-
     }
 }

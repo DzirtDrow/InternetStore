@@ -47,9 +47,9 @@ public class SignupController extends AbstractController {
 
         model.addAttribute("user", userDto);
         if(!isCurrentAuthenticationAnonymous()){
-            model.addAttribute("loggedinuser", getPrincipal());
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         } else {
-            model.addAttribute("loggedinuser", "anonymousUser");
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         }
 
         return "signup";
@@ -59,7 +59,7 @@ public class SignupController extends AbstractController {
      * This method will be called on form submission, handling POST request for
      * saving user in database. It also validates the user input
      *
-     * @param user   the user
+     * @param user   the {@link UserDto}
      * @param result the result
      * @param model  the model
      * @return the string
