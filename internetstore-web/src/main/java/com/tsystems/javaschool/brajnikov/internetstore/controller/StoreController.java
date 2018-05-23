@@ -87,12 +87,6 @@ public class StoreController extends AbstractController {
         List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
         model.addAttribute("goods", goodsByCategory);
 
-        if (!isCurrentAuthenticationAnonymous()) {
-            model.addAttribute("loggedinuser", getPrincipal());
-        } else {
-            model.addAttribute("loggedinuser", "anonymousUser");
-        }
-
         return "/store";
     }
 
@@ -132,18 +126,13 @@ public class StoreController extends AbstractController {
         if (!isCurrentAuthenticationAnonymous()) {
             UserEntity user = userService.findByName(getPrincipal());
             cartItemsList = cartService.getCartItems(user.getId());
-
             model.addAttribute("userCart", cartItemsList);
             model.addAttribute("totalPrice", cartService.getCartTotalPrice(user.getId()));
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
 
         } else {
-
             cartItemsList = sessionCart.getCartItemsList();
-
             model.addAttribute("userCart", cartItemsList);
             model.addAttribute("totalPrice", sessionCart.getCartTotalPrice());
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         }
         return "/cart";
     }

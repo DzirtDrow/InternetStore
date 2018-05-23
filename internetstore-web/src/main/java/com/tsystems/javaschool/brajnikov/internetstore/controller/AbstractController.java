@@ -7,8 +7,6 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 
 /**
@@ -64,10 +62,10 @@ public abstract class AbstractController {
      * @param exception the exception
      * @return the model and view
      */
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleIOException(Exception exception) {
-        ModelAndView modelAndView = new ModelAndView("error");
-        modelAndView.addObject("message", exception.getMessage());
-        return modelAndView;
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ModelAndView handleIOException(Exception exception) {
+//        ModelAndView modelAndView = new ModelAndView("error");
+//        modelAndView.addObject("message", exception.getMessage());
+//        return modelAndView;
+//    }
 }

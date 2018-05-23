@@ -83,8 +83,6 @@ public class OrderController extends AbstractController {
     @RequestMapping(value = "/orderPay", method = RequestMethod.GET)
     public String orderPay(Model model,@RequestParam("id") Integer orderId){
         if (!isCurrentAuthenticationAnonymous()) {
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
-
             OrderEntity order = orderService.getOrderById(orderId);
             orderService.pushOrderStatus(order);
         }
@@ -101,8 +99,6 @@ public class OrderController extends AbstractController {
     public String listUserOrders(Model model) {
 
         if (!isCurrentAuthenticationAnonymous()) {
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
-
             UserEntity user = userService.findByName(getPrincipal());
             try {
                 List<OrderEntity> userOrders = orderService.getOrdersListByUser(user);
@@ -112,7 +108,6 @@ public class OrderController extends AbstractController {
             }
             return "/orders-list";
         } else {
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
             return "/login";
         }
 

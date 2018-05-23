@@ -73,7 +73,6 @@ public class ManageGoodsController extends AbstractController {
     public String listGoods(Model model) {
         logger.info("Showing goods list for manager");
         List<GoodsEntity> goods = goodsService.findAllGoods();
-        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         model.addAttribute("goods", goods);
         return "/goodslist";
     }

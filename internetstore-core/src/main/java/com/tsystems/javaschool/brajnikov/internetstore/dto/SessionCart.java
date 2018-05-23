@@ -3,7 +3,10 @@ package com.tsystems.javaschool.brajnikov.internetstore.dto;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +17,7 @@ import java.util.Map;
  * Session cart - need to support cart in session scope
  */
 @Component("sessionCart")
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
 public class SessionCart {
 

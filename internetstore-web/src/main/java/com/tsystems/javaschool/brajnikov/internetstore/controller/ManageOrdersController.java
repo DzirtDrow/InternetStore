@@ -56,7 +56,6 @@ public class ManageOrdersController extends AbstractController {
     @RequestMapping(value = {"/manageoneorder"}, method = RequestMethod.GET)
     public String showManageOrder(Model model, @RequestParam("id") Integer orderId) {
         OrderEntity order = orderService.getOrderById(orderId);
-        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         model.addAttribute("orderStatuses", OrderStatusEnum.values());
         model.addAttribute("orderStatus", order.getStatus());
         model.addAttribute("order", order);

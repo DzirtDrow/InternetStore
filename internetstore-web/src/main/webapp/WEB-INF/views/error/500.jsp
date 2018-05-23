@@ -42,11 +42,8 @@
         <div class="x-page inner-bottom-sm">
             <div class="row">
                 <div class="col-md-12 x-text text-center">
-                    <h1>ERROR!</h1>
-                        <h2>${errorMsg}</h2>
-                    <%--<span>${errorMsg}</span>--%>
-
-                    <%--<p>We are sorry, the page you've requested is not available. </p>--%>
+                    <h1>500!</h1>
+                    <h2>Internal Server Error</h2>
                     <a href="<c:url value='/index'/>"><i class="fa fa-home"></i> Go To Homepage</a>
                     <%--${exception}--%>
                 </div>

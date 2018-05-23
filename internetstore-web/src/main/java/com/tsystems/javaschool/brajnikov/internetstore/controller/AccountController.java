@@ -34,8 +34,6 @@ public class AccountController extends AbstractController {
     public String showAccountPage(Model model) {
         UserEntity user = userService.findByName(getPrincipal());
         model.addAttribute("user", user);
-        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
-
         logger.info("Showing Account page for user: {}", user.getName());
 
         return "/account";

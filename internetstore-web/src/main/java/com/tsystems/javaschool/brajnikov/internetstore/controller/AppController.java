@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Controller("appController")
 @RequestMapping("/")
-@SessionAttributes("currentrole")
+@SessionAttributes({"currentrole","loggedinuser"})
 public class AppController extends AbstractController {
 
     /**
@@ -101,10 +101,8 @@ public class AppController extends AbstractController {
     public String loginPage(ModelMap model) {
         logger.info("Login page showing");
         if (isCurrentAuthenticationAnonymous()) {
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
             return "login";
         } else {
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
             logger.info("Trying to show Login page when user is already authentificated. User: {}", getPrincipal());
             return "redirect:/index";
         }
@@ -120,8 +118,6 @@ public class AppController extends AbstractController {
     public String listUsers(ModelMap model, Principal principal) {
         List<UserEntity> users = userService.findAllUsers();
         model.addAttribute("time", new Date().toString());
-
-        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         model.addAttribute("users", users);
 
         return "list";
@@ -142,7 +138,6 @@ public class AppController extends AbstractController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-
         model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         return "redirect:/index";
     }
@@ -155,13 +150,13 @@ public class AppController extends AbstractController {
      */
     @RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
-        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
+
         return "accessdenied";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(ModelMap model) {
-        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
+
         return "admin";
     }
 

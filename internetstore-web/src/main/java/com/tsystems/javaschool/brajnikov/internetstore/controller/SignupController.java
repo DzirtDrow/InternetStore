@@ -44,14 +44,7 @@ public class SignupController extends AbstractController {
     @RequestMapping(value = {"/signup"}, method = RequestMethod.GET)
     public String newUser(ModelMap model) {
         UserDto userDto = new UserDto();
-
         model.addAttribute("user", userDto);
-        if(!isCurrentAuthenticationAnonymous()){
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
-        } else {
-            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
-        }
-
         return "signup";
     }
 

@@ -41,7 +41,6 @@ public class CartServiceImpl implements CartService {
             cartDao.create(cartEntity); //creating cart if not exist
         }
 
-        //
         CartItemEntity item = cartDao.getCartItemFromCartByGoods(cartEntity, goodsEntity);
         if (item == null) {
             item = new CartItemEntity();

@@ -31,6 +31,10 @@
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </logger>
+    <logger name="com.tsystems.javaschool.brajnikov.internetstore" level="ERROR" additivity="false">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
 
     <!--&lt;!&ndash; By default, the level of the root level is set to DEBUG &ndash;&gt;-->
     <root level="DEBUG">

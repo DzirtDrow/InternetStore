@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("addressService")
-@Transactional
 public class AddressServiceImpl implements AddressService {
 
     @Autowired
     private AddressDao addressDao;
 
+    @Transactional
     public void updateAddress(AddressEntity addressEntity, String address) {
         addressEntity.setAddress(address);
         if(addressDao.read(addressEntity.getId())!= null){
