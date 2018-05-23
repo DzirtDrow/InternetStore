@@ -30,20 +30,20 @@
                                             <%--<table class="table table-hover">--%>
                                         <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Goods name</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
-                                            <th>Sum</th>
+                                            <th>Total price</th>
 
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <c:forEach items="${items}" var="items">
                                             <tr>
-                                                <td>${items.goods.name}</td>
-                                                <td>${items.goods.price}</td>
-                                                <td>${items.count}</td>
-                                                <td>${items.count * items.goods.price}</td>
+                                                <td class="text-center">${items.goods.name}</td>
+                                                <td class="text-center">$${items.goods.price}</td>
+                                                <td class="text-center">${items.count}</td>
+                                                <td class="text-center">$${items.count * items.goods.price}</td>
 
                                             </tr>
                                         </c:forEach>
@@ -70,23 +70,20 @@
 
                     <c:choose>
                         <c:when test="${order.status == 'PROCESSING'}">
-                            <font color="blue"><span class="cart-product-info center-block">Обработка</span></font>
+                            <font color="blue"><span class="cart-product-info center-block">Processing</span></font>
                         </c:when>
                         <c:when test="${order.status == 'PENDING_PAYMENT'}">
-                            <font color="red"><span
-                                    class="cart-product-info center-block">Ожидается оплата</span></font>
+                            <font color="red"><span class="cart-product-info center-block">Waiting for payment</span></font>
                         </c:when>
                         <c:when test="${order.status == 'PENDING_SHIPPING'}">
-                            <font color="#483d8b"><span
-                                    class="cart-product-info center-block">Ожидается доставка</span></font>
+                            <font color="#483d8b"><span class="cart-product-info center-block">Waiting for shipping</span></font>
                         </c:when>
 
                         <c:when test="${order.status == 'SHIPPED'}">
-                            <font color="green"><span class="cart-product-info center-block">Доставлено</span></font>
+                            <font color="green"><span class="cart-product-info center-block">Shipped</span></font>
                         </c:when>
                         <c:when test="${order.status == 'DELIVERED'}">
-                            <font color="blue"><span
-                                    class="cart-product-info center-block">Выдано покупателю</span></font>
+                            <font color="blue"><span class="cart-product-info center-block">Issued to Consumer</span></font>
                         </c:when>
                         <c:otherwise>
                             <span class="cart-product-info center-block">${order.status}</span>

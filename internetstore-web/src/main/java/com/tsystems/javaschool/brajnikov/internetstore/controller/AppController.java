@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,7 @@ import java.util.List;
  */
 @Controller("appController")
 @RequestMapping("/")
+@SessionAttributes("currentrole")
 public class AppController extends AbstractController {
 
     /**
@@ -77,8 +79,8 @@ public class AppController extends AbstractController {
     public String home(ModelMap model) {
 
         if (!isCurrentAuthenticationAnonymous()) {
+            model.addAttribute("currentrole", userService.findByName(getPrincipal()).getRole().toString());
             model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
-
         } else {
             model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         }
@@ -99,8 +101,10 @@ public class AppController extends AbstractController {
     public String loginPage(ModelMap model) {
         logger.info("Login page showing");
         if (isCurrentAuthenticationAnonymous()) {
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
             return "login";
         } else {
+            model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
             logger.info("Trying to show Login page when user is already authentificated. User: {}", getPrincipal());
             return "redirect:/index";
         }
@@ -109,7 +113,7 @@ public class AppController extends AbstractController {
     /**
      * List users.
      *
-     * @param model     the model
+     * @param model the model
      * @return the string
      */
     @RequestMapping(value = {"/list"}, method = RequestMethod.GET)
@@ -133,10 +137,12 @@ public class AppController extends AbstractController {
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response, Model model) {
+        model.addAttribute("currentrole", "user");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+
         model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         return "redirect:/index";
     }
@@ -153,5 +159,10 @@ public class AppController extends AbstractController {
         return "accessdenied";
     }
 
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String adminPage(ModelMap model) {
+        model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
+        return "admin";
+    }
 
 }

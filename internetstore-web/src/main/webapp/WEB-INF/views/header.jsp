@@ -39,7 +39,12 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-
+                        <%--<li><a href="#">${currentrole}</a></li>--%>
+                        <c:choose>
+                            <c:when test="${(currentrole == 'admin' || currentrole == 'manager')}">
+                                <li><a href="<c:url value='/admin'/> ">Admin's page</a></li>
+                            </c:when>
+                        </c:choose>
                         <li><a href="<c:url value='/account'/> ">My Account</a></li>
                         <li><a href="<c:url value='/orders-list'/> ">My Orders</a></li>
                         <li><a href="<c:url value='/cart'/> ">My Cart</a></li>

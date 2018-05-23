@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 /**
  * The type Abstract controller with some methods for all controllers.
  */
+
 public abstract class AbstractController {
 
 
@@ -31,17 +32,17 @@ public abstract class AbstractController {
      *
      * @return the authentificated user's username
      */
-    protected String getPrincipal(){
+    protected String getPrincipal() {
         String userName = null;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof User) {
-            userName = ((User)principal).getUsername();
+            userName = ((User) principal).getUsername();
         } else {
             userName = principal.toString();
         }
 
-        logger.info("Getting principal: {}" , userName);
+        logger.info("Getting principal: {}", userName);
 
         return userName;
     }
@@ -56,7 +57,6 @@ public abstract class AbstractController {
         logger.info("Is current authentification is anonymous? {}", authenticationTrustResolver.isAnonymous(authentication));
         return authenticationTrustResolver.isAnonymous(authentication);
     }
-
 
     /**
      * Handle io exception model and view.

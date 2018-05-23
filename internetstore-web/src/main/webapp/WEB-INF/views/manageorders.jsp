@@ -62,7 +62,28 @@
                                     </td>
 
                                     <td>
-                                        <span class="cart-product-info center-block">${orders.status}</span>
+                                        <%--<span class="cart-product-info center-block">${orders.status}</span>--%>
+                                            <c:choose>
+                                                <c:when test="${orders.status == 'PROCESSING'}">
+                                                    <font color="blue"><span class="cart-product-info center-block">Processing</span></font>
+                                                </c:when>
+                                                <c:when test="${orders.status == 'PENDING_PAYMENT'}">
+                                                    <font color="red"><span class="cart-product-info center-block">Waiting for payment</span></font>
+                                                </c:when>
+                                                <c:when test="${orders.status == 'PENDING_SHIPPING'}">
+                                                    <font color="#483d8b"><span class="cart-product-info center-block">Waiting for shipping</span></font>
+                                                </c:when>
+
+                                                <c:when test="${orders.status == 'SHIPPED'}">
+                                                    <font color="green"><span class="cart-product-info center-block">Shipped</span></font>
+                                                </c:when>
+                                                <c:when test="${orders.status == 'DELIVERED'}">
+                                                    <font color="blue"><span class="cart-product-info center-block">Issued to Consumer</span></font>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="cart-product-info center-block">${orders.status}</span>
+                                                </c:otherwise>
+                                            </c:choose>
                                     </td>
 
 

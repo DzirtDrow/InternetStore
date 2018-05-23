@@ -54,20 +54,20 @@
                                     <td>
                                         <c:choose>
                                             <c:when test="${orders.status == 'PROCESSING'}">
-                                                <font color="blue"><span class="cart-product-info center-block">Обработка</span></font>
+                                                <font color="blue"><span class="cart-product-info center-block">Processing</span></font>
                                             </c:when>
                                             <c:when test="${orders.status == 'PENDING_PAYMENT'}">
-                                                <font color="red"><span class="cart-product-info center-block">Ожидается оплата</span></font>
+                                                <font color="red"><span class="cart-product-info center-block">Waiting for payment</span></font>
                                             </c:when>
                                             <c:when test="${orders.status == 'PENDING_SHIPPING'}">
-                                                <font color="#483d8b"><span class="cart-product-info center-block">Ожидается доставка</span></font>
+                                                <font color="#483d8b"><span class="cart-product-info center-block">Waiting for shipping</span></font>
                                             </c:when>
 
                                             <c:when test="${orders.status == 'SHIPPED'}">
-                                                <font color="green"><span class="cart-product-info center-block">Доставлено</span></font>
+                                                <font color="green"><span class="cart-product-info center-block">Shipped</span></font>
                                             </c:when>
                                             <c:when test="${orders.status == 'DELIVERED'}">
-                                                <font color="blue"><span class="cart-product-info center-block">Выдано покупателю</span></font>
+                                                <font color="blue"><span class="cart-product-info center-block">Issued to Consumer</span></font>
                                             </c:when>
                                             <c:otherwise>
                                                 <span class="cart-product-info center-block">${orders.status}</span>

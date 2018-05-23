@@ -15,6 +15,7 @@
 <%@include file="header.jsp" %>
 
 <%@include file="categories-bar.jsp" %>
+
 <div class="body-content">
     <div class="container">
         <div class="checkout-box faq-page">

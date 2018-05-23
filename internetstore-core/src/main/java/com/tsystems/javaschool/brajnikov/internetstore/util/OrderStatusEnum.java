@@ -7,17 +7,32 @@ public enum OrderStatusEnum {
     /**
      * Processing order status.
      */
-    PROCESSING, /**
+    PROCESSING("Processing"),
+    /**
      * Pending payment order status.
      */
-    PENDING_PAYMENT, /**
+    PENDING_PAYMENT("Waiting for payment"),
+    /**
      * Pending shipping order status.
      */
-    PENDING_SHIPPING, /**
+    PENDING_SHIPPING("Waiting for shipping"),
+    /**
      * Shipped order status.
      */
-    SHIPPED, /**
+    SHIPPED("Shipped"),
+    /**
      * Delivered order status.
      */
-    DELIVERED
+    DELIVERED("Delivered");
+
+    private String text;
+
+    OrderStatusEnum(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return this.text;
+    }
 }

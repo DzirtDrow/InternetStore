@@ -71,7 +71,6 @@ public class StoreController extends AbstractController {
      */
     static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 
-
     /**
      * Store category list string.
      *
