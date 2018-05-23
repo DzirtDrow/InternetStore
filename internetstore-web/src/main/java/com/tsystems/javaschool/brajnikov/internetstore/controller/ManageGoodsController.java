@@ -30,6 +30,7 @@ public class ManageGoodsController extends AbstractController {
 
     @RequestMapping(value = "/addgoods", method = RequestMethod.GET)
     public String addGoodsPage(Model model) {
+        logger.info("Showing add goods page");
         model.addAttribute("goods", new GoodsEntity());
         model.addAttribute("categories", categoryService.getCategoryList());
         return "/addgoods";
