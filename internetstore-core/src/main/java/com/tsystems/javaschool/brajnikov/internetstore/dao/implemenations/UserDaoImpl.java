@@ -15,8 +15,6 @@ import java.util.List;
 @Repository("userDao")
 public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> implements UserDao {
 
-//    @PersistenceContext
-//    private EntityManager entityManager;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -33,7 +31,7 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
         Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where email = :paramName");
         query.setParameter("paramName", email);
 
-        UserEntity userEntity = null; //TODO
+        UserEntity userEntity = null;
         try {
             userEntity = (UserEntity)query.getSingleResult();
         } catch (NoResultException e) {
@@ -56,16 +54,13 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
     }
 
     public List<UserEntity> findAllUsers() {
-        List<UserEntity> users = getList();//(List<UserEntity>) criteria.list();
+        List<UserEntity> users = getList();
         return users;
     }
 
     public UserEntity getActiveUser(String email) {
         UserEntity activeUserInfo = findByEmail(email);
 
-//        if(activeUserInfo != null) {
-//            activeUserInfo = (UserInfo)list.get(0);
-//        }
         return activeUserInfo;
     }
 }

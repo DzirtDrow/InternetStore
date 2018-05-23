@@ -16,19 +16,6 @@
 <body>
 <%@include file="header.jsp" %>
 
-<%--<form:form modelAttribute="goods" class="form-horizontal" method="post">--%>
-<%--<div class="row">--%>
-<%--Name: <form:input type="text" path="name" id="name" />--%>
-<%--</div>--%>
-<%--<div class="row">--%>
-<%--Price: <form:input type="text" path="price" id="price"/>--%>
-<%--</div>--%>
-
-<%--<div class="row">--%>
-<%--<div class="form-actions floatRight">--%>
-<%--<input type="submit" value="Save changes" class="btn btn-primary btn-sm">--%>
-<%--</div>--%>
-<%--</div>--%>
 
 <%--</form:form>--%>
 <form:form class="register-form outer-top-xs" role="form" modelAttribute="goods" method="post">

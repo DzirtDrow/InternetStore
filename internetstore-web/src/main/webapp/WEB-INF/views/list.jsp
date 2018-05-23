@@ -10,43 +10,46 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Users List</title>
-    <link href="<c:url value='/static/css2/bootstrap.css' />" rel="stylesheet"></link>
-    <link href="<c:url value='/static/css2/app.css' />" rel="stylesheet"></link>
+
 </head>
 
 <body>
-<%@include file="authheader.jsp" %>
-<%--<div class="generic-container">--%>
-    <%--<div class="panel panel-default">--%>
-        <!-- Default panel contents -->
-        <div class="panel-heading"><span class="lead">List of Users </span></div>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Birthdate</th>
+<%@include file="header.jsp" %>
+<div class="panel-heading"><span class="lead">List of Users </span></div>
 
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${users}" var="user">
-                <tr>
-                    <td>${user.name}</td>
-                    <td>${user.lastName}</td>
-                    <td>${user.email}</td>
-                    <td>${user.role}</td>
-                    <td>${user.date}</td>
-                    <td><a href="" class="btn btn-success custom-width">Orders</a></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    <%--</div>--%>
-<%--</div>--%>
-<h5>User: ${loggedinuser}</h5>
-<p>Time: ${time}</p>
+<div class="body-content outer-top-xs">
+    <div class="container">
+        <div class="row ">
+            <div class="shopping-cart">
+                <div class="shopping-cart-table ">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead><!-- /thead -->
+                            <tbody>
+                            <c:forEach items="${users}" var="user">
+                                <tr>
+                                    <td class="center">${user.name}</td>
+                                    <td>${user.lastName}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.role}</td>
+                                    <td><a disabled="true" href="<c:url value='/edituserbyadmin?id=${user.id}'/>" class="btn btn-success custom-width">Edit User</a></td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table><!-- /table -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

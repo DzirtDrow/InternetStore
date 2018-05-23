@@ -2,7 +2,6 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
-import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +40,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         grantList.add(new SimpleGrantedAuthority("ROLE_"+currentUser.getRole().toString()));
-
-
-//        TODO load session cart when user load
-//        cartService.loadSessionCart(currentUser.getId());
 
         return new User(currentUser.getName(), currentUser.getPassword(),
                 true, true,true,true,

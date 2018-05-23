@@ -10,16 +10,14 @@ import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.C
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
-import com.tsystems.javaschool.brajnikov.internetstore.util.OrderStatusEnum;
-import org.hibernate.criterion.Order;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -38,6 +36,8 @@ public class OrderController extends AbstractController {
 
     @Autowired
     private CustomAuthentificationSuccessHandler authHandler;
+
+    static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @RequestMapping(value = {"/order"}, method = RequestMethod.GET)
     public String showOneOrder(Model model, @RequestParam("id") Integer orderId) {
@@ -62,11 +62,10 @@ public class OrderController extends AbstractController {
     @RequestMapping(value = "/orderPay", method = RequestMethod.GET)
     public String orderPay(Model model,@RequestParam("id") Integer orderId){
         if (!isCurrentAuthenticationAnonymous()) {
-            UserEntity user = userService.findByName(getPrincipal());
             model.addAttribute("loggedinuser", getPrincipal());
+
             OrderEntity order = orderService.getOrderById(orderId);
-            order.setStatus(OrderStatusEnum.PENDING_SHIPPING);
-            orderService.updateOrder(order);
+            orderService.pushOrderStatus(order);
         }
         return "redirect:/order?id=" + orderId;
     }
@@ -76,14 +75,13 @@ public class OrderController extends AbstractController {
 
         if (!isCurrentAuthenticationAnonymous()) {
             model.addAttribute("loggedinuser", getPrincipal());
-            //model.addAttribute("userRole", getLoggedInUserEntity().getRole().toString());
 
-            UserEntity user = userService.findByName(getPrincipal()); //TODO make DTO!
+            UserEntity user = userService.findByName(getPrincipal());
             try {
-                List<OrderEntity> userOrders = orderService.getOrdersListByUser(user);//orderService.getOrdersListByUser(user.getId());
+                List<OrderEntity> userOrders = orderService.getOrdersListByUser(user);
                 model.addAttribute("orders", userOrders);
             } catch (OrdersNotFoundException ex) {
-                return "/index"; //TODO to error list
+                return "/index";
             }
             return "/orders-list";
         } else {

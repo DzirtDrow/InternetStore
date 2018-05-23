@@ -14,44 +14,6 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<%--<div class="body-content outer-top-xl">--%>
-<%--<div class="container">--%>
-<%--<div class="row ">--%>
-<%--<form:form modelAttribute="order" method="post">--%>
-<%--<div class="row">--%>
-<%--Date: <h4>${order.order_date}</h4>--%>
-<%--</div>--%>
-<%--<div class="row">--%>
-<%--Price: <h4>$${order.sum}</h4>--%>
-<%--</div>--%>
-<%--<div class="row">--%>
-<%--Status:--%>
-<%--<select class="selectpicker" data-width="fit" data-id="${order.id}">--%>
-<%--&lt;%&ndash;<option value="option1"> OPtion 1</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<option value="option2"> OPtion 2</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<option value="option3"> OPtion 3</option>&ndash;%&gt;--%>
-<%--<c:forEach items="${orderStatuses}" var="orderStatus">--%>
-<%--<option value="${orderStatus}" ${order.status.equals(orderStatus) ? 'selected' : ''}>${orderStatus}</option>--%>
-<%--</c:forEach>--%>
-<%--</select>--%>
-<%--</div>--%>
-<%--&lt;%&ndash;<c:choose>&ndash;%&gt;--%>
-<%--&lt;%&ndash;<c:when test="${order.status == 'PENDING_PAYMENT'}">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<div class="row">&ndash;%&gt;--%>
-<%--&lt;%&ndash;<a href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>&ndash;%&gt;--%>
-<%--&lt;%&ndash;&lt;%&ndash;<div class="form-actions floatRight">&ndash;%&gt;&ndash;%&gt;--%>
-<%--&lt;%&ndash;&lt;%&ndash;<input type="submit" value="Pay" class="btn btn-primary btn-sm">&ndash;%&gt;&ndash;%&gt;--%>
-<%--&lt;%&ndash;&lt;%&ndash;</div>&ndash;%&gt;&ndash;%&gt;--%>
-<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:when>&ndash;%&gt;--%>
-<%--&lt;%&ndash;</c:choose>&ndash;%&gt;--%>
-
-
-<%--</form:form>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
 <div class="body-content outer-top-xl">
     <div class="container">
         <div class="row ">
@@ -64,7 +26,6 @@
                                 <div class="shopping-cart-table ">
                                     <div class="table-responsive">
                                         <table class="table">
-                                                <%--<table class="table table-hover">--%>
                                             <h4>Goods in order:</h4>
                                             <thead>
                                             <tr>
@@ -101,16 +62,9 @@
                             </a>
                         </h4>
                     </div>
-
                     <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
-                    <div class="table">
+                                        <div class="table">
                         <h4>Status:
-
-                            <%--<select name="status_select" class="selectpicker" data-width="fit" data-id="${order.id}">--%>
-                                <%--<c:forEach items="${orderStatuses}" var="orderStatus">--%>
-                                    <%--<option value="${orderStatus}" ${order.status.equals(orderStatus) ? 'selected' : ''}>${orderStatus}</option>--%>
-                                <%--</c:forEach>--%>
-                            <%--</select>--%>
 
                             <c:choose>
                                 <c:when test="${order.status == 'PROCESSING'}">
@@ -133,15 +87,12 @@
                                     <span class="cart-product-info center-block">${order.status}</span>
                                 </c:otherwise>
                             </c:choose>
-                            <a href="<c:url value='/changeorderstatus?id=${order.id}'/>" class="btn-black">Push order Status</a>
+                            <br>
+                            <a href="<c:url value='/changeorderstatus?id=${order.id}'/>" class="btn btn-primary btn-sm">Push order Status</a>
                         </h4>
                     </div>
 
                 </div>
-                <div class="form-actions floatRight">
-                    <input type="submit" value="Save changes" class="btn btn-primary btn-sm">
-                </div>
-                <%--</div>--%>
                 <i hidden>
                     <form:input path="user.id" type="user.id"/>
                 </i>

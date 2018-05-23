@@ -1,5 +1,23 @@
 package com.tsystems.javaschool.brajnikov.internetstore.util;
 
+/**
+ * The enum Order status enum.
+ */
 public enum OrderStatusEnum {
-    PROCESSING, PENDING_PAYMENT, PENDING_SHIPPING, SHIPPED, DELIVERED
+    /**
+     * Processing order status.
+     */
+    PROCESSING, /**
+     * Pending payment order status.
+     */
+    PENDING_PAYMENT, /**
+     * Pending shipping order status.
+     */
+    PENDING_SHIPPING, /**
+     * Shipped order status.
+     */
+    SHIPPED, /**
+     * Delivered order status.
+     */
+    DELIVERED
 }

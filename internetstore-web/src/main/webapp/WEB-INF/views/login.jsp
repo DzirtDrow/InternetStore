@@ -13,22 +13,6 @@
 <body>
 <%@include file="header.jsp" %>
 
-<%--<form action="${pageContext.request.contextPath}/login" method="post">--%>
-<%--<table>--%>
-<%--<tr>--%>
-<%--<td>Username:</td>--%>
-<%--<td><input type='text' name='username'/></td>--%>
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<td>Password:</td>--%>
-<%--<td><input type='password' name='password'></td>--%>
-<%--</tr>--%>
-<%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
-<%--<tr>--%>
-<%--<td colspan='2'><input name="submit" type="submit" value="Submit"></td>--%>
-<%--</tr>--%>
-<%--</table>--%>
-<%--</form>--%>
 <div class="body-content">
     <div class="container">
         <div class="sign-in-page col-md-4 col-sm-4">

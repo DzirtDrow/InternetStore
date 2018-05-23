@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 @Repository("orderDao")
@@ -18,15 +17,6 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void createOrder() {
-//TODO ???
-    }
-
-    public void addGoodsToOrder(GoodsEntity goodsEntity, Integer num) {
-        CartItemEntity cartEntity = new CartItemEntity(); // TODO
-
-//TODO
-    }
 
     @SuppressWarnings("unchecked")
     public List<OrderEntity> getOrdersByUser(UserEntity userEntity) throws OrdersNotFoundException {

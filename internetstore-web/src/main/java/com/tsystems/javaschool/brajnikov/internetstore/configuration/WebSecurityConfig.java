@@ -3,11 +3,9 @@ package com.tsystems.javaschool.brajnikov.internetstore.configuration;
 import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -20,9 +18,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
+/**
+ * The Web security config.
+ */
 @Configuration
 @EnableWebSecurity
 //@EnableWebMvc
@@ -34,12 +34,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
+    /**
+     * The Token repository.
+     */
     @Autowired
     PersistentTokenRepository tokenRepository;
 
     @Autowired
     private CustomAuthentificationSuccessHandler customAuthentificationSuccessHandler;
 
+    /**
+     * Password encoder b crypt password encoder.
+     *
+     * @return the b crypt password encoder
+     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -52,22 +60,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/*.js");
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .inMemoryAuthentication()
-//                .withUser("admin").password("nimda").roles("ADMIN");
-//    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/", "/index", "signup").permitAll()
                 //.access("hasRole('USER') or hasRole('ADMIN') or hasRole('MANAGER')")
-                .antMatchers("/goodslist").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                .antMatchers("/manageorders").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                .antMatchers("/manageoneorder").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                .antMatchers("/admin").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
-                .antMatchers("/list").access("hasRole('ROLE_admin')")
+                .antMatchers("/goodslist","/manageorders","/manageoneorder","/admin").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+                //.antMatchers("/manageorders").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+                //.antMatchers("/manageoneorder").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+                //.antMatchers("/admin").access("hasRole('ROLE_admin')or hasRole('ROLE_manager')")
+                .antMatchers("/list","/edituserbyadmin").access("hasRole('ROLE_admin')")
                 .antMatchers("/store").permitAll()
                 .antMatchers("/cart").permitAll()
                 .antMatchers("/details").permitAll()
@@ -85,12 +86,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().exceptionHandling().accessDeniedPage("/accessdenied");
     }
 
+    /**
+     * Configure global security.
+     *
+     * @param auth the auth
+     * @throws Exception the exception
+     */
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
         auth.authenticationProvider(authenticationProvider());
     }
 
+    /**
+     * Authentication provider dao authentication provider.
+     *
+     * @return the dao authentication provider
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -99,12 +111,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
 
+    /**
+     * Gets persistent token based remember me services.
+     *
+     * @return the persistent token based remember me services
+     */
     @Bean
     public PersistentTokenBasedRememberMeServices getPersistentTokenBasedRememberMeServices() {
         PersistentTokenBasedRememberMeServices tokenBasedservice = new PersistentTokenBasedRememberMeServices(
                 "remember-me", userDetailsService, tokenRepository);
         return tokenBasedservice;
     }
+
+    /**
+     * Gets authentication trust resolver.
+     *
+     * @return the authentication trust resolver
+     */
     @Bean
     public AuthenticationTrustResolver getAuthenticationTrustResolver() {
         return new AuthenticationTrustResolverImpl();

@@ -3,11 +3,15 @@ package com.tsystems.javaschool.brajnikov.internetstore.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
+/**
+ * The type Address entity.
+ */
 @Entity
 @Data
 @Table(name = "user_address")
-public class AddressEntity {
+public class AddressEntity implements Serializable{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

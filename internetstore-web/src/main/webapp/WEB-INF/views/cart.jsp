@@ -114,15 +114,7 @@
                                     </td>
 
                                     <td class="cart-product-quantity">
-                                            <%--<div class="quant-input">--%>
-                                            <%--<div class="arrows">--%>
-                                            <%--<div class="arrow plus gradient"><span class="ir"><i--%>
-                                            <%--class="icon fa fa-sort-asc"--%>
-                                            <%--href="increaseItemsCount?id=${cartItem.id}">+</i></span></div>--%>
-                                            <%--<div class="arrow minus gradient"><span class="ir"><i--%>
-                                            <%--class="icon fa fa-sort-desc"--%>
-                                            <%--href="decreaseItemsCount?id=${cartItem.id}">-</i></span></div>--%>
-                                            <%--</div>--%>
+
                                         <a href="increaseItemsCount?id=${cartItem.id}" class="btn btn-black ">+</a>
                                         <i>${cartItem.count}</i>
                                         <a href="decreaseItemsCount?id=${cartItem.id}" class="btn btn-black">-</a>

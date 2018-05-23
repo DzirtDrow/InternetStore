@@ -1,5 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ErrorController {
+
+    static final Logger logger = LoggerFactory.getLogger(ErrorController.class);
 
     @RequestMapping(value = "errors", method = RequestMethod.GET)
     public ModelAndView renderErrorPage(HttpServletRequest httpRequest) {

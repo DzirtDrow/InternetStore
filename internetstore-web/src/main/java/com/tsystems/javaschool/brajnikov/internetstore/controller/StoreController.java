@@ -10,8 +10,9 @@ import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartSe
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,22 +23,40 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
+/**
+ * The type Store controller.
+ */
 @Controller("storeController")
 @SessionAttributes("order")
 public class StoreController extends AbstractController {
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * The Goods service.
+     */
     @Autowired
     GoodsService goodsService;
 
+    /**
+     * The Session cart.
+     */
     @Autowired
     SessionCart sessionCart;
 
+    /**
+     * The Cart service.
+     */
     @Autowired
     CartService cartService;
 
+    /**
+     * The Category service.
+     */
     @Autowired
     CategoryService categoryService;
 
@@ -45,11 +64,21 @@ public class StoreController extends AbstractController {
     private CustomAuthentificationSuccessHandler authHandler;
 
     @Autowired
-    PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+    private PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
-    @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;
+    /**
+     * The Logger.
+     */
+    static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 
+
+    /**
+     * Store category list string.
+     *
+     * @param model      the model
+     * @param categoryId the category id
+     * @return the string
+     */
     @RequestMapping(value = {"/store"}, method = RequestMethod.GET)
     public String storeCategoryList(Model model, @RequestParam("id") Integer categoryId) {
 
@@ -65,9 +94,17 @@ public class StoreController extends AbstractController {
         } else {
             model.addAttribute("loggedinuser", "anonymousUser");
         }
+
         return "/store";
     }
 
+    /**
+     * Delete goods string.
+     *
+     * @param model the model
+     * @param id    the id
+     * @return the string
+     */
     @RequestMapping(value = "/addtocart")
     public String deleteGoods(Model model, @RequestParam("id") Integer id) {
         //UserEntity user = userService.findByName(getPrincipal());
@@ -86,6 +123,12 @@ public class StoreController extends AbstractController {
         return "redirect:/store?id=" + cat;
     }
 
+    /**
+     * Show user cart string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @RequestMapping(value = "/cart")
     public String showUserCart(Model model) {
         List<CartItemEntity> cartItemsList;
@@ -113,6 +156,13 @@ public class StoreController extends AbstractController {
         return "/cart";
     }
 
+    /**
+     * Delete item from cart string.
+     *
+     * @param model the model
+     * @param id    the id
+     * @return the string
+     */
     @RequestMapping(value = "/deleteItemFromCart")
     public String deleteItemFromCart(Model model, @RequestParam("id") String id) {
         if (!isCurrentAuthenticationAnonymous()) {
@@ -127,6 +177,13 @@ public class StoreController extends AbstractController {
         return "redirect:/cart";
     }
 
+    /**
+     * Increase item count string.
+     *
+     * @param model the model
+     * @param id    the id
+     * @return the string
+     */
     @RequestMapping(value = "/increaseItemsCount")
     public String increaseItemCount(Model model, @RequestParam("id") String id) {
         if (!isCurrentAuthenticationAnonymous()) {
@@ -139,6 +196,13 @@ public class StoreController extends AbstractController {
         return "redirect:/cart";
     }
 
+    /**
+     * Decrease item count string.
+     *
+     * @param model the model
+     * @param id    the id
+     * @return the string
+     */
     @RequestMapping(value = "/decreaseItemsCount")
     public String decreaseItemCount(Model model, @RequestParam("id") Integer id) {
         if (!isCurrentAuthenticationAnonymous()) {
@@ -151,6 +215,13 @@ public class StoreController extends AbstractController {
         return "redirect:/cart";
     }
 
+    /**
+     * Goods details string.
+     *
+     * @param model   the model
+     * @param goodsId the goods id
+     * @return the string
+     */
     @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
     public String goodsDetails(Model model, @RequestParam("id") Integer goodsId) {
         model.addAttribute("goods", goodsService.findGoodsById(goodsId));

@@ -38,8 +38,6 @@ public class OrderServiceImpl implements OrderService {
 
     public int createOrderByCart(CartEntity cartEntity) throws CartIsEmptyException {
 
-        //TODO check empty cart here
-
         List<CartItemEntity> itemsList = cartEntity.getCartItems();
 
         if(itemsList.isEmpty()){
@@ -84,10 +82,6 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.getOrdersByUser(user);
     }
 
-
-    public List<CartItemEntity> getCarts() {
-        return null;
-    }
 
     public void updateOrder(OrderEntity orderEntity) {
         orderDao.update(orderEntity);

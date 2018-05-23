@@ -1,16 +1,18 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import com.tsystems.javaschool.brajnikov.internetstore.util.OrderStatusEnum;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The type Order entity.
+ */
 @Entity
-@Setter @Getter
+@Data
 @Table(name = "orders", schema = "internet_store_db")
 public class OrderEntity implements Serializable{
     @Id
@@ -37,12 +39,6 @@ public class OrderEntity implements Serializable{
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<CartItemEntity> orderItems;
 
-//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    @JoinColumn(name = "order_id", referencedColumnName = "id")
-//    private List<CartItemEntity> orderItems;
-
-    public OrderEntity() {
-    }
 
     @Override
     public String toString() {

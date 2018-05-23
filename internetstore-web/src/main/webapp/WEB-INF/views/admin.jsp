@@ -11,21 +11,25 @@
     <title>Admin page</title>
 </head>
 <body>
-<input type="button" class="button" value="Show Users List"
-       onclick="location.href=' ${pageContext.request.contextPath}/list'"/>
-<input type="button" class="button" value="Show Goods List"
-       onclick="location.href=' ${pageContext.request.contextPath}/goodslist'"/>
-<%--<input type="button" class="button" value="Show Store"--%>
-<%--onclick="location.href=' ${pageContext.request.contextPath}/store'"/>--%>
-<br>
-<br>
-<br>
-<input type="button" class="button" value="Sign Up"
-       onclick="location.href=' ${pageContext.request.contextPath}/signup'"/>
-<input type="button" class="button" value="Login" onclick="location.href=' ${pageContext.request.contextPath}/login'"/>
+<%@include file="header.jsp" %>
 
-<input type="button" class="button" value="Orders Managment" onclick="location.href=' ${pageContext.request.contextPath}/manageorders'"/>
+<div class="body-content">
+    <div class="container">
+        <div class="sign-in-page col-md-4 col-sm-4">
+            <input type="button" class="btn-primary" value="Orders Managment"
+                   onclick="location.href=' ${pageContext.request.contextPath}/manageorders'"/>
+            <br><br>
+            <input type="button" class="btn-primary" value="Show Users List"
+                   onclick="location.href=' ${pageContext.request.contextPath}/list'"/>
+            <br><br>
+            <input type="button" class="btn-primary" value="Show Goods List"
+                   onclick="location.href=' ${pageContext.request.contextPath}/goodslist'"/>
 
+            <br><br>
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

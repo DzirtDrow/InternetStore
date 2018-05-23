@@ -1,13 +1,15 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * The type Cart item entity.
+ */
 @Entity
 @Setter
 @Getter
@@ -38,35 +40,4 @@ public class CartItemEntity implements Serializable {
     @Column(name = "type")
     private CartItemTypeEnum type;
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public GoodsEntity getGoods() {
-//        return goods;
-//    }
-//
-//    public void setGoods(GoodsEntity goods) {
-//        this.goods = goods;
-//    }
-//
-//    public int getCount() {
-//        return count;
-//    }
-//
-//    public void setCount(int count) {
-//        this.count = count;
-//    }
-//
-//    public CartEntity getCart() {
-//        return cart;
-//    }
-//
-//    public void setCart(CartEntity cart) {
-//        this.cart = cart;
-//    }
 }

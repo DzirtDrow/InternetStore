@@ -1,15 +1,15 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+/**
+ * The type Persistent login.
+ */
 @Entity
+@Data
 @Table(name="PERSISTENT_LOGINS")
 public class PersistentLogin implements Serializable {
 
@@ -25,36 +25,5 @@ public class PersistentLogin implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date last_used;
 
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Date getLast_used() {
-        return last_used;
-    }
-
-    public void setLast_used(Date last_used) {
-        this.last_used = last_used;
-    }
 
 }

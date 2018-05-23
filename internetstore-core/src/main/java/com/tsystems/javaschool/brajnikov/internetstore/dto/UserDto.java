@@ -6,6 +6,9 @@ import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.Size;
 import java.sql.Date;
 
+/**
+ * The type User dto for register and validating.
+ */
 @Data
 public class UserDto {
 

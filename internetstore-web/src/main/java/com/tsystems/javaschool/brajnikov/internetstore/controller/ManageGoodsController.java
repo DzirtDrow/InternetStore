@@ -3,6 +3,8 @@ package com.tsystems.javaschool.brajnikov.internetstore.controller;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,15 +26,20 @@ public class ManageGoodsController extends AbstractController {
     @Autowired
     private CategoryService categoryService;
 
+    static final Logger logger = LoggerFactory.getLogger(ManageGoodsController.class);
+
     @RequestMapping(value = "/addgoods", method = RequestMethod.GET)
     public String addGoodsPage(Model model) {
         model.addAttribute("goods", new GoodsEntity());
+        model.addAttribute("categories", categoryService.getCategoryList());
         return "/addgoods";
     }
 
     @RequestMapping(value = "/addgoods", method = RequestMethod.POST)
-    public ModelAndView addNewGoods(@ModelAttribute("goods") GoodsEntity goodsEntity, Model model) {
-        goodsService.addGoods(goodsEntity);
+    public ModelAndView addNewGoods(@ModelAttribute("goods") GoodsEntity goodsEntity,
+                                    Model model) {
+
+            goodsService.addGoods(goodsEntity);
         return new ModelAndView("redirect:/goodslist/");
     }
 
@@ -48,9 +55,9 @@ public class ManageGoodsController extends AbstractController {
 
 
     @RequestMapping(value = "/deleteGoods")
-    public String deleteGoods(Model model, @RequestParam("id") String id) {
+    public String deleteGoods(Model model, @RequestParam("id") Integer id) {
         if (id != null) {
-            goodsService.deleteGoodsById(Integer.parseInt(id));
+            goodsService.deleteGoodsById(id);
         }
         return "redirect:/goodslist";
     }
@@ -58,7 +65,6 @@ public class ManageGoodsController extends AbstractController {
     @RequestMapping(value = "/editgoods", method = RequestMethod.GET)
     public String editGoodsPage(Model model, @RequestParam("id") Integer id) {
         if (id != null) {
-            // model.addAttribute("category", goodsService.findGoodsById(id).getCategory());
             model.addAttribute("goods", goodsService.findGoodsById(id));
         }
         return "/editgoods";

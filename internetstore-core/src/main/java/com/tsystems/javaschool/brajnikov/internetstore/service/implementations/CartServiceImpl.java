@@ -4,7 +4,10 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartItemDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
-import com.tsystems.javaschool.brajnikov.internetstore.model.*;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +59,7 @@ public class CartServiceImpl implements CartService {
 
         cartEntity.setSum(getCartTotalPrice(userId)); // set cart total price
 
-        cartDao.update(cartEntity);//TODO ????
+        cartDao.update(cartEntity);
 
     }
 
@@ -76,14 +79,14 @@ public class CartServiceImpl implements CartService {
         CartEntity cartEntity = userDao.findById(userId).getCart();
         int result = 0;
         List<CartItemEntity> items = cartEntity.getCartItems();
-        for (CartItemEntity item: items) {
+        for (CartItemEntity item : items) {
             result += item.getGoods().getPrice() * item.getCount();
         }
         return result;
     }
 
     public CartEntity getCartByUser(UserEntity user) {
-       return cartDao.findCartByUser(user);
+        return cartDao.findCartByUser(user);
     }
 
     public void deleteCartItem(int itemId) {
@@ -107,10 +110,7 @@ public class CartServiceImpl implements CartService {
     }
 
     public void loadSessionCart(int userId) {
-        List<CartItemEntity> itemList = sessionCart.getCartItemsList();
-//        for (CartItemEntity item : itemList) {
-//            addGoodsToCart(userId, item.getGoods()); //TODO need to save count of items
-//        }
+            //TODO load session cart to user order here
 
     }
 }

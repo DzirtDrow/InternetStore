@@ -30,7 +30,7 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.tsystems.javaschool.brajnikov.internetstore.model" });
+        sessionFactory.setPackagesToScan("com.tsystems.javaschool.brajnikov.internetstore.model");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
      }
