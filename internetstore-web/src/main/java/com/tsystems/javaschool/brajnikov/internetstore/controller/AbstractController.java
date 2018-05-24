@@ -55,17 +55,4 @@ public abstract class AbstractController {
         logger.info("Is current authentification is anonymous? {}", authenticationTrustResolver.isAnonymous(authentication));
         return authenticationTrustResolver.isAnonymous(authentication);
     }
-
-    /**
-     * Handle io exception model and view.
-     *
-     * @param exception the exception
-     * @return the model and view
-     */
-//    @ExceptionHandler(Exception.class)
-//    public ModelAndView handleIOException(Exception exception) {
-//        ModelAndView modelAndView = new ModelAndView("error");
-//        modelAndView.addObject("message", exception.getMessage());
-//        return modelAndView;
-//    }
 }

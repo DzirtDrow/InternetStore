@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -98,8 +99,11 @@ public class AppController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage(ModelMap model) {
+    public String loginPage(@RequestParam(value = "error", required = false) String error, ModelMap model) {
         logger.info("Login page showing");
+        if (error != null) {
+            model.addAttribute("error", "Invalid username or password!");
+        }
         if (isCurrentAuthenticationAnonymous()) {
             return "login";
         } else {
