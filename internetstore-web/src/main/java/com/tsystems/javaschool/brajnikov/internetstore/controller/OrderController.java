@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
@@ -36,6 +37,9 @@ public class OrderController extends AbstractController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SessionCart sessionCart;
 
     @Autowired
     private CustomAuthentificationSuccessHandler authHandler;
@@ -81,7 +85,7 @@ public class OrderController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = "/orderPay", method = RequestMethod.GET)
-    public String orderPay(Model model,@RequestParam("id") Integer orderId){
+    public String orderPay(Model model, @RequestParam("id") Integer orderId) {
         if (!isCurrentAuthenticationAnonymous()) {
             OrderEntity order = orderService.getOrderById(orderId);
             orderService.pushOrderStatus(order);
@@ -127,15 +131,19 @@ public class OrderController extends AbstractController {
             CartEntity cart = cartService.getCartByUser(user);
 
             try {
-                 id = orderService.createOrderByCart(cart);
+                id = orderService.createOrderByCart(cart);
 
             } catch (CartIsEmptyException e) {
                 return "/cart";
             }
         } else {
-            authHandler.setOrderFlag(true);
-            return "/login";
+            if ((sessionCart.getCartItemsList() != null) && (!sessionCart.getCartItemsList().isEmpty())) {
+                authHandler.setOrderFlag(true);
+                return "/login";
+            } else {
+                return "redirect:/cart";
+            }
         }
-        return "redirect:/order?id="+id;
+        return "redirect:/order?id=" + id;
     }
 }

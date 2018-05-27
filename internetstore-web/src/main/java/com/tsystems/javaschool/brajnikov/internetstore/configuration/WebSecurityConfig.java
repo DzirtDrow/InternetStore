@@ -72,7 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/orders-list").authenticated()
                 .and().formLogin().loginPage("/login")
                 //.successHandler(customAuthentificationSuccessHandler)
-                //.loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .and().rememberMe().rememberMeParameter("remember-me")
                 .tokenRepository(tokenRepository).tokenValiditySeconds(86400)
