@@ -26,7 +26,7 @@ public class UserEntity implements Serializable {
     private String name;
 
     @Column(name = "lastname")
-    private String lastName;
+    private String lastname;
 
     @Column(name = "email", unique = true)
     private String email;
@@ -55,7 +55,7 @@ public class UserEntity implements Serializable {
         return "UserEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", lastname='" + lastname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", date=" + date +

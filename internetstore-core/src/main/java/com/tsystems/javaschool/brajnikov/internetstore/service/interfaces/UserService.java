@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+import com.tsystems.javaschool.brajnikov.internetstore.dto.UserRequestDto;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
@@ -64,7 +65,7 @@ public interface UserService {
      * @param user the {@link UserDto}
      * @throws EmailIsUsedException the email is used exception
      */
-    void registerUser(UserDto user) throws EmailIsUsedException;
+    void registerUser(UserRequestDto user) throws EmailIsUsedException;
 
     /**
      * Update user.
@@ -72,4 +73,6 @@ public interface UserService {
      * @param userEntity the {@link UserEntity}
      */
     void updateUser(UserEntity userEntity);
+
+    void updateUserByDto(UserRequestDto userRequestDto);
 }

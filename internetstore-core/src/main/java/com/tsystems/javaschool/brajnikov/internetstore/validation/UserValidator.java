@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.validation;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.UserRequestDto;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -24,7 +25,7 @@ public class UserValidator implements Validator {
     }
 
     public void validate(Object o, Errors errors) {
-        UserDto user = (UserDto) o;
+        UserRequestDto user = (UserRequestDto) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty.user.Name");
         if (user.getName().length() < 4 || user.getName().length() > 32) {

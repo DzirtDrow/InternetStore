@@ -2,7 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.AddressDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
-import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+import com.tsystems.javaschool.brajnikov.internetstore.dto.UserRequestDto;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
@@ -14,7 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service("userService")
 @Transactional
@@ -52,7 +57,7 @@ public class UserServiceImpl implements UserService {
         return userEntity;
     }
 
-    public void registerUser(UserDto user) throws EmailIsUsedException {
+    public void registerUser(UserRequestDto user) throws EmailIsUsedException {
 
         if (dao.findByEmail(user.getEmail()) != null) {
             throw new EmailIsUsedException();
@@ -69,6 +74,22 @@ public class UserServiceImpl implements UserService {
 
     public void updateUser(UserEntity userEntity) {
         dao.update(userEntity);
+    }
+
+    public void updateUserByDto(UserRequestDto userRequestDto) {
+        UserEntity user = dao.findByEmail(userRequestDto.getEmail());
+        user.setLastname(userRequestDto.getLastname());
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        Date date = null;
+        try {
+            date = format.parse(userRequestDto.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace(); //TODO logger
+        }
+        user.setDate(date);
+
+        dao.update(user);
+
     }
 
     public AddressEntity getUserAddress(UserEntity user) {

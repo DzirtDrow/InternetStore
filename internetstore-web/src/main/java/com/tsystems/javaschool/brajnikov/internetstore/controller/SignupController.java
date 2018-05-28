@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserDto;
+import com.tsystems.javaschool.brajnikov.internetstore.dto.UserRequestDto;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import com.tsystems.javaschool.brajnikov.internetstore.validation.UserValidator;
@@ -58,7 +59,7 @@ public class SignupController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = {"/signup"}, method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("user")  UserDto user, BindingResult result,
+    public String saveUser(@ModelAttribute("user") UserRequestDto user, BindingResult result,
                            ModelMap model) {
         try {
             userValidator.validate(user, result);

@@ -37,10 +37,10 @@
                             <c:forEach items="${users}" var="user">
                                 <tr>
                                     <td class="center">${user.name}</td>
-                                    <td>${user.lastName}</td>
+                                    <td>${user.lastname}</td>
                                     <td>${user.email}</td>
                                     <td>${user.role}</td>
-                                    <td><a disabled="true" href="<c:url value='/edituserbyadmin?id=${user.id}'/>" class="btn btn-success custom-width">Edit User</a></td>
+                                    <td><a href="<c:url value='/edituserbyadmin?id=${user.id}'/>" class="btn btn-success custom-width">Edit User</a></td>
                                 </tr>
                             </c:forEach>
                             </tbody>

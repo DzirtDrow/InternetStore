@@ -16,7 +16,7 @@
         <div class="sign-in-page col-md-4 col-sm-4">
             <h4 class="checkout-subtitle">My Account</h4>
             <p class="text title-tag-line">Change your personal data</p>
-            <form:form class="register-form outer-top-xs" role="form" modelAttribute="user" method="post">
+            <form:form class="register-form outer-top-xs" role="form" modelAttribute="user" method="post" name="userform">
                 <div class="form-group">
                     <label class="info-title">Name </label>
                     <form:input path="name" type="name" class="form-control unicase-form-control text-input"
@@ -32,14 +32,22 @@
 
                 <div class="form-group">
                     <label class="info-title">Last name </label>
-                    <form:input path="lastName" type="lastName" class="form-control unicase-form-control text-input"/>
+                    <form:input path="lastname" type="lastname" class="form-control unicase-form-control text-input"/>
                         <%--<input type="text" class="">--%>
                 </div>
 
+                <div class="form-group">
+                    <label class="info-title">Birth Date </label>
 
+                   <form:input type="date" class="form-control" path="date" autocomplete="true"/> <%--<form:input path="date" type="date" class="form-control unicase-form-control text-input"/>--%>
+
+                    <%--<fmt:formatDate value="date" pattern="dd.MM.yyyy"/>--%>
+
+                        <%--<input type="text" class="">--%>
+                </div>
                 <i hidden>
 
-                    <form:input path="password" type="password"/>
+                    <form:input path="password" type="password" readonly="true"/>
                     <form:input path="id" type="id"/>
                     <form:input path="role" type="role"/>
                 </i>
@@ -47,8 +55,8 @@
                 <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Edit</button>
 
             </form:form>
-
-            <%--</div>--%>
+            <%--<form:input   path="${editdate}" type="test"/>--%>
+            </div>
         </div>
     </div>
 </div>
