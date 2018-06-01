@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,8 +42,9 @@ public class ManageGoodsController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = "/addgoods", method = RequestMethod.GET)
-    public String addGoodsPage(Model model) {
+    public String addGoodsPage(Model model, @RequestParam( value = "error", required = false)  String error) {
         logger.info("Showing add goods page");
+        model.addAttribute("error", error);
         model.addAttribute("goods", new GoodsEntity());
         model.addAttribute("categories", categoryService.getCategoryList());
         return "/addgoods";
@@ -57,10 +59,15 @@ public class ManageGoodsController extends AbstractController {
      */
     @RequestMapping(value = "/addgoods", method = RequestMethod.POST)
     public ModelAndView addNewGoods(@ModelAttribute("goods") GoodsEntity goodsEntity,
-                                    Model model) {
+                                    Model model, BindingResult result) {
         logger.info("Adding new goods {}", goodsEntity.getName());
-        goodsService.addGoods(goodsEntity);
-        return new ModelAndView("redirect:/goodslist/");
+        if (goodsEntity.getPrice() > 0) {
+            goodsService.addGoods(goodsEntity);
+            return new ModelAndView("redirect:/goodslist/");
+        } else {
+            return new ModelAndView("redirect:/addgoods?error=neg");
+        }
+
     }
 
     /**

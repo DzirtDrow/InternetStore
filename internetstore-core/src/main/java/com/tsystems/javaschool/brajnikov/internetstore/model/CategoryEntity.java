@@ -24,4 +24,11 @@ public class CategoryEntity implements Serializable {
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<GoodsEntity> goodsList;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "category_parameter",
+                joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "parameter_id"))
+    private List<CategoryEntity> parameters;
 }

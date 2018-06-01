@@ -152,5 +152,28 @@ ALTER TABLE `internet_store_db`.`orders` ADD status
   ENUM('PROCESSING', 'PENDING_PAYMENT', 'PENDING_SHIPPING', 'SHIPPED', 'DELIVERED') DEFAULT 'PROCESSING' NOT NULL;
 
 
+CREATE TABLE `internet_store_db`.`parameter`
+(
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(64) NOT NULL,
+  description VARCHAR(255),
+  param_type ENUM('param_num', 'param_string')
+);
+CREATE UNIQUE INDEX parameter_name_uindex ON parameter (name);
 
 
+CREATE TABLE `internet_store_db`.`category_parameter`
+(
+  category_id INT NOT NULL,
+  parameter_id INT NOT NULL,
+  CONSTRAINT category_parameter_category_id_fk FOREIGN KEY (category_id) REFERENCES category (id),
+  CONSTRAINT category_parameter_parameter_id_fk FOREIGN KEY (parameter_id) REFERENCES parameter (id)
+);
+
+
+CREATE TABLE `internet_store_db`.`goods_parameter`
+(
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  num_value INT,
+  string_value VARCHAR(128)
+);

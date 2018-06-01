@@ -1,7 +1,9 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserRequestDto;
+import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.AddressService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import org.slf4j.Logger;
@@ -17,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Date;
-
 /**
  * The type Account controller.
  */
@@ -27,6 +27,9 @@ public class AccountController extends AbstractController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AddressService addressService;
 
     /**
      * The Logger.
@@ -43,7 +46,8 @@ public class AccountController extends AbstractController {
     public String showAccountPage(Model model) {
         UserEntity user = userService.findByName(getPrincipal());
         model.addAttribute("user", user);
-        model.addAttribute("address", user.getAddress());
+        AddressEntity addressEntity = user.getAddress();
+        model.addAttribute("useraddress", addressEntity);
         logger.info("Showing Account page for user: {}", user.getName());
 
         return "/account";
@@ -52,15 +56,24 @@ public class AccountController extends AbstractController {
     /**
      * Edit account.
      *
-     * @param userEntity the user entity
-     * @param model      the model
+     * @param userRequestDto the user entity
+     * @param address        the AddressEntity
+     * @param model          the model
      * @return the string
      */
     @RequestMapping(value = "/account", method = RequestMethod.POST)
     public String editAccount(@ModelAttribute("user") UserRequestDto userRequestDto,
+                              @ModelAttribute("useraddress") AddressEntity address,
                               Model model) {
 
+        address.setUser(userService.findByEmail(userRequestDto.getEmail())); //TODO
+        address.setId(userService.findByEmail(userRequestDto.getEmail()).getAddress().getId()); //TODO monstro!, i set address id from user
+        addressService.updateAddress(address);
+
+        userRequestDto.setAddressEntity(address);
+
         userService.updateUserByDto(userRequestDto);
+
         logger.info("Updating user {} from account page", userRequestDto.getName());
         return "redirect:/account";
     }

@@ -10,7 +10,6 @@ public interface AddressService {
      * Update address.
      *
      * @param addressEntity the address entity
-     * @param address       the address
      */
-    void updateAddress(AddressEntity addressEntity, String address);
+    void updateAddress(AddressEntity addressEntity);
 }

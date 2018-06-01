@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dto;
 
+import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
@@ -24,6 +25,8 @@ public class UserRequestDto {
 
     @Size(min = 4, max = 32)
     private String confirmPassword;
+
+    private AddressEntity addressEntity; //TODO make AdressDTO
 
     private RoleEnum role;
 

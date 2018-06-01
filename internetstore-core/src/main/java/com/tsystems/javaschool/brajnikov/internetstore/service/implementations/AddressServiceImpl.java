@@ -14,10 +14,16 @@ public class AddressServiceImpl implements AddressService {
     private AddressDao addressDao;
 
     @Transactional
-    public void updateAddress(AddressEntity addressEntity, String address) {
-        addressEntity.setAddress(address);
-        if(addressDao.read(addressEntity.getId())!= null){
-            addressDao.update(addressEntity);
+    public void updateAddress(AddressEntity addressEntity) {
+        if (addressDao.read(addressEntity.getId()) != null) {
+            //addressDao.update(addressEntity);
+            AddressEntity addr = addressDao.read(addressEntity.getId());
+            addr.setUser(addressEntity.getUser());
+            addr.setAddress(addressEntity.getAddress());
+            addr.setCoordinates(addressEntity.getCoordinates());
+            addressDao.update(addr);
+
+            System.out.println(addressEntity.toString());
         } else {
             addressDao.create(addressEntity);
         }

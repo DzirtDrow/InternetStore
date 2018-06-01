@@ -6,7 +6,7 @@
   Time: 15:51
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <html>
 <head>
     <title>Index</title>
@@ -23,6 +23,7 @@
                 <div class="col-md-12">
                     <h2 class="heading-title">Welcome to Internet Shop!</h2>
                     <span class="title-tag">To get started, select the product category!</span>
+                    <a href="test">TEST</a>
 
                 </div>
             </div><!-- /.row -->

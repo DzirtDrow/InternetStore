@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
     public void updateUserByDto(UserRequestDto userRequestDto) {
         UserEntity user = dao.findByEmail(userRequestDto.getEmail());
         user.setLastname(userRequestDto.getLastname());
+        user.setAddress(userRequestDto.getAddressEntity()); //TODO ???
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = null;
         try {
