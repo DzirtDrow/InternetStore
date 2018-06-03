@@ -4,6 +4,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CategoryDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,5 +31,13 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         return (List<CategoryEntity>) query.getResultList();
     }
 
+    public List<ParameterEntity> getParameterListByCategory(CategoryEntity category) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("select ParameterEntity from ParameterEntity " +
+                "join fetch CategoryEntity ");
+//        return (List<ParameterEntity>) query.getResultList();
+        List<ParameterEntity> result = category.getParameters();
+        return result;
+    }
 
 }

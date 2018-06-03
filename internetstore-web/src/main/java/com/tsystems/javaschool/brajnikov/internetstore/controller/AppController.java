@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.CategoryDto;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
@@ -79,15 +79,18 @@ public class AppController extends AbstractController {
     @RequestMapping(value = {"/", "/home", "/index"}, method = RequestMethod.GET)
     public String home(ModelMap model) {
 
-        if (!isCurrentAuthenticationAnonymous()) {
+            if (!isCurrentAuthenticationAnonymous()) {
             model.addAttribute("currentrole", userService.findByName(getPrincipal()).getRole().toString());
             model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, getPrincipal());
         } else {
             model.addAttribute(LOGGED_IN_USER_ATTRIBUTE_NAME, "anonymousUser");
         }
         logger.info("Showing index page");
-        List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
-        model.addAttribute("categories", categoryEntityList);
+//        List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
+//        model.addAttribute("categories", categoryEntityList);
+
+        List<CategoryDto> categoryDtoList = categoryService.getCategoryDtoList();
+        model.addAttribute("categories", categoryDtoList);
 
         return "index";
     }

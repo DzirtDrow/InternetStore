@@ -1,10 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
@@ -83,6 +80,10 @@ public class StoreController extends AbstractController {
 
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
+
+        CategoryEntity categoryEntity = categoryService.getCategoryById(categoryId);
+        List<ParameterEntity> parameterEntityList = categoryEntity.getParameters();
+        model.addAttribute("parameters", parameterEntityList);
 
         List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
         model.addAttribute("goods", goodsByCategory);

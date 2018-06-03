@@ -4,12 +4,12 @@ import com.tsystems.javaschool.brajnikov.internetstore.util.ParameterTypeEnum;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "parameter")
 @Data
-public class ParameterEntity {
+public class ParameterEntity implements Serializable{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +26,13 @@ public class ParameterEntity {
     @Column(name = "param_type")
     private ParameterTypeEnum parameterType;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "category_parameter",
-            joinColumns = @JoinColumn(name = "parameter_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private List<CategoryEntity> categories;
+//    @ManyToMany(mappedBy = "parameters", fetch = FetchType.EAGER)
+//    @JoinTable(name = "category_parameter",
+//            joinColumns = @JoinColumn(name = "parameter_id"),
+//            inverseJoinColumns = @JoinColumn(name = "category_id"))
+//    private List<CategoryEntity> categories = new ArrayList<CategoryEntity>();
+
+
 
 
 }

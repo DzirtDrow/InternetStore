@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.GenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
+import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 
@@ -27,4 +28,6 @@ public interface OrdersDao extends GenericDao<OrderEntity, Integer> {
      * @return the list of {@link OrderEntity}
      */
     List<OrderEntity> getOrdersList();
+
+    List<OrderEntity> getOrdersByGoods(GoodsEntity goods);
 }

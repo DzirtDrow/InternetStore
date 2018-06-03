@@ -1,9 +1,12 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,10 +28,10 @@ public class CategoryEntity implements Serializable {
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<GoodsEntity> goodsList;
 
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany
     @JoinTable(name = "category_parameter",
                 joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "parameter_id"))
-    private List<CategoryEntity> parameters;
+    private List<ParameterEntity> parameters = new ArrayList<ParameterEntity>();
 }

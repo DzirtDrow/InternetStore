@@ -3,6 +3,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.GenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 
 import java.util.List;
 
@@ -25,4 +26,7 @@ public interface CategoryDao extends GenericDao<CategoryEntity, Integer> {
      * @return the category list
      */
     List<CategoryEntity> getCategoryList();
+
+
+    List<ParameterEntity> getParameterListByCategory(CategoryEntity category);
 }

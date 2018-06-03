@@ -11,6 +11,18 @@
 
     <artifactId>internetstore-core</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <packaging>jar</packaging>
 
     <properties>
@@ -24,6 +36,7 @@
 
         <jstl.version>1.2</jstl.version>
         <logback.version>1.1.3</logback.version>
+        <modelmapper.version>1.1.0</modelmapper.version>
         <!--<log4j.version>1.2.17</log4j.version>-->
         <lombok.versiom>1.16.18</lombok.versiom>
         <mockito.version>1.10.19</mockito.version>
@@ -126,6 +139,12 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.versiom}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
         </dependency>
 
         <!-- Mockito lib for testing-->

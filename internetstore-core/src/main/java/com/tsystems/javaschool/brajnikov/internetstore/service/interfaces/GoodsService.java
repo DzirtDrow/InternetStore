@@ -43,4 +43,12 @@ public interface GoodsService {
      * @param id the id
      */
     void deleteGoodsById(Integer id);
+
+    /**
+     * Is in order boolean.
+     *
+     * @param goods the goods
+     * @return the boolean
+     */
+    boolean isInOrder(GoodsEntity goods);
 }

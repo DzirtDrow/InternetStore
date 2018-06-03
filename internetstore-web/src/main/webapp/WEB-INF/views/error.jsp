@@ -43,7 +43,7 @@
             <div class="row">
                 <div class="col-md-12 x-text text-center">
                     <h1>ERROR!</h1>
-                    <%--<h2>${errorMsg}</h2>--%>
+                    <h4>${errorMsg}</h4>
                     <a href="<c:url value='/index'/>"><i class="fa fa-home"></i> Go To Homepage</a>
                     <%--${exception}--%>
                 </div>

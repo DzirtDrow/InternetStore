@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import com.tsystems.javaschool.brajnikov.internetstore.exception.DeletingGoodsException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
@@ -42,11 +43,11 @@ public class ManageGoodsController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = "/addgoods", method = RequestMethod.GET)
-    public String addGoodsPage(Model model, @RequestParam( value = "error", required = false)  String error) {
+    public String addGoodsPage(Model model, @RequestParam(value = "error", required = false) String error) {
         logger.info("Showing add goods page");
         model.addAttribute("error", error);
         model.addAttribute("goods", new GoodsEntity());
-        model.addAttribute("categories", categoryService.getCategoryList());
+        model.addAttribute("categories", categoryService.getCategoryDtoList());
         return "/addgoods";
     }
 
@@ -92,10 +93,15 @@ public class ManageGoodsController extends AbstractController {
      * @param id    the goods id
      * @return the string
      */
-    @RequestMapping(value = "/deleteGoods")
-    public String deleteGoods(Model model, @RequestParam("id") Integer id) {
+    @RequestMapping(value = "/deleteGoods" )
+    public String deleteGoods(Model model, @RequestParam("id") Integer id) throws DeletingGoodsException {
         if (id != null) {
-            goodsService.deleteGoodsById(id);
+            if (!goodsService.isInOrder(goodsService.findGoodsById(id))) {
+                goodsService.deleteGoodsById(id);
+            } else {
+                throw new DeletingGoodsException("You can not delete this goods, because it is in some orders");
+            }
+
         }
         logger.info("Deleting goods {}", goodsService.findGoodsById(id));
         return "redirect:/goodslist";

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * The type Goods entity.
@@ -31,11 +32,12 @@ public class GoodsEntity implements Serializable {
     @Column(name = "left_count")
     private int leftCount;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-
+    @OneToMany(mappedBy = "goods", fetch = FetchType.EAGER)
+    private List<GoodsParameterEntity> goodsParameterList;
 
     @Override
     public boolean equals(Object o) {
