@@ -40,9 +40,17 @@
         <!--<log4j.version>1.2.17</log4j.version>-->
         <lombok.versiom>1.16.18</lombok.versiom>
         <mockito.version>1.10.19</mockito.version>
+
     </properties>
 
     <dependencies>
+        <!--<dependency>-->
+            <!--<groupId>com.tsystems.javaschool.brajnikov</groupId>-->
+            <!--<artifactId>internetstore-webservices</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+            <!--<type>jar</type>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -154,7 +162,6 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 

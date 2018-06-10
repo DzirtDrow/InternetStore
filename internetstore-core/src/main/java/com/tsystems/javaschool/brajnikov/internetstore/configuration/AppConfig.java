@@ -10,10 +10,8 @@ import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.tsystems.javaschool.brajnikov.internetstore")
+@ComponentScan(basePackages = {"com.tsystems.javaschool.brajnikov.internetstore"})
 public class AppConfig extends WebMvcConfigurerAdapter {
-
-
 
     /**
      * Configure MessageSource to lookup any validation/error message in internationalized property files

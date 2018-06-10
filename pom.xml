@@ -12,6 +12,7 @@
         <module>internetstore-core</module>
         <module>internetstore-database</module>
         <module>internetstore-web</module>
+        <module>internetstore-webservices</module>
     </modules>
 
     <build>

@@ -3,7 +3,10 @@ package com.tsystems.javaschool.brajnikov.internetstore.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
@@ -13,8 +16,9 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"com.tsystems.javaschool.brajnikov.internetstore.controller",
-                "com.tsystems.javaschool.brajnikov.internetstore.configuration"})
-public class WebConfig implements WebMvcConfigurer{
+                "com.tsystems.javaschool.brajnikov.internetstore.configuration",
+                "com.tsystems.javaschool.brajnikov.internetstore.webservices"})
+public class WebConfig implements WebMvcConfigurer {
 
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -22,6 +26,7 @@ public class WebConfig implements WebMvcConfigurer{
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
     }
 
+    @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
@@ -46,6 +51,8 @@ public class WebConfig implements WebMvcConfigurer{
         registry.addViewController("/details").setViewName("details");
         registry.addViewController("/edituserbyadmin").setViewName("edituserbyadmin");
         registry.addViewController("/test").setViewName("test");
+
+
     }
 
     /**

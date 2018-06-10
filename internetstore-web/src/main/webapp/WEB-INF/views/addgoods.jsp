@@ -35,6 +35,7 @@
                 <div class="form-group">
                     <label class="info-title">Name </label>
                     <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
+
                 </div>
                 <div class="form-group">
                     <label class="info-title">Price </label>

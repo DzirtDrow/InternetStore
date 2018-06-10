@@ -34,3 +34,7 @@ hs_err_pid*
 /internetstore-web/internetstore-web.iml
 /internetstore-web/target/
 /internetstore-database/target/
+/target/
+/internetstore-webservices/internetstore-webservices.iml
+/internetstore-webservices/target/
+/internetstore-core/internetstore-core.iml
