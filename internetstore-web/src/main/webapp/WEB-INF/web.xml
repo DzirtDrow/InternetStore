@@ -13,4 +13,13 @@
         <location>/WEB-INF/views/error/404.jsp</location>
     </error-page>
 
+    <servlet>
+        <servlet-name>Jersey-Servlet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey-Servlet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -12,9 +12,6 @@
     <artifactId>internetstore-web</artifactId>
     <packaging>war</packaging>
 
-    <properties>
-        <resteasy-version>4.0.0.Beta3</resteasy-version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -40,22 +37,29 @@
             <version>1.2</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>com.fasterxml.jackson.core</groupId>-->
-        <!--<artifactId>jackson-databind</artifactId>-->
-        <!--<version>2.5.3</version>-->
-        <!--</dependency>-->
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-spring</artifactId>
-            <version>${resteasy-version}</version>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.19</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-            <version>${resteasy-version}</version>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+            <version>2.0.3.RELEASE</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
