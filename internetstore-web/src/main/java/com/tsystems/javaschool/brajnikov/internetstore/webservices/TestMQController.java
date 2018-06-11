@@ -20,6 +20,6 @@ public class TestMQController {
     String queue1() {
         logger.info("Emit to queue1");
         template.convertAndSend("queue1","Message to queue");
-        return "Emit to queue";
+        return "Emit to queue"; 
     }
 }
