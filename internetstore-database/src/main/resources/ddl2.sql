@@ -174,3 +174,13 @@ FOREIGN KEY (goods_id) REFERENCES goods (id);
 ALTER TABLE `internet_store_db`.`goods_parameter`
   ADD CONSTRAINT goods_parameter_parameter_id_fk
 FOREIGN KEY (parameter_id) REFERENCES parameter (id);
+
+
+CREATE TABLE `internet_store_db`.`promotion`
+(
+  id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name        VARCHAR(255)    NOT NULL,
+  description VARCHAR(255)    NULL
+)
+  ENGINE = InnoDB;
+

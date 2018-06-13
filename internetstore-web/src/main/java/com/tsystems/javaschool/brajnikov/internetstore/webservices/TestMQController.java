@@ -18,8 +18,10 @@ public class TestMQController {
     @RequestMapping("/emit")
     @ResponseBody
     String queue1() {
-        logger.info("Emit to queue1");
-        template.convertAndSend("queue1","Message to queue");
-        return "Emit to queue"; 
+        logger.info("Emit to promo queue");
+        template.convertAndSend("promo_queue","RPOMO.MESSAGE");
+
+        //template.convertAndSend("store-exchange", "promo.basic", "");
+        return "Emit to queue";
     }
 }

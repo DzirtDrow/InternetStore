@@ -1,13 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.util;
 
-import com.tsystems.javaschool.brajnikov.internetstore.dto.CategoryDto;
-import com.tsystems.javaschool.brajnikov.internetstore.dto.GoodsDto;
-import com.tsystems.javaschool.brajnikov.internetstore.dto.GoodsParameterDto;
-import com.tsystems.javaschool.brajnikov.internetstore.dto.ParameterDto;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsParameterEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.dto.*;
+import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,7 +41,12 @@ public class ModelMapperWrapper {
     public CategoryDto mapCategory(CategoryEntity category) {
         return modelMapper.map(category, CategoryDto.class);
     }
+
     public GoodsParameterDto mapGoodsParameter(GoodsParameterEntity goodsParameter) {
         return modelMapper.map(goodsParameter, GoodsParameterDto.class);
+    }
+
+    public PromotionDto mapPromotion(PromotionEntity promotion){
+        return modelMapper.map(promotion, PromotionDto.class);
     }
 }

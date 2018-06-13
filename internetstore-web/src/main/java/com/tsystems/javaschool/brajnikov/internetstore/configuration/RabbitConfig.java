@@ -4,14 +4,11 @@ import com.tsystems.javaschool.brajnikov.internetstore.webservices.TestMQControl
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -39,21 +36,21 @@ public class RabbitConfig{
 
     @Bean
     public Queue myQueue1() {
-        return new Queue("queue1");
+        return new Queue("promo_queue");
     }
 
     //объявляем контейнер, который будет содержать листенер для сообщений
-    @Bean
-    public SimpleMessageListenerContainer messageListenerContainer1() {
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory());
-        container.setQueueNames("queue1");
-        container.setMessageListener(new MessageListener() {
-            //тут ловим сообщения из queue1
-            public void onMessage(Message message) {
-                logger.info("received from queue1 : " + new String(message.getBody()));
-            }
-        });
-        return container;
-    }
+//    @Bean
+//    public SimpleMessageListenerContainer messageListenerContainer1() {
+//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory());
+//        container.setQueueNames("promo_queue");
+//        container.setMessageListener(new MessageListener() {
+//            //тут ловим сообщения из promo_queue
+//            public void onMessage(Message message) {
+//                logger.info("received from promo queue : " + new String(message.getBody()));
+//            }
+//        });
+//        return container;
+//    }
 }
