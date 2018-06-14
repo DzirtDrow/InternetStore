@@ -16,8 +16,9 @@ public interface CartService {
      *
      * @param userId      the user id
      * @param goodsEntity the {@link GoodsEntity}
+     * @return the boolean result. true, if success
      */
-    void addGoodsToCart(int userId, GoodsEntity goodsEntity);
+    boolean addGoodsToCart(int userId, GoodsEntity goodsEntity);
 
     /**
      * Gets cart items by user id.
@@ -70,4 +71,13 @@ public interface CartService {
      * @return the cart by user
      */
     CartEntity getCartByUser(UserEntity user);
+
+    /**
+     * Gets cart item by id.
+     *
+     * @param id the id
+     * @return the cart item by id
+     */
+    CartItemEntity getCartItemById(Integer id);
+
 }

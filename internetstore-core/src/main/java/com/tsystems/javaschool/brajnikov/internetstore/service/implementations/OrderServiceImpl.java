@@ -49,13 +49,18 @@ public class OrderServiceImpl implements OrderService {
         order.setSum(cartEntity.getSum());
         order.setOrder_date(new Date());
 
-        orderDao.create(order);
+        orderDao.create(order);//TODO ????
 
         for (CartItemEntity item : itemsList) {
-
             item.setCart(null);
             item.setType(CartItemTypeEnum.type_order);
             item.setOrder(order);
+
+            GoodsEntity goods = goodsDao.read(item.getGoods().getId());
+
+            goods.setLeftCount(goods.getLeftCount() - item.getCount());//TODO check sub zero
+
+            goodsDao.update(goods);
 
             cartItemDao.update(item);
         }

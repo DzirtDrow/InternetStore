@@ -30,7 +30,11 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private SessionCart sessionCart;
 
-    public void addGoodsToCart(int userId, GoodsEntity goodsEntity) {
+    public boolean addGoodsToCart(int userId, GoodsEntity goodsEntity) {
+
+        if (goodsEntity.getLeftCount() < 1) {
+            return false;
+        }
 
         UserEntity user = userDao.findById(userId);
         CartEntity cartEntity = cartDao.findCartByUser(user);
@@ -59,7 +63,7 @@ public class CartServiceImpl implements CartService {
         cartEntity.setSum(getCartTotalPrice(userId)); // set cart total price
 
         cartDao.update(cartEntity);
-
+        return true;
     }
 
     public List<CartItemEntity> getCartItems(int userId) {
@@ -88,6 +92,11 @@ public class CartServiceImpl implements CartService {
         return cartDao.findCartByUser(user);
     }
 
+    @Override
+    public CartItemEntity getCartItemById(Integer id) {
+        return cartItemDao.read(id);
+    }
+
     public void deleteCartItem(int itemId) {
         cartItemDao.deleteItemById(itemId);
     }
@@ -109,6 +118,6 @@ public class CartServiceImpl implements CartService {
     }
 
     public void loadSessionCart(int userId) {
-            //TODO load session cart to user order here
+        //TODO load session cart to user order here
     }
 }

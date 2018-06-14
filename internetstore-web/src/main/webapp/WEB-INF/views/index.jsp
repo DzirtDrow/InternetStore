@@ -13,7 +13,16 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="<c:url value='/index'/> ">Home</a></li>
+                <li class='active'>${currentCategory.name}</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
 <%@include file="categories-bar.jsp" %>
 
 <div class="body-content">

@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: Dzirt
@@ -14,6 +15,8 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
+
+
 <div class="body-content outer-top-xl">
     <div class="container">
         <div class="row ">

@@ -13,10 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -76,10 +75,12 @@ public class StoreController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = {"/store"}, method = RequestMethod.GET)
-    public String storeCategoryList(Model model, @RequestParam("id") Integer categoryId) {
+    public String storeCategoryList(Model model,  @RequestParam("id") Integer categoryId) {
 
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
+
+        model.addAttribute("currentCategory", categoryService.getCategoryById(categoryId));
 
         CategoryEntity categoryEntity = categoryService.getCategoryById(categoryId);
         List<ParameterEntity> parameterEntityList = categoryEntity.getParameters();
@@ -94,25 +95,34 @@ public class StoreController extends AbstractController {
     /**
      * Delete goods string.
      *
-     * @param model the model
+     *
      * @param id    the id
      * @return the string
      */
     @RequestMapping(value = "/addtocart")
-    public String deleteGoods(Model model, @RequestParam("id") Integer id) {
-
+    public ModelAndView addGoods(@ModelAttribute("goods") GoodsEntity goods, BindingResult result, @RequestParam("id") Integer id) {
+        int cat = goodsService.findGoodsById(id).getCategory().getId();
+        ModelAndView modelAndView = new ModelAndView("redirect:/store?id=" + cat);
         if (id != null) {
             if (!isCurrentAuthenticationAnonymous()) {
                 UserEntity user = userService.findByName(getPrincipal());
 
-                cartService.addGoodsToCart(user.getId(), goodsService.findGoodsById(id));
+                //try to add goods in cart
+                if(cartService.addGoodsToCart(user.getId(), goodsService.findGoodsById(id))){
+                    //success
+                } else {
+                    result.rejectValue("name","Size.userForm.username");
+
+                    //errorr (if goods count =0)
+                }
             } else {
+                //TODO сделать то же для sessioncart
                 sessionCart.addItemToSessionCart(goodsService.findGoodsById(id));
             }
         }
 
-        int cat = goodsService.findGoodsById(id).getCategory().getId();
-        return "redirect:/store?id=" + cat;
+
+        return modelAndView;
     }
 
     /**
@@ -166,13 +176,21 @@ public class StoreController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = "/increaseItemsCount")
-    public String increaseItemCount(Model model, @RequestParam("id") String id) {
+    public String increaseItemCount(Model model, @RequestParam("id") Integer id) {
         if (!isCurrentAuthenticationAnonymous()) {
             if (id != null) {
-                cartService.increaseItemsCount(Integer.parseInt(id));
+                //TODO check items count
+                CartItemEntity item = cartService.getCartItemById(id);
+                if(item.getCount() < goodsService.findGoodsById(item.getGoods().getId()).getLeftCount()){
+                    cartService.increaseItemsCount(id);
+                } else {
+                    //TODO Должна быть ошибка преаышения количества
+                }
+
             }
         } else {
-            sessionCart.increaseItemCount(Integer.parseInt(id));
+            //TODO для sessioncart сделать то же
+            sessionCart.increaseItemCount(id);
         }
         return "redirect:/cart";
     }

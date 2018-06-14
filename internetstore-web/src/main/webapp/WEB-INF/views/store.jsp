@@ -14,6 +14,16 @@
 
 <body>
 <%@include file="header.jsp" %>
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="<c:url value='/index'/> ">Home</a></li>
+                <li class='active'>${currentCategory.name}</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
 <%@include file="categories-bar.jsp" %>
 
 
@@ -34,7 +44,6 @@
 
                                 <c:forEach items="${goods}" var="goods">
 
-
                                     <div class="category-product-inner wow fadeInUp  fa-border">
                                         <div class="products">
                                             <div class="product-list product">
@@ -47,47 +56,68 @@
                                                     </div>
                                                     <!-- /.col -->
                                                     <div class="col col-sm-8 col-lg-8">
-                                                        <div class="product-info">
-                                                            <h3 class="name"><a href="#">${goods.name}</a>
-                                                            </h3>
-                                                            <div class="rating rateit-small"></div>
-                                                            <div class="product-price"><span
-                                                                    class="price">Price: $${goods.price}</span>
-                                                            </div>
-                                                            <!-- /.product-price -->
+                                                        <h2 class="name"><a href="#">${goods.name}</a>
+                                                        </h2>
+                                                        <div class="rating rateit-small"></div>
+                                                        <div class="product-price">Price: <b><span
+                                                                class="price">$${goods.price}</span></b>
+                                                        </div>
+                                                        <!-- /.product-price -->
+                                                        <div class="description m-t-10">
+                                                            Description: <b>${goods.description}</b>
+                                                            <br>
+                                                        </div>
+
+
+                                                        <div class="description m-t-10">
+                                                            <c:forEach items="${goods.goodsParameterList}"
+                                                                       var="params">
+                                                                <span class="value">${params.parameter.name}: </span>
+
+
+                                                                <%--<c:when test="${params.parameter.parameterType == 'param_num'}">--%>
+                                                                <b><span
+                                                                        class="value">${params.numValue}</span></b><br/>
+                                                                <%--</c:when>--%>
+                                                                <%--<c:otherwise>--%>
+                                                                <%--<span class="value">${params.stringValue}</span>--%>
+                                                                <%--</c:otherwise>--%>
+                                                            </c:forEach>
+
                                                             <div class="description m-t-10">
-                                                                    ${goods.description}
+                                                                Items in stock: <b> ${goods.leftCount}</b>
                                                                 <br>
                                                             </div>
-                                                            <div class="description m-t-10">
-                                                                <c:forEach items="${goods.goodsParameterList}"
-                                                                           var="params">
-                                                                    <span class="value">${params.parameter.name}: </span>
-
-
-                                                                    <%--<c:when test="${params.parameter.parameterType == 'param_num'}">--%>
-                                                                        <span class="value">${params.numValue}</span>
-                                                                    <%--</c:when>--%>
-                                                                    <%--<c:otherwise>--%>
-                                                                        <%--<span class="value">${params.stringValue}</span>--%>
-                                                                    <%--</c:otherwise>--%>
-                                                                </c:forEach>
-                                                            </div>
-                                                            <div class="action">
-                                                                <a href="addtocart?id=${goods.id}"
-                                                                   class="btn btn-primary btn-black">Add to cart</a>
-                                                            </div>
-                                                            <br>
-                                                            <!-- /.cart -->
-
                                                         </div>
+                                                            <%--<c:choose>--%>
+                                                            <%--<c:when test="${goods.leftCount == 0}">sd'libha;rubh</c:when>--%>
+                                                            <%--</c:choose>--%>
+                                                        <c:choose>
+                                                            <c:when test="${goods.leftCount > 0}">
+                                                                <div class="action">
+                                                                    <a href="addtocart?id=${goods.id}"
+                                                                       class="btn btn-primary">Add to
+                                                                        cart</a>
+                                                                </div>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <div class="action">
+                                                                    <a href=""
+                                                                       class="btn btn-primary" disabled="true">Out of
+                                                                        stock</a>
+                                                                </div>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <br/>
+
+                                                        <!-- /.cart -->
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </c:forEach>
-
                             </div>
                         </div>
                     </div>
@@ -95,6 +125,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
