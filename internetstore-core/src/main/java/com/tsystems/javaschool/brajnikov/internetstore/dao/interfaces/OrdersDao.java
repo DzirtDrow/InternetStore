@@ -5,6 +5,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundE
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
 
 import java.util.List;
 
@@ -30,4 +31,8 @@ public interface OrdersDao extends GenericDao<OrderEntity, Integer> {
     List<OrderEntity> getOrdersList();
 
     List<OrderEntity> getOrdersByGoods(GoodsEntity goods);
+
+    List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type);
+
+    List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type);
 }

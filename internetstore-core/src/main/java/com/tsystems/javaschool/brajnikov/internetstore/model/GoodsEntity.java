@@ -32,7 +32,10 @@ public class GoodsEntity implements Serializable {
     @Column(name = "left_count")
     private int leftCount;
 
-    @ManyToOne
+    @Column(name = "sales_count")
+    private int salesCount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 

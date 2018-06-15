@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository("goodsDao")
@@ -17,6 +19,19 @@ public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implem
 
     public List<GoodsEntity> findAllGoods() {
         return getList();
+    }
+
+    @Override
+    public List<GoodsEntity> getTopList(int count) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from GoodsEntity order by salesCount desc");
+        List<GoodsEntity> queryResult = (List<GoodsEntity>) query.getResultList();
+        List<GoodsEntity> result = new ArrayList<>();
+        for(int i = 0; i < count; i++){
+            result.add(queryResult.get(i));
+
+        }
+        return result;
     }
 
 }

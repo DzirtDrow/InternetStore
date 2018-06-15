@@ -56,5 +56,11 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
+    @Override
+    public List<GoodsEntity> getTopSales(int count) {
+        return goodsDao.getTopList(count);
+
+    }
+
 
 }

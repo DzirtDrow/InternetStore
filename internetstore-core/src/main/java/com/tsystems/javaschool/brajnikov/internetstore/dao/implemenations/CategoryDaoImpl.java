@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
 
@@ -33,10 +34,14 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
 
     public List<ParameterEntity> getParameterListByCategory(CategoryEntity category) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("select ParameterEntity from ParameterEntity " +
-                "join fetch CategoryEntity ");
-//        return (List<ParameterEntity>) query.getResultList();
-        List<ParameterEntity> result = category.getParameters();
+                .createQuery("from ParameterEntity where CategoryEntity =:categoryParam");
+        query.setParameter("categoryParam", category);
+        List<ParameterEntity> result;
+        try {
+            result = (List<ParameterEntity>) query.getResultList();
+        } catch (NoResultException ex) {
+            return null;
+        }
         return result;
     }
 

@@ -6,6 +6,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundE
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -49,6 +50,21 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
         query.setParameter("goodsParam", goods.getId());
         List<OrderEntity> result = (List<OrderEntity>) query.getResultList();
         return result;
+    }
+
+    @Override
+    public List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from OrderEntity order by order_date " + type);
+        return (List<OrderEntity>) query.getResultList();
+    }
+
+    @Override
+    public List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from OrderEntity order by status " + type);
+        return (List<OrderEntity>) query.getResultList();
+
     }
 }
 

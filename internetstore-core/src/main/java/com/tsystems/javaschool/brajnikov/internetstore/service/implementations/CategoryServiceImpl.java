@@ -48,5 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void updateCategory(CategoryEntity categoryEntity) {
+        categoryDao.update(categoryEntity);
+    }
+
 
 }

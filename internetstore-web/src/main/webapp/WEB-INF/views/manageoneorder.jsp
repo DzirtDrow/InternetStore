@@ -16,7 +16,6 @@
 <body>
 <%@include file="header.jsp" %>
 
-
 <div class="body-content outer-top-xl">
     <div class="container">
         <div class="row ">

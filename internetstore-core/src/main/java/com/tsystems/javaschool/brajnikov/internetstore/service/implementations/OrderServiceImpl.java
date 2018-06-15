@@ -7,6 +7,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
 import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.util.OrderStatusEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -109,6 +110,16 @@ public class OrderServiceImpl implements OrderService {
         }
         orderEntity.setStatus(status);
         orderDao.update(orderEntity);
+    }
+
+    @Override
+    public List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type) {
+        return orderDao.getAllOrdersOrderByDate(type);
+    }
+
+    @Override
+    public List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type) {
+        return orderDao.getAllOrdersOrderByStatus(type);
     }
 
 

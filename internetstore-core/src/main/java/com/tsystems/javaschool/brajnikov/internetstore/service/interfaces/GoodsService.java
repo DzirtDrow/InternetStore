@@ -51,4 +51,6 @@ public interface GoodsService {
      * @return the boolean
      */
     boolean isInOrder(GoodsEntity goods);
+
+    List<GoodsEntity> getTopSales(int count);
 }

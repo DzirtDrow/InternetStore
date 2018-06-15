@@ -28,4 +28,14 @@ public class AddressServiceImpl implements AddressService {
             addressDao.create(addressEntity);
         }
     }
+
+    @Override
+    @Transactional
+    public AddressEntity findAddressByUserId(int id) {
+
+        AddressEntity addressEntity = addressDao.getAddressByUserId(id);
+
+//TODO
+        return addressEntity;
+    }
 }

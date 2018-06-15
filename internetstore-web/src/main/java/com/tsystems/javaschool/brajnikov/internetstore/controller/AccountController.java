@@ -66,8 +66,13 @@ public class AccountController extends AbstractController {
                               @ModelAttribute("useraddress") AddressEntity address,
                               Model model) {
 
-        address.setUser(userService.findByEmail(userRequestDto.getEmail())); //TODO
-        address.setId(userService.findByEmail(userRequestDto.getEmail()).getAddress().getId()); //TODO monstro!, i set address id from user
+        UserEntity user = userService.findByEmail(userRequestDto.getEmail());
+        address.setUser(user); //TODO
+
+        if(addressService.findAddressByUserId(user.getId()) == null){
+            address.setId(userService.findByEmail(userRequestDto.getEmail()).getAddress().getId()); //TODO monstro!, i set address id from user
+        }
+
         addressService.updateAddress(address);
 
         userRequestDto.setAddressEntity(address);
@@ -97,18 +102,18 @@ public class AccountController extends AbstractController {
     /**
      * Update user by admin.
      *
-     * @param userEntity the {@link UserEntity}
+     * @param userRequestDto the {@link UserRequestDto}
      * @param model      the model
      * @return the string
      */
     @RequestMapping(value = "/edituserbyadmin", method = RequestMethod.POST)
-    public String updateUserByADmin(@ModelAttribute("user") UserEntity userEntity,
+    public String updateUserByADmin(@ModelAttribute("user") UserRequestDto userRequestDto,
                                     BindingResult result,
                                     RedirectAttributes redirectAttributes,
                                     Authentication authentication,
                                     Model model) {
-        logger.info("Updating user {} by admin", userEntity.getName());
-        userService.updateUser(userEntity);
+        logger.info("Updating user {} by admin", userRequestDto.getName());
+        userService.updateUserByDto(userRequestDto);
         return "redirect:/list";
     }
 }

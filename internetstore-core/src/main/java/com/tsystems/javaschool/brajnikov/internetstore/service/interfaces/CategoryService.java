@@ -30,4 +30,6 @@ public interface CategoryService {
     List<ParameterEntity> getParametersByCategory(CategoryEntity categoryEntity);
 
     List<CategoryDto> getCategoryDtoList();
+
+    void updateCategory(CategoryEntity categoryEntity);
 }

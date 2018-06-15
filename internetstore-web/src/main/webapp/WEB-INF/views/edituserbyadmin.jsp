@@ -46,6 +46,8 @@
 
                 <i hidden>
 
+                        <%--<form:input path="id" type="id"/>--%>
+                    <form:input type="date" path="date"/>
                     <form:input path="password" type="password"/>
                     <form:input path="id" type="id"/>
                 </i>

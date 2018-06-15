@@ -3,6 +3,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
+import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
 
 import java.util.List;
 
@@ -66,4 +67,7 @@ public interface OrderService {
     void pushOrderStatus(OrderEntity orderEntity);
 
 
+    List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type);
+
+    List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type);
 }

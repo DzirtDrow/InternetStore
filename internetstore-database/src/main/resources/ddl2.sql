@@ -138,7 +138,7 @@ ALTER TABLE `internet_store_db`.`orders`
   ENUM ('PROCESSING', 'PENDING_PAYMENT', 'PENDING_SHIPPING', 'SHIPPED', 'DELIVERED') DEFAULT 'PROCESSING' NOT NULL;
 
 
-CREATE TABLE `internet_store_db`.`parameter`
+CREATE TABLE IF NOT EXISTS `internet_store_db`.`parameter`
 (
   id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   name        VARCHAR(64)     NOT NULL,
@@ -146,10 +146,10 @@ CREATE TABLE `internet_store_db`.`parameter`
   param_type  ENUM ('param_num', 'param_string')
 );
 CREATE UNIQUE INDEX parameter_name_uindex
-  ON parameter (name);
+  ON `internet_store_db`.`parameter` (name);
 
 
-CREATE TABLE `internet_store_db`.`category_parameter`
+CREATE TABLE IF NOT EXISTS `internet_store_db`.`category_parameter`
 (
   category_id  INT NOT NULL,
   parameter_id INT NOT NULL,
@@ -158,7 +158,7 @@ CREATE TABLE `internet_store_db`.`category_parameter`
 );
 
 
-CREATE TABLE `internet_store_db`.`goods_parameter`
+CREATE TABLE IF NOT EXISTS `internet_store_db`.`goods_parameter`
 (
   id           INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   num_value    INT,
@@ -176,7 +176,7 @@ ALTER TABLE `internet_store_db`.`goods_parameter`
 FOREIGN KEY (parameter_id) REFERENCES parameter (id);
 
 
-CREATE TABLE `internet_store_db`.`promotion`
+CREATE TABLE IF NOT EXISTS `internet_store_db`.`promotion`
 (
   id          INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   name        VARCHAR(255)    NOT NULL,
@@ -184,3 +184,4 @@ CREATE TABLE `internet_store_db`.`promotion`
 )
   ENGINE = InnoDB;
 
+ALTER TABLE `internet_store_db`.`goods` ADD sales_count INT NULL;

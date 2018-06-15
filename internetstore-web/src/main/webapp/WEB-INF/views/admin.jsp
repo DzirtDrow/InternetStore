@@ -26,8 +26,9 @@
                         <div class="">
                             <ul class="nav nav-checkout-progress">
                                 <li><a class="btn-link" href="${pageContext.request.contextPath}/manageorders">Orders Managment</a></li>
-                                <li><a class="btn-link" href="${pageContext.request.contextPath}/list">Show Users List</a></li>
-                                <li><a class="btn-link" href="${pageContext.request.contextPath}/goodslist">Show Goods List</a></li>
+                                <li><a class="btn-link" href="${pageContext.request.contextPath}/managecategories">Categories Managment</a></li>
+                                <li><a class="btn-link" href="${pageContext.request.contextPath}/goodslist">Goods Managment</a></li>
+                                <li><a class="btn-link" href="${pageContext.request.contextPath}/list">Users Managment</a></li>
                             </ul>
                         </div>
                     </div>

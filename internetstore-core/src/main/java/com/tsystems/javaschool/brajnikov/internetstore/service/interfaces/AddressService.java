@@ -12,4 +12,6 @@ public interface AddressService {
      * @param addressEntity the address entity
      */
     void updateAddress(AddressEntity addressEntity);
+
+    AddressEntity findAddressByUserId(int id);
 }

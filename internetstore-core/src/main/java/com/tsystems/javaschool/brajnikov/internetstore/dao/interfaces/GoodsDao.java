@@ -15,4 +15,6 @@ public interface GoodsDao extends GenericDao<GoodsEntity, Integer> {
      * @return the list of {@link GoodsEntity}
      */
     List<GoodsEntity> findAllGoods();
+
+    List<GoodsEntity> getTopList(int count);
 }
