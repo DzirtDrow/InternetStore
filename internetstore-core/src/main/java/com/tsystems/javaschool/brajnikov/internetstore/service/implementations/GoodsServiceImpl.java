@@ -1,10 +1,10 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CategoryDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsDao;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsParameterDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +22,30 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private OrdersDao ordersDao;
 
+    @Autowired
+    private GoodsParameterDao goodsParameterDao;
+
+    @Autowired
+    private CategoryDao categoryDao;
     public List<GoodsEntity> findAllGoods() {
         return goodsDao.findAllGoods();
     }
 
     public void addGoods(GoodsEntity goodsEntity) {
         goodsDao.create(goodsEntity);
+
+        CategoryEntity category = categoryDao.read(goodsEntity.getCategory().getId());
+
+        List<ParameterEntity> possibleParameters = category.getParameters();//TODO ???
+
+        for (ParameterEntity param: possibleParameters) {
+           GoodsParameterEntity goodsParameter = new GoodsParameterEntity();
+           goodsParameter.setGoods(goodsEntity);
+           goodsParameter.setParameter(param);
+           goodsParameter.setNumValue(0);
+           goodsParameter.setStringValue("test");
+           goodsParameterDao.create(goodsParameter);
+        }
     }
 
     public void deleteGoods(GoodsEntity goodsEntity) {

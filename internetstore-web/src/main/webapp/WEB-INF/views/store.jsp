@@ -95,7 +95,7 @@
                                                     </div>
                                                     <!-- /.col -->
                                                     <div class="col col-sm-8 col-lg-8">
-                                                        <h2 class="name"><a href="#">${goods.name}</a>
+                                                        <h2 class="name"><a href="<c:url value='/details?id=${goods.id}'/> ">${goods.name}</a>
                                                         </h2>
                                                         <div class="rating rateit-small"></div>
                                                         <div class="product-price">Price: <b><span
@@ -109,36 +109,19 @@
 
 
                                                         <div class="description m-t-10">
-                                                                <%--<table border="1">--%>
 
-                                                                <%--<c:forEach items="${currentCategory.parameters}" var="catpar">--%>
-                                                                <%--<tr>--%>
-                                                                <%--${catpar.name}--%>
-                                                                <%--</tr>--%>
-                                                                <%--</c:forEach>--%>
-                                                                <%--</table>--%>
-                                                            <c:forEach items="${goods.goodsParameterList}"
-                                                                       var="params">
-                                                                <span class="value">${params.parameter.name}: </span>
+                                                            <%--<c:forEach items="${goods.goodsParameterList}"--%>
+                                                                       <%--var="params">--%>
+                                                                <%--<span class="value">${params.parameter.name}: </span>--%>
 
 
-                                                                <%--<c:when test="${params.parameter.parameterType == 'param_num'}">--%>
-                                                                <b><span
-                                                                        class="value">${params.numValue}</span></b><br/>
-                                                                <%--</c:when>--%>
-                                                                <%--<c:otherwise>--%>
-                                                                <%--<span class="value">${params.stringValue}</span>--%>
-                                                                <%--</c:otherwise>--%>
-                                                            </c:forEach>
+                                                            <%--</c:forEach>--%>
 
                                                             <div class="description m-t-10">
                                                                 Items in stock: <b> ${goods.leftCount}</b>
                                                                 <br>
                                                             </div>
                                                         </div>
-                                                            <%--<c:choose>--%>
-                                                            <%--<c:when test="${goods.leftCount == 0}">sd'libha;rubh</c:when>--%>
-                                                            <%--</c:choose>--%>
                                                         <c:choose>
                                                             <c:when test="${goods.leftCount > 0}">
                                                                 <div class="action">

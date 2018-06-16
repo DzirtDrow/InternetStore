@@ -19,7 +19,9 @@ public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implem
     private SessionFactory sessionFactory;
 
     public List<GoodsEntity> findAllGoods() {
-        return getList();
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from GoodsEntity order by id asc");
+        return (List<GoodsEntity>)query.getResultList();
     }
 
     @Override

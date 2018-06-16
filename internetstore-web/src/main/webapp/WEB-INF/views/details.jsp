@@ -11,38 +11,118 @@
     <title>Goods Details</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
-<div class="products">
-    <div class="product-list product">
-        <div class="row product-list-row">
-            <div class="col col-sm-4 col-lg-2">
-                <div class="product-image">
-                    <img src="<c:url value='/static/images/products/p1.jpg'/>" height="110">
-                </div>
-            </div>
-            <!-- /.col -->
-            <div class="col col-sm-8 col-lg-8">
-                <div class="product-info">
-                    <h3 class="name">${goods.name}
-                    </h3>
-                    <div class="rating rateit-small"></div>
-                    <div class="product-price"><span
-                            class="price">Price:  $${goods.price}</span>
-                    </div>
-                    <!-- /.product-price -->
-                    <div class="description m-t-10">
-                        ${goods.description}
-                        <br>
-                    </div>
-                    <div class="action">
-                        <a href="addtocart?id=${goods.id}" class="btn btn-primary btn-black">Add to cart</a>
-                    </div>
-                    <!-- /.cart -->
+<%@include file="header.jsp" %>
+<%--<div class="products">--%>
+<%--<div class="product-list product">--%>
+<%--<div class="row product-list-row">--%>
+<%--<div class="col col-sm-4 col-lg-2">--%>
+<%--<div class="product-image">--%>
+<%--<img src="<c:url value='/static/images/products/p1.jpg'/>" height="110">--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--<!-- /.col -->--%>
+<%--<div class="col col-sm-8 col-lg-8">--%>
+<%--<div class="product-info">--%>
+<%--<h3 class="name">${goods.name}--%>
+<%--</h3>--%>
+<%--<div class="rating rateit-small"></div>--%>
+<%--<div class="product-price"><span--%>
+<%--class="price">Price:  $${goods.price}</span>--%>
+<%--</div>--%>
+<%--<!-- /.product-price -->--%>
+<%--<div class="description m-t-10">--%>
+<%--${goods.description}--%>
+<%--<br>--%>
+<%--</div>--%>
+<%--<div class="action">--%>
+<%--<c:choose>--%>
+<%--<c:when test="${goods.leftCount > 0}">--%>
+<%--<div class="action">--%>
+<%--<a href="addtocart?id=${goods.id}"--%>
+<%--class="btn btn-primary">Add to cart</a>--%>
+<%--</div>--%>
+<%--</c:when>--%>
+<%--<c:otherwise>--%>
+<%--<div class="action">--%>
+<%--<a href=""--%>
+<%--class="btn btn-primary" disabled="true">Out of stock</a>--%>
+<%--</div>--%>
+<%--</c:otherwise>--%>
+<%--</c:choose>--%>
+<%--&lt;%&ndash;<a href="addtocart?id=${goods.id}" class="btn btn-primary">Add to cart</a>&ndash;%&gt;--%>
+<%--</div>--%>
+<%--<!-- /.cart -->--%>
 
-                </div>
-            </div>
+<%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
+
+<br/>
+<div class='col-lg-offset-4 col-lg-5'>
+    <div class="detail-block">
+        <div class="product-image">
+            <img src="<c:url value='/static/images/products/p1.jpg'/>" height="310">
         </div>
-    </div>
+        <div class='col-sm-5 col-md-7 product-info-block'>
+            <div class="product-info">
+                <h5>Category: <b>${goods.category.name}</b></h5>
+                <h4 class="name">Name: <b>${goods.name}</b></h4>
+                <div class="description-container m-t-20">
+                    Description:<br/>
+                    <b>${goods.description}</b>
+                    <br/><br/>
+                </div><!-- /.description-container -->
+
+                Parameters:<br/>
+                <c:forEach items="${goodsParameters}" var="goodsparam">
+                    ${goodsparam.parameter.name} :
+                    <c:choose>
+                        <c:when test="${goodsparam.parameter.parameterType == 'param_num'}">
+                            <b>${goodsparam.numValue}</b><br/>
+                        </c:when>
+                        <c:otherwise>
+                            <b>${goodsparam.stringValue}</b><br/>
+                        </c:otherwise>
+                    </c:choose>
+
+                </c:forEach>
+                <div class="price-container info-container m-t-20">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="price-box">
+                                <span class="price"><h4>Price: <b>$${goods.price}</b></h4></span>
+                            </div>
+                        </div>
+
+
+                    </div><!-- /.row -->
+                </div><!-- /.price-container -->
+
+                <div class="quantity-container info-container">
+                    <div class="row">
+
+                        <div class="col-sm-2">
+                            <span class="label">Qty :</span>
+                        </div>
+
+
+                        <div class="col-sm-7">
+                            <a href="addtocart?id=${goods.id}" class="btn btn-primary"><i
+                                    class="fa fa-shopping-cart inner-right-vs"></i>
+                                ADD TO CART</a>
+                        </div>
+
+
+                    </div><!-- /.row -->
+                </div><!-- /.quantity-container -->
+
+
+            </div><!-- /.product-info -->
+        </div><!-- /.col-sm-7 -->
+    </div><!-- /.row -->
+</div>
 </div>
 </body>
 </html>

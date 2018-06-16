@@ -53,12 +53,12 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
                                                   Integer priceMax,
                                                   String sorttype) {
 
-        if((priceMin == null)||(priceMax == null)){
+        if ((priceMin == null) || (priceMax == null)) {
             priceMin = 0;
             priceMax = Integer.MAX_VALUE;
         }
         SortingTypeEnum ste = SortingTypeEnum.ASC;
-        if(sorttype!=null){
+        if (sorttype != null) {
             ste = SortingTypeEnum.valueOf(sorttype);
         }
         Query query = sessionFactory.getCurrentSession()
@@ -70,7 +70,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         query.setParameter("categoryParam", category);
         query.setParameter("priceMinParam", priceMin); //TODO check not null
         query.setParameter("priceMaxParam", priceMax);
-        List<GoodsEntity> result = (List<GoodsEntity>)query.getResultList();
+        List<GoodsEntity> result = (List<GoodsEntity>) query.getResultList();
         return result;
     }
 
@@ -79,10 +79,36 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from GoodsEntity where category = :categoryParam order by price desc");
         query.setParameter("categoryParam", categoryEntity);
-        List<GoodsEntity> goodsEntityList = (List<GoodsEntity>)query.getResultList();
+        List<GoodsEntity> goodsEntityList = (List<GoodsEntity>) query.getResultList();
         GoodsEntity goods = goodsEntityList.get(0);
         Integer result = goods.getPrice();
         return result;
     }
+
+    @Override
+    public CategoryEntity findCategoryByName(String name) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from CategoryEntity where name = :paramName");
+        query.setParameter("paramName", name);
+
+        CategoryEntity categoryEntity = null;
+        try {
+            categoryEntity = (CategoryEntity) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        return categoryEntity;
+    }
+
+    @Override
+    public boolean deleteCategoryById(Integer id) {
+        try {
+            delete(read(id));
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
 
 }

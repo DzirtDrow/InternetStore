@@ -91,8 +91,13 @@ public class ManageGoodsController extends AbstractController {
         String type = pathVariablesMap.get("type");
         logger.info("Showing goods list for manager");
         PagedListHolder<GoodsEntity> goodsPage = null;
+
+        Integer goodsCount = 0;
+        List<GoodsEntity> goods = goodsService.findAllGoods();
+        goodsCount = goods.size();
         if (type == null) {
-            List<GoodsEntity> goods = goodsService.findAllGoods();
+
+
             goodsPage = new PagedListHolder<GoodsEntity>();
             goodsPage.setSource(goods);
             goodsPage.setPageSize(10);
@@ -117,6 +122,7 @@ public class ManageGoodsController extends AbstractController {
             goodsPage.setPage(pageNum);
 
         }
+        req.getSession().setAttribute("goodsCount", goodsCount);
         //ModelAndView mv = new ModelAndView("goodslist");
 //        List<GoodsEntity> goods = goodsService.findAllGoods();
 //        model.addAttribute("goods", goods);
@@ -165,7 +171,8 @@ public class ManageGoodsController extends AbstractController {
              parameters = category.getParameters();//categoryService.getParametersByCategory(category);
 
         }
-        model.addAttribute("parameters", parameters);
+        model.addAttribute("parameterss", parameters);
+
         logger.info("Showing goods edit page");
         return "/editgoods";
     }
@@ -181,7 +188,7 @@ public class ManageGoodsController extends AbstractController {
 
         GoodsEntity oldGoods = goodsService.findGoodsById(goodsEntity.getId());
         goodsEntity.setCategory(oldGoods.getCategory());
-        goodsService.updateGoods(goodsEntity);
+//        goodsService.updateGoods(goodsEntity); //TODO decomment
         logger.info("Updating goods {}", goodsEntity);
         return new ModelAndView("redirect:/goodslist");
     }

@@ -244,8 +244,13 @@ public class StoreController extends AbstractController {
      */
     @RequestMapping(value = {"/details"}, method = RequestMethod.GET)
     public String goodsDetails(Model model, @RequestParam("id") Integer goodsId) {
-        model.addAttribute("goods", goodsService.findGoodsById(goodsId));
-        return "/details?id=" + goodsId;
+        GoodsEntity goods = goodsService.findGoodsById(goodsId);
+        model.addAttribute("goods", goods);
+
+        List<GoodsParameterEntity> goodsParameters = goods.getGoodsParameterList();
+
+        model.addAttribute("goodsParameters", goodsParameters);
+        return "/details";
     }
 
 

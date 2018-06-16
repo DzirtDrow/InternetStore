@@ -33,6 +33,7 @@
                             <div>
                                 <span style="float:right;">
                                   Page ${pageListHolder.page + 1} of ${pageListHolder.pageCount};<br/>  Goods on page: 10.
+                                    <br/>Total goods count: ${goodsCount}
                                 </span>
 
 
@@ -87,7 +88,7 @@
                                         <td class="text-center">${ph.leftCount}</td>
                                         <td class="text-center">${ph.salesCount}</td>
                                         <td>
-                                            <a href="deleteGoods?id=${ph.id}"
+                                            <a href="<c:url value='/deleteGoods?id=${ph.id}'/>"
                                                class="btn btn-success custom-width">Delete</a>
 
                                             <a href="<c:url value='/editgoods?id=${ph.id}'/>"

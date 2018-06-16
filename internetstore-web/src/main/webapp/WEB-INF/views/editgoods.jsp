@@ -17,7 +17,9 @@
 <%@include file="header.jsp" %>
 
 
+
 <%--</form:form>--%>
+
 <form:form class="register-form outer-top-xs" role="form" modelAttribute="goods" method="post">
 
     <div class="body-content">
@@ -26,10 +28,9 @@
 
                 <h4 class="checkout-subtitle">Goods Changing</h4>
                 <p class="text title-tag-line">Change this goods
-                    <c:forEach items="${parameters}" var="param">
-                        <input value="${param.description}"/>
-                    </c:forEach>
+
                 </p>
+
                 <div class="form-group">
                     <label class="info-title">Name </label>
                     <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
@@ -54,11 +55,52 @@
                 </div>
 
 
+                <c:forEach items="${goods.goodsParameterList}" var="par">
+                    ${par.parameter.name} - ${par.numValue}
+                </c:forEach>
+                <c:forEach items="${parameterss}" var="par">
+                <div class="form-group">
+                    <label class="info-title">${par.name}: </label>
 
+                    <c:choose>
+                        <c:when test="${par.parameterType == 'param_num'}">
+                            <input type="number" id = "${par.name}" class="form-control unicase-form-control text-input"
+                                   value=""/>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" id = "${par.name}" class="form-control unicase-form-control text-input"
+                                   value=""/>
+                        </c:otherwise>
+                    </c:choose>
 
+                </div>
+                </c:forEach>
+                <script>
+                    function addParameters(){
+
+                        //prs.forEach(function (value) { console.log(value) });
+
+                        //var test = document.getElementById("inp_Color").value;
+                        <%--var minb = document.getElementById("pricemin").value;--%>
+                        <%--var maxb = document.getElementById("pricemax").value;--%>
+                        <%--if(minb){--%>
+                        <%--document.getElementById("pricemin").value = 0;--%>
+                        <%--var min = 0;--%>
+                        <%--}--%>
+                        <%--if(maxb){--%>
+                        <%--document.getElementById("pricemax").value = ${pricefilter.max};--%>
+                        <%--var max = ${pricefilter.max};--%>
+                        <%--}--%>
+
+                        <%--var sorttype = document.getElementById("sorttypeselect").value;--%>
+                        <%--var str = "${pageContext.request.contextPath}/store?id=${currentCategory.id}"--%>
+                        <%--+ "&min=" + min + "&max=" + max + "&sorttype=" + sorttype;--%>
+                        alert("fgjsrtj");
+                    }
+                </script>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" onclick="addParameters()">Save Changes</button>
                 </div>
                     <%--</div>--%>
             </div>

@@ -63,5 +63,20 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDao.getMaxPriceForCategory(categoryEntity);
     }
 
+    @Override
+    public CategoryEntity findCategoryByName(String name) {
+        return categoryDao.findCategoryByName(name);
+    }
+
+    @Override
+    public Integer addCategory(CategoryEntity category) {
+        return categoryDao.create(category);
+    }
+
+    @Override
+    public boolean deleteCategoryById(Integer id) {
+        return categoryDao.deleteCategoryById(id);
+    }
+
 
 }

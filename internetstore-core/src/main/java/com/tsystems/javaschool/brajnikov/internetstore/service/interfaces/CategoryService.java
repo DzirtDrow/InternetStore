@@ -27,6 +27,7 @@ public interface CategoryService {
     List<CategoryEntity> getCategoryList();
 
     CategoryEntity getCategoryById(int categoryId);
+
     List<ParameterEntity> getParametersByCategory(CategoryEntity categoryEntity);
 
     List<CategoryDto> getCategoryDtoList();
@@ -36,4 +37,10 @@ public interface CategoryService {
     List<GoodsEntity> getGoodsListByFilter(CategoryEntity category, Integer priceMin, Integer priceMax, String sorttype);
 
     Integer getMaxPriceForCategory(CategoryEntity categoryEntity);
+
+    CategoryEntity findCategoryByName(String name);
+
+    Integer addCategory(CategoryEntity category);
+
+    boolean deleteCategoryById(Integer id);
 }

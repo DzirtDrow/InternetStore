@@ -42,9 +42,9 @@ public class ModelMapperWrapper {
         return modelMapper.map(category, CategoryDto.class);
     }
 
-    public GoodsParameterDto mapGoodsParameter(GoodsParameterEntity goodsParameter) {
-        return modelMapper.map(goodsParameter, GoodsParameterDto.class);
-    }
+//    public GoodsParameterDto mapGoodsParameter(GoodsParameterEntity goodsParameter) {
+//        return modelMapper.map(goodsParameter, GoodsParameterDto.class);
+//    }
 
     public PromotionDto mapPromotion(PromotionEntity promotion){
         return modelMapper.map(promotion, PromotionDto.class);
