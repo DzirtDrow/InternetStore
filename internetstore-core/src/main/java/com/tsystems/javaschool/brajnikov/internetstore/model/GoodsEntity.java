@@ -1,6 +1,8 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,7 +37,8 @@ public class GoodsEntity implements Serializable {
     @Column(name = "sales_count")
     private int salesCount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 

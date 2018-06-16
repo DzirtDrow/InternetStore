@@ -1,7 +1,9 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.exception.DeletingGoodsException;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import org.slf4j.Logger;
@@ -84,7 +86,6 @@ public class ManageGoodsController extends AbstractController {
 //        model.addAttribute("goods", goods);
 //        return "/goodslist";
 //    }
-
     @RequestMapping(value = {"/goodslist/{type}", "/goodslist"}, method = RequestMethod.GET)
     public String listGoods(@PathVariable Map<String, String> pathVariablesMap, Model model, HttpServletRequest req) {
         String type = pathVariablesMap.get("type");
@@ -95,8 +96,8 @@ public class ManageGoodsController extends AbstractController {
             goodsPage = new PagedListHolder<GoodsEntity>();
             goodsPage.setSource(goods);
             goodsPage.setPageSize(10);
-            req.getSession().setAttribute("goods",  goodsPage);
-           // model.addAttribute("goods", goodsPage);
+            req.getSession().setAttribute("goods", goodsPage);
+            // model.addAttribute("goods", goodsPage);
         } else if ("next".equals(type)) {
             // Return next set of list
             goodsPage = (PagedListHolder<GoodsEntity>) req.getSession()
@@ -153,9 +154,18 @@ public class ManageGoodsController extends AbstractController {
      */
     @RequestMapping(value = "/editgoods", method = RequestMethod.GET)
     public String editGoodsPage(Model model, @RequestParam("id") Integer id) {
+        GoodsEntity goods = null;
         if (id != null) {
-            model.addAttribute("goods", goodsService.findGoodsById(id));
+            goods = goodsService.findGoodsById(id);
+            model.addAttribute("goods", goods);
         }
+        List<ParameterEntity> parameters = null;
+        if(goods != null) {
+            CategoryEntity category = goods.getCategory(); //TODO
+             parameters = category.getParameters();//categoryService.getParametersByCategory(category);
+
+        }
+        model.addAttribute("parameters", parameters);
         logger.info("Showing goods edit page");
         return "/editgoods";
     }

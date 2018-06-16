@@ -20,12 +20,16 @@
 <%--</form:form>--%>
 <form:form class="register-form outer-top-xs" role="form" modelAttribute="goods" method="post">
 
-<div class="body-content">
-    <div class="container">
-        <div class="sign-in-page col-md-4 col-sm-4 ">
+    <div class="body-content">
+        <div class="container">
+            <div class="sign-in-page col-md-4 col-sm-4 ">
 
-            <h4 class="checkout-subtitle">Goods Changing</h4>
-            <p class="text title-tag-line">Change this goods</p>
+                <h4 class="checkout-subtitle">Goods Changing</h4>
+                <p class="text title-tag-line">Change this goods
+                    <c:forEach items="${parameters}" var="param">
+                        <input value="${param.description}"/>
+                    </c:forEach>
+                </p>
                 <div class="form-group">
                     <label class="info-title">Name </label>
                     <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
@@ -46,17 +50,21 @@
                     <label class="info-title">Left Count </label>
                     <form:input path="leftCount" type="number" class="form-control unicase-form-control text-input"/>
                         <%--<input type="text" class="">--%>
+
                 </div>
 
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
-            <%--</div>--%>
-        </div>
 
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+                    <%--</div>--%>
+            </div>
+
+        </div>
     </div>
-</div>
 </form:form>
 </body>
 </html>

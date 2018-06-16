@@ -32,4 +32,8 @@ public interface CategoryService {
     List<CategoryDto> getCategoryDtoList();
 
     void updateCategory(CategoryEntity categoryEntity);
+
+    List<GoodsEntity> getGoodsListByFilter(CategoryEntity category, Integer priceMin, Integer priceMax, String sorttype);
+
+    Integer getMaxPriceForCategory(CategoryEntity categoryEntity);
 }

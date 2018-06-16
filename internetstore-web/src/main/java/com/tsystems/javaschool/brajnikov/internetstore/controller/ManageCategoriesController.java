@@ -61,4 +61,20 @@ public class ManageCategoriesController extends AbstractController {
         }
         return "redirect:/editcategory?id=" + idcategory;
     }
+
+    @RequestMapping(value = {"/addparamtocategory"}, method = RequestMethod.GET)
+    public String addParamtoCategory(Model model,
+                                          @RequestParam(value = "idparam") Integer idparam,
+                                          @RequestParam(value = "idcategory") Integer idcategory) {
+
+        CategoryEntity categoryEntity = categoryService.getCategoryById(idcategory);
+        List<ParameterEntity> parameters = categoryEntity.getParameters();
+        ParameterEntity newParameter = parameterService.getParameterById(idparam);
+        if(!parameters.contains(newParameter)){
+            parameters.add(newParameter);
+            categoryEntity.setParameters(parameters);
+            categoryService.updateCategory(categoryEntity);
+        }
+        return "redirect:/editcategory?id=" + idcategory;
+    }
 }

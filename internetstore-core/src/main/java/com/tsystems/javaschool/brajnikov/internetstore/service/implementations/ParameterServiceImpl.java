@@ -19,4 +19,10 @@ public class ParameterServiceImpl implements ParameterService {
     public List<ParameterEntity> getPossibleParameters() {
         return parameterDao.getList();
     }
+
+    @Override
+    @Transactional
+    public ParameterEntity getParameterById(Integer idparam) {
+        return parameterDao.read(idparam);
+    }
 }

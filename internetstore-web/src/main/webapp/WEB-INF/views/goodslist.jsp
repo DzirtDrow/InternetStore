@@ -17,7 +17,8 @@
 <body>
 <%@include file="header.jsp" %>
 
-<div class="panel-heading"><span class="lead">List of Goods </span>
+<div class="panel-heading">
+    <span class="lead">List of Goods </span>
 </div>
 
 
@@ -43,16 +44,16 @@
                                 </c:choose>
                                 </span>
                                     <span>
-                                <c:forEach begin="0" end="${pageListHolder.pageCount-1}" varStatus="loop">
-                                    &nbsp;&nbsp;
-                                    <c:choose>
-                                        <c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
-                                        <c:otherwise><a
-                                                href="/internet-store/goodslist/${loop.index}">${loop.index+1}</a></c:otherwise>
-                                    </c:choose>
-                                    &nbsp;&nbsp;
-                                </c:forEach>
-                                </span>
+                                    <c:forEach begin="0" end="${pageListHolder.pageCount-1}" varStatus="loop">
+                                        &nbsp;&nbsp;
+                                        <c:choose>
+                                            <c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
+                                            <c:otherwise><a
+                                                    href="/internet-store/goodslist/${loop.index}">${loop.index+1}</a></c:otherwise>
+                                        </c:choose>
+                                        &nbsp;&nbsp;
+                                    </c:forEach>
+                                    </span>
                                     <span>
                                 <c:choose>
                                     <c:when test="${pageListHolder.lastPage}">Next</c:when>
@@ -67,7 +68,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <th>Category</th>
+                                    <%--<th>Category</th>--%>
                                     <th>Left count</th>
                                     <th>Sold</th>
                                     <th>Actions</th>
@@ -82,7 +83,7 @@
                                         <td>${ph.id}</td>
                                         <td class="text-center"><b>${ph.name}</b></td>
                                         <td class="text-center">$${ph.price}</td>
-                                        <td class="text-center">${ph.category.name}</td>
+                                        <%--<td class="text-center">${ph.category.name}</td>--%>
                                         <td class="text-center">${ph.leftCount}</td>
                                         <td class="text-center">${ph.salesCount}</td>
                                         <td>
@@ -134,6 +135,7 @@
     </div>
 </div>
 </div>
+
 
 <%--<div class="body-content outer-top-xs">--%>
 <%--<div class="container">--%>

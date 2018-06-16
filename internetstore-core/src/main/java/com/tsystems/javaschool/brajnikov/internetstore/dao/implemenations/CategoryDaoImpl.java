@@ -5,6 +5,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CategoryDa
 import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         return (List<CategoryEntity>) query.getResultList();
     }
 
+
     public List<ParameterEntity> getParameterListByCategory(CategoryEntity category) {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from ParameterEntity where CategoryEntity =:categoryParam");
@@ -42,6 +44,44 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         } catch (NoResultException ex) {
             return null;
         }
+        return result;
+    }
+
+    @Override
+    public List<GoodsEntity> getGoodsListByFilter(CategoryEntity category,
+                                                  Integer priceMin,
+                                                  Integer priceMax,
+                                                  String sorttype) {
+
+        if((priceMin == null)||(priceMax == null)){
+            priceMin = 0;
+            priceMax = Integer.MAX_VALUE;
+        }
+        SortingTypeEnum ste = SortingTypeEnum.ASC;
+        if(sorttype!=null){
+            ste = SortingTypeEnum.valueOf(sorttype);
+        }
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from GoodsEntity " +
+                        " where category = :categoryParam " +
+                        " and price >= :priceMinParam  " +
+                        " and price <= :priceMaxParam " +
+                        " order by price " + ste);
+        query.setParameter("categoryParam", category);
+        query.setParameter("priceMinParam", priceMin); //TODO check not null
+        query.setParameter("priceMaxParam", priceMax);
+        List<GoodsEntity> result = (List<GoodsEntity>)query.getResultList();
+        return result;
+    }
+
+    @Override
+    public Integer getMaxPriceForCategory(CategoryEntity categoryEntity) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from GoodsEntity where category = :categoryParam order by price desc");
+        query.setParameter("categoryParam", categoryEntity);
+        List<GoodsEntity> goodsEntityList = (List<GoodsEntity>)query.getResultList();
+        GoodsEntity goods = goodsEntityList.get(0);
+        Integer result = goods.getPrice();
         return result;
     }
 

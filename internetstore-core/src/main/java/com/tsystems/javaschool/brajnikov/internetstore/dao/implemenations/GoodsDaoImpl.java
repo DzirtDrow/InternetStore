@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsDao;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implem
 
         }
         return result;
+    }
+
+    @Override
+    public CategoryEntity findCategoryByGoods(GoodsEntity goods) {
+        return null;
     }
 
 }

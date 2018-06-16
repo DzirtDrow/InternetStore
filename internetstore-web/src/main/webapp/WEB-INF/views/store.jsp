@@ -1,7 +1,7 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%--<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>--%>
 <%--<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>--%>
 
 <html>
@@ -37,10 +37,49 @@
                         <div class="product-list product">
                             <div class="row product-list-row">
 
-                                <c:forEach items="${parameters}" var="parameters">
-                                    <h6>${parameters.name}</h6>
-                                    <a>${parameters.description}</a>
-                                </c:forEach>
+                                <%--<c:forEach items="${parameters}" var="parameters">--%>
+                                <%--<h6>${parameters.name}</h6>--%>
+                                <%--<a>${parameters.description}</a>--%>
+                                <%--</c:forEach>--%>
+                                Price filter:
+                                <input type="text" id="pricemin" size="4" value="${pricefilter.min}"/> -
+                                <input type="text" id="pricemax" size="4" value="${pricefilter.max}"/>
+                                    <script>
+                                        function someFunc(){
+
+                                            var minb = document.getElementById("pricemin").value;
+                                            var maxb = document.getElementById("pricemax").value;
+                                            if(minb){
+                                                document.getElementById("pricemin").value = 0;
+                                                var min = 0;
+                                            }
+                                            if(maxb){
+                                                document.getElementById("pricemax").value = ${pricefilter.max};
+                                                var max = ${pricefilter.max};
+                                            }
+
+                                            var sorttype = document.getElementById("sorttypeselect").value;
+                                            var str = "${pageContext.request.contextPath}/store?id=${currentCategory.id}"
+                                                + "&min=" + min + "&max=" + max + "&sorttype=" + sorttype;
+
+                                            document.location.href = str;
+                                            //alert(str);
+                                        }
+                                    </script>
+                                    &nbsp Sorting type:
+                                   <select id="sorttypeselect">
+                                       <c:forEach items="${sorttypes}" var="sorttype">
+                                           <option >${sorttype}</option>
+                                       </c:forEach>
+                                   </select>
+
+                                    &nbsp
+                                    <a id="setbtn" onclick="someFunc()" class="btn btn-link">Apply</a>
+                                <%--<form:form  role="form" modelAttribute="pricefilter" action="${pageContext.request.contextPath}/store" method="get">--%>
+                                <%--<form:input path="min" size="1" type="number"/> ---%>
+                                <%--<form:input path="max" type="number"/>--%>
+                                <%--<button type="submit" class="btn btn-primary" >Set</button>--%>
+                                <%--</form:form>--%>
 
                                 <c:forEach items="${goods}" var="goods">
 
@@ -70,6 +109,14 @@
 
 
                                                         <div class="description m-t-10">
+                                                                <%--<table border="1">--%>
+
+                                                                <%--<c:forEach items="${currentCategory.parameters}" var="catpar">--%>
+                                                                <%--<tr>--%>
+                                                                <%--${catpar.name}--%>
+                                                                <%--</tr>--%>
+                                                                <%--</c:forEach>--%>
+                                                                <%--</table>--%>
                                                             <c:forEach items="${goods.goodsParameterList}"
                                                                        var="params">
                                                                 <span class="value">${params.parameter.name}: </span>

@@ -29,4 +29,8 @@ public interface CategoryDao extends GenericDao<CategoryEntity, Integer> {
 
 
     List<ParameterEntity> getParameterListByCategory(CategoryEntity category);
+
+    List<GoodsEntity> getGoodsListByFilter(CategoryEntity category, Integer priceMin, Integer priceMax, String sorttype);
+
+    Integer getMaxPriceForCategory(CategoryEntity categoryEntity);
 }

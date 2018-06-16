@@ -53,5 +53,15 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDao.update(categoryEntity);
     }
 
+    @Override
+    public List<GoodsEntity> getGoodsListByFilter(CategoryEntity category, Integer priceMin, Integer priceMax, String sorttype) {
+        return categoryDao.getGoodsListByFilter(category, priceMin, priceMax, sorttype);
+    }
+
+    @Override
+    public Integer getMaxPriceForCategory(CategoryEntity categoryEntity) {
+        return categoryDao.getMaxPriceForCategory(categoryEntity);
+    }
+
 
 }

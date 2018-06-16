@@ -12,7 +12,7 @@
     <title>Manage Categories</title>
 </head>
 <body>
-<%--<%@include file="header.jsp" %>--%>
+<%@include file="header.jsp" %>
 <table class="table-bordered">
     <h4>Categories</h4>
     <thead>

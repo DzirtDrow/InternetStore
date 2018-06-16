@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
@@ -60,6 +61,11 @@ public class GoodsServiceImpl implements GoodsService {
     public List<GoodsEntity> getTopSales(int count) {
         return goodsDao.getTopList(count);
 
+    }
+
+    @Override
+    public CategoryEntity findCategoryByGoods(GoodsEntity goods) {
+        return goodsDao.findCategoryByGoods(goods);
     }
 
 

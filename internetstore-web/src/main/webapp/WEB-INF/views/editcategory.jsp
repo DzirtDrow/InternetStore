@@ -59,7 +59,7 @@ Possible parameters (you can add):
             <td>${pospar.description}</td>
             <td>${pospar.parameterType}</td>
             <td>
-                <a href="<c:url value='#'/>">Add to category</a>
+                <a href="<c:url value='/addparamtocategory?idparam=${pospar.id}&idcategory=${category.id}'/>">Add to category</a>
             </td>
         </tr>
 

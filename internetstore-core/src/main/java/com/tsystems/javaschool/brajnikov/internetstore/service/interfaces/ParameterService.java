@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ParameterService  {
     List<ParameterEntity> getPossibleParameters();
+
+    ParameterEntity getParameterById(Integer idparam);
 }

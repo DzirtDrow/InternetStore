@@ -1,12 +1,14 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
+import com.tsystems.javaschool.brajnikov.internetstore.filter.PriceFilter;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
+import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +77,12 @@ public class StoreController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = {"/store"}, method = RequestMethod.GET)
-    public String storeCategoryList(Model model,  @RequestParam("id") Integer categoryId) {
+    public String storeCategoryList(Model model,
+                                    @RequestParam("id") Integer categoryId,
+                                    @RequestParam(value = "min", required = false) Integer priceMin,
+                                    @RequestParam(value = "max", required = false) Integer priceMax,
+                                    @RequestParam(value = "sorttype", required = false) String sorttype
+    ) {
 
         List<CategoryEntity> categoryEntityList = categoryService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
@@ -86,8 +93,23 @@ public class StoreController extends AbstractController {
         List<ParameterEntity> parameterEntityList = categoryEntity.getParameters();
         model.addAttribute("parameters", parameterEntityList);
 
+        if(priceMin == null) {
+            priceMin = 0;
+        }
+        if(priceMax == null) {
+            priceMax = categoryService.getMaxPriceForCategory(categoryEntity);
+        }
         List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
-        model.addAttribute("goods", goodsByCategory);
+        //model.addAttribute("goods", goodsByCategory);
+
+
+        List<GoodsEntity> goodsByFilters = categoryService.getGoodsListByFilter(categoryEntity, priceMin, priceMax, sorttype);
+        model.addAttribute("goods", goodsByFilters);
+
+        PriceFilter priceFilter = new PriceFilter(priceMin, priceMax);
+        model.addAttribute("pricefilter", priceFilter);
+
+        model.addAttribute("sorttypes", SortingTypeEnum.values());
 
         return "/store";
     }
@@ -95,8 +117,7 @@ public class StoreController extends AbstractController {
     /**
      * Delete goods string.
      *
-     *
-     * @param id    the id
+     * @param id the id
      * @return the string
      */
     @RequestMapping(value = "/addtocart")
@@ -108,10 +129,10 @@ public class StoreController extends AbstractController {
                 UserEntity user = userService.findByName(getPrincipal());
 
                 //try to add goods in cart
-                if(cartService.addGoodsToCart(user.getId(), goodsService.findGoodsById(id))){
+                if (cartService.addGoodsToCart(user.getId(), goodsService.findGoodsById(id))) {
                     //success
                 } else {
-                    result.rejectValue("name","Size.userForm.username");
+                    result.rejectValue("name", "Size.userForm.username");
 
                     //errorr (if goods count =0)
                 }
@@ -181,7 +202,7 @@ public class StoreController extends AbstractController {
             if (id != null) {
                 //TODO check items count
                 CartItemEntity item = cartService.getCartItemById(id);
-                if(item.getCount() < goodsService.findGoodsById(item.getGoods().getId()).getLeftCount()){
+                if (item.getCount() < goodsService.findGoodsById(item.getGoods().getId()).getLeftCount()) {
                     cartService.increaseItemsCount(id);
                 } else {
                     //TODO Должна быть ошибка преаышения количества
