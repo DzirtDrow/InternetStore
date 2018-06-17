@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/rtest")
@@ -56,12 +57,12 @@ public class TestRestController2 {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPromoList() {
 
-//        List<PromotionDto> promoList = new ArrayList<PromotionDto>();
-       List<PromotionDto> promoList = promotionService.getPromotionDtoList();
+       List<PromotionDto> promoList = new ArrayList<PromotionDto>();
+  //     List<PromotionDto> promoList = promotionService.getPromotionDtoList();
 
-//        promoList.add(new PromotionDto(1, "test 1", "test desc 1"));
-//        promoList.add(new PromotionDto(2, "test 2", "test desc 2"));
-//        promoList.add(new PromotionDto(3,"test 3", "test desc 3"));
+        promoList.add(new PromotionDto(1, "test 1", "test desc 1"));
+        promoList.add(new PromotionDto(2, "test 2", "test desc 2"));
+        promoList.add(new PromotionDto(3,"test 3", "test desc 3"));
 //        promoList.add(new PromotionDto(4,"test 4", "test desc 4"));
 //        promoList.add(new PromotionDto(5,"test 5", "test desc 5"));
 //        promoList.add(new PromotionDto(6,"test 6", "test desc 6"));

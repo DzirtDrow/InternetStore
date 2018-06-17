@@ -79,7 +79,15 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from GoodsEntity where category = :categoryParam order by price desc");
         query.setParameter("categoryParam", categoryEntity);
-        List<GoodsEntity> goodsEntityList = (List<GoodsEntity>) query.getResultList();
+        List<GoodsEntity> goodsEntityList;
+        try {
+             goodsEntityList = (List<GoodsEntity>) query.getResultList();
+        } catch (NoResultException ex){
+            return 0;
+        }
+        if(goodsEntityList.isEmpty()){
+            return 0;
+        }
         GoodsEntity goods = goodsEntityList.get(0);
         Integer result = goods.getPrice();
         return result;

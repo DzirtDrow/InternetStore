@@ -111,7 +111,7 @@ public class ManageCategoriesController extends AbstractController {
     @RequestMapping(value = {"/addparamteter"}, method = RequestMethod.POST)
     public String addParameter(Model model, @ModelAttribute("newparameter") ParameterEntity parameterEntity){
 
-        parameterService.addNewParameter(parameterEntity);
+       Integer paramId = parameterService.addNewParameter(parameterEntity);
         return "redirect:/managecategories";
 
     }

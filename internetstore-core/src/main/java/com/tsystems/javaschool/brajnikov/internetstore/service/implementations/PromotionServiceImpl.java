@@ -24,7 +24,7 @@ public class PromotionServiceImpl implements PromotionService {
 
     public List<PromotionDto> getPromotionDtoList() {
         List<PromotionDto> result = new ArrayList<>();
-        result.add(new PromotionDto(1, "test 1", "test desc 1"));
+        result.add(new PromotionDto(1, "test 1", "test desc 12312341"));
         result.add(new PromotionDto(2, "test 2", "test desc 2"));
 //                promotionDao.getList()
 //                .stream()

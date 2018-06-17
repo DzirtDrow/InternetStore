@@ -58,7 +58,17 @@
 <%--</div>--%>
 <%--</div>--%>
 <%--</div>--%>
-
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <ul class="list-inline list-unstyled">
+                <li><a href="<c:url value='/index'/> ">Home</a></li>
+                <li><a href="<c:url value='/store?id=${goods.category.id}'/> ">${goods.category.name}</a></li>
+                <li class='active'>${goods.name}</li>
+            </ul>
+        </div><!-- /.breadcrumb-inner -->
+    </div><!-- /.container -->
+</div><!-- /.breadcrumb -->
 <br/>
 <div class='col-lg-offset-4 col-lg-5'>
     <div class="detail-block">

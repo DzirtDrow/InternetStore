@@ -6,6 +6,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsParam
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
+import com.tsystems.javaschool.brajnikov.internetstore.util.ParameterTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private CategoryDao categoryDao;
+
     public List<GoodsEntity> findAllGoods() {
         return goodsDao.findAllGoods();
     }
@@ -38,13 +40,16 @@ public class GoodsServiceImpl implements GoodsService {
 
         List<ParameterEntity> possibleParameters = category.getParameters();//TODO ???
 
-        for (ParameterEntity param: possibleParameters) {
-           GoodsParameterEntity goodsParameter = new GoodsParameterEntity();
-           goodsParameter.setGoods(goodsEntity);
-           goodsParameter.setParameter(param);
-           goodsParameter.setNumValue(0);
-           goodsParameter.setStringValue("test");
-           goodsParameterDao.create(goodsParameter);
+        for (ParameterEntity param : possibleParameters) {
+            GoodsParameterEntity goodsParameter = new GoodsParameterEntity();
+            goodsParameter.setGoods(goodsEntity);
+            goodsParameter.setParameter(param);
+            if (param.getParameterType() == ParameterTypeEnum.param_num) {
+                goodsParameter.setNumValue(0);
+            } else {
+                goodsParameter.setStringValue("");
+            }
+            goodsParameterDao.create(goodsParameter);
         }
     }
 

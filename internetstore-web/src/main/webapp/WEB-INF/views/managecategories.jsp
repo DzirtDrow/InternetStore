@@ -39,6 +39,7 @@
             </tbody>
         </table>
         <a href="<c:url value='/addcategory'/>" class="btn">Add new Category</a>
+        <a href="<c:url value='/addparamteter'/>" class="btn">Add new Parameter</a>
     </div>
 </div>
 

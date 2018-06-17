@@ -1,9 +1,8 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.exception.DeletingGoodsException;
-import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsParameterEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import com.tsystems.javaschool.brajnikov.internetstore.validation.GoodsValidator;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -173,16 +173,23 @@ public class ManageGoodsController extends AbstractController {
         GoodsEntity goods = null;
         if (id != null) {
             goods = goodsService.findGoodsById(id);
-            model.addAttribute("goods", goods);
+            //model.addAttribute("goods", goods);
         }
-        List<ParameterEntity> parameters = null;
-        if (goods != null) {
-            CategoryEntity category = goods.getCategory(); //TODO
-            parameters = category.getParameters();//categoryService.getParametersByCategory(category);
+        model.addAttribute("goods", goods);
+//        List<ParameterEntity> parameters = null;
+//        if (goods != null) {
+//            CategoryEntity category = goods.getCategory(); //TODO
+//            parameters = category.getParameters();//categoryService.getParametersByCategory(category);
+//
+//        }
+        List<GoodsParameterEntity> goodsParameterEntityList = goods.getGoodsParameterList();
+//        if(goodsParameterEntityList.isEmpty()){
+//            goodsParameterEntityList = new ArrayList<GoodsParameterEntity>();
+//        }
 
-        }
-        model.addAttribute("parameterss", parameters);
+        model.addAttribute("parameterss", goodsParameterEntityList);
 
+//        model.addAttribute("paramlist", goods.getGoodsParameterList());
         logger.info("Showing goods edit page");
         return "/editgoods";
     }
@@ -194,12 +201,14 @@ public class ManageGoodsController extends AbstractController {
      * @return the model and view
      */
     @RequestMapping(value = "/editgoods", method = RequestMethod.POST)
-    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity, BindingResult bindingResult) {
+    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity,
+                                  @ModelAttribute("parameterss") ArrayList<GoodsParameterEntity> parameterEntityList,
+                                  BindingResult bindingResult) {
 
 
         GoodsEntity oldGoods = goodsService.findGoodsById(goodsEntity.getId());
         goodsEntity.setCategory(oldGoods.getCategory());
-        goodsService.updateGoods(goodsEntity); //TODO decomment
+        goodsService.updateGoods(goodsEntity);
         logger.info("Updating goods {}", goodsEntity);
         return new ModelAndView("redirect:/goodslist");
     }
