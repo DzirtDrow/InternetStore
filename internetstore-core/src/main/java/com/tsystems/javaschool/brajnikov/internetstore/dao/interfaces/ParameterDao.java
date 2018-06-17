@@ -5,4 +5,5 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 
 public interface ParameterDao extends GenericDao<ParameterEntity, Integer> {
 
+    ParameterEntity findByName(String name);
 }

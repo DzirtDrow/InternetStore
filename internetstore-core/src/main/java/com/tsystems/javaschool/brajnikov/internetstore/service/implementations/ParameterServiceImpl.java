@@ -25,4 +25,13 @@ public class ParameterServiceImpl implements ParameterService {
     public ParameterEntity getParameterById(Integer idparam) {
         return parameterDao.read(idparam);
     }
+
+    @Override
+    @Transactional
+    public Integer addNewParameter(ParameterEntity parameterEntity) {
+        if (parameterDao.findByName(parameterEntity.getName()) == null) {
+            return parameterDao.create(parameterEntity);
+        }
+        return null;
+    }
 }

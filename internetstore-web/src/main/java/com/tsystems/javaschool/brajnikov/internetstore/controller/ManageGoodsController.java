@@ -6,6 +6,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
+import com.tsystems.javaschool.brajnikov.internetstore.validation.GoodsValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class ManageGoodsController extends AbstractController {
      * The Logger.
      */
     static final Logger logger = LoggerFactory.getLogger(ManageGoodsController.class);
+    @Autowired
+    private GoodsValidator goodsValidator;
 
     /**
      * Add goods page.
@@ -45,9 +48,8 @@ public class ManageGoodsController extends AbstractController {
      * @return the string
      */
     @RequestMapping(value = "/addgoods", method = RequestMethod.GET)
-    public String addGoodsPage(Model model, @RequestParam(value = "error", required = false) String error) {
+    public String addGoodsPage(Model model) {
         logger.info("Showing add goods page");
-        model.addAttribute("error", error);
         model.addAttribute("goods", new GoodsEntity());
         model.addAttribute("categories", categoryService.getCategoryDtoList());
         return "/addgoods";
@@ -62,15 +64,23 @@ public class ManageGoodsController extends AbstractController {
      */
     @RequestMapping(value = "/addgoods", method = RequestMethod.POST)
     public ModelAndView addNewGoods(@ModelAttribute("goods") GoodsEntity goodsEntity,
-                                    Model model, BindingResult result) {
+                                    Model model, BindingResult bindingResult) {
+        goodsValidator.validate(goodsEntity, bindingResult);
+
+        model.addAttribute("categories", categoryService.getCategoryDtoList());
+        if (bindingResult.hasErrors()) {
+
+            return new ModelAndView("addgoods");
+        }
+
         logger.info("Adding new goods {}", goodsEntity.getName());
         if (goodsEntity.getPrice() > 0) {
             goodsService.addGoods(goodsEntity);
             return new ModelAndView("redirect:/goodslist/");
         } else {
-            return new ModelAndView("redirect:/addgoods?error=neg");
+            //return new ModelAndView("redirect:/addgoods?error=neg");
         }
-
+        return new ModelAndView("redirect:/goodslist/");
     }
 
     /**
@@ -166,9 +176,9 @@ public class ManageGoodsController extends AbstractController {
             model.addAttribute("goods", goods);
         }
         List<ParameterEntity> parameters = null;
-        if(goods != null) {
+        if (goods != null) {
             CategoryEntity category = goods.getCategory(); //TODO
-             parameters = category.getParameters();//categoryService.getParametersByCategory(category);
+            parameters = category.getParameters();//categoryService.getParametersByCategory(category);
 
         }
         model.addAttribute("parameterss", parameters);
@@ -184,11 +194,12 @@ public class ManageGoodsController extends AbstractController {
      * @return the model and view
      */
     @RequestMapping(value = "/editgoods", method = RequestMethod.POST)
-    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity) {
+    public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity, BindingResult bindingResult) {
+
 
         GoodsEntity oldGoods = goodsService.findGoodsById(goodsEntity.getId());
         goodsEntity.setCategory(oldGoods.getCategory());
-//        goodsService.updateGoods(goodsEntity); //TODO decomment
+        goodsService.updateGoods(goodsEntity); //TODO decomment
         logger.info("Updating goods {}", goodsEntity);
         return new ModelAndView("redirect:/goodslist");
     }

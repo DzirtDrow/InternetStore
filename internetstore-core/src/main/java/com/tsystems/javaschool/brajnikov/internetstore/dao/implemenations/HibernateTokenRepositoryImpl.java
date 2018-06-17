@@ -1,7 +1,5 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
-import java.util.Date;
-
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.PersistentLogin;
 import org.hibernate.Criteria;
@@ -12,6 +10,8 @@ import org.springframework.security.web.authentication.rememberme.PersistentReme
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Repository("tokenRepositoryDao")
 @Transactional
@@ -29,7 +29,6 @@ public class HibernateTokenRepositoryImpl extends AbstractGenericDao<PersistentL
         persistentLogin.setToken(token.getTokenValue());
         persistentLogin.setLast_used(token.getDate());
         create(persistentLogin);
-
     }
 
     //@Override

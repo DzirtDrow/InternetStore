@@ -25,6 +25,7 @@
             <p class="text title-tag-line">Adding new Goods</p>
 
             <form:form class="register-form outer-top-xs" role="form" modelAttribute="goods" method="post">
+                <%--<form:errors path="*" cssClass="error" element="div"/>--%>
                 <div class="form-group">
                     <label class="info-title">Category </label>
                     <form:select cssClass="dropdown" path="category.id">
@@ -34,13 +35,16 @@
 
                 <div class="form-group">
                     <label class="info-title">Name </label>
-                    <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
+                    <form:input path="name" type="name" class="form-control unicase-form-control text-input" />
+
 
                 </div>
                 <div class="form-group">
                     <label class="info-title">Price </label>
                     <form:input path="price" type="number" class="form-control unicase-form-control text-input"/>
-
+                    <div class="text-danger">
+                        <form:errors path="price" cssClass="error" element="div"/>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -53,9 +57,6 @@
                     <form:input path="leftCount" type="number" class="form-control unicase-form-control text-input"/>
 
                 </div>
-
-
-
                 <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Add</button>
 
             </form:form>

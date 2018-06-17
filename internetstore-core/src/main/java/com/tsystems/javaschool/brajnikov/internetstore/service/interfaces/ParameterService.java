@@ -8,4 +8,6 @@ public interface ParameterService  {
     List<ParameterEntity> getPossibleParameters();
 
     ParameterEntity getParameterById(Integer idparam);
+
+    Integer addNewParameter(ParameterEntity parameterEntity);
 }

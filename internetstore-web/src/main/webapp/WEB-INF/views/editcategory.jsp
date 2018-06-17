@@ -6,16 +6,20 @@
   Time: 23:14
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
 <html>
 <head>
     <title>Edit Category</title>
 </head>
 <body>
-
-Category name: <h4>${category.name}</h4>
+<%@include file="header.jsp" %>
+<br/>
+<div class='col-lg-offset-2 col-lg-5'>
+    <div class="detail-block">
+Category name: <h3>${category.name}</h3>
 <a href="<c:url value='/managecategories'/>">Categories managment</a><br/><br/>
-Category parameters:
+<b>Category parameters:</b>
+
 <table border="1">
     <thead>
     <th>ID</th>
@@ -67,11 +71,11 @@ Possible parameters (you can add):
 
     <tr>
 
-        <td colspan="5"><a href="<c:url value='#'/>">Add new parameter</a>
+        <td colspan="5"><a href="<c:url value='/addparamteter'/>">Add new parameter</a>
         </td>
     </tr>
     </tbody>
 </table>
-
+    </div></div>
 </body>
 </html>

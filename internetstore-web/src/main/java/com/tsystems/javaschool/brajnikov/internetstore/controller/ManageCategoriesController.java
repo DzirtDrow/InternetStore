@@ -4,6 +4,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.ParameterService;
+import com.tsystems.javaschool.brajnikov.internetstore.util.ParameterTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,4 +101,18 @@ public class ManageCategoriesController extends AbstractController {
         return "redirect:/managecategories";
     }
 
+    @RequestMapping(value = {"/addparamteter"}, method = RequestMethod.GET)
+    public String addParameterPage(Model model){
+        model.addAttribute("newparameter", new ParameterEntity());
+        model.addAttribute("parametertypes", ParameterTypeEnum.values());
+        return "/addparameter";
+
+    }
+    @RequestMapping(value = {"/addparamteter"}, method = RequestMethod.POST)
+    public String addParameter(Model model, @ModelAttribute("newparameter") ParameterEntity parameterEntity){
+
+        parameterService.addNewParameter(parameterEntity);
+        return "redirect:/managecategories";
+
+    }
 }
