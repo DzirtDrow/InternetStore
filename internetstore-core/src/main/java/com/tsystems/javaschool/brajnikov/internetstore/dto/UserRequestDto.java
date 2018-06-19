@@ -1,7 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dto;
 
 import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.RoleEnum;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 

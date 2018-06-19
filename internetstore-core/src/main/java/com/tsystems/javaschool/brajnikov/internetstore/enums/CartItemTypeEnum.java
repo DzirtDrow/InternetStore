@@ -1,4 +1,4 @@
-package com.tsystems.javaschool.brajnikov.internetstore.util;
+package com.tsystems.javaschool.brajnikov.internetstore.enums;
 
 /**
  * The enum Cart item type enum.

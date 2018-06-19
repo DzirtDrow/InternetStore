@@ -6,7 +6,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundE
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

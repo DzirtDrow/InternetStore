@@ -3,7 +3,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
-import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 
 import java.util.List;
 

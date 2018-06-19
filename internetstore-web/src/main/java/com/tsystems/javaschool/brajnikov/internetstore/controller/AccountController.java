@@ -5,7 +5,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.AddressService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.RoleEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -69,7 +69,8 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Price</th>
-                                    <%--<th>Category</th>--%>
+                                    <th>Category</th>
+                                    <th>Status</th>
                                     <th>Left count</th>
                                     <th>Sold</th>
                                     <th>Actions</th>
@@ -84,7 +85,8 @@
                                         <td>${ph.id}</td>
                                         <td class="text-center"><b>${ph.name}</b></td>
                                         <td class="text-center">$${ph.price}</td>
-                                        <%--<td class="text-center">${ph.category.name}</td>--%>
+                                        <td class="text-center">${ph.category.name}</td>
+                                        <td class="text-center">${ph.status}</td>
                                         <td class="text-center">${ph.leftCount}</td>
                                         <td class="text-center">${ph.salesCount}</td>
                                         <td>

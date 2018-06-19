@@ -7,7 +7,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedExce
 import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.dto;
 
-import com.tsystems.javaschool.brajnikov.internetstore.util.ParameterTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.ParameterTypeEnum;
 import lombok.Data;
 
 @Data

@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
-import com.tsystems.javaschool.brajnikov.internetstore.util.RoleEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.RoleEnum;
 import lombok.Data;
 
 import javax.persistence.*;

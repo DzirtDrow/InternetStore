@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
-import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 

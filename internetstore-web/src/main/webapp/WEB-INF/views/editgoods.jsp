@@ -28,7 +28,17 @@
                 <p class="text title-tag-line">Change this goods
 
                 </p>
+                <div class="form-group">
+                    <label class="info-title">Category </label>
+                    <form:select cssClass="form-control selection-handle" path="category.id">
+                        <form:options items="${categories}" itemValue="id" itemLabel="name"/>
+                    </form:select>
+                </div>
 
+                <div class="form-group">
+                    <label class="info-title">Status: </label>
+                        <form:select cssClass="form-control selection-handle" items="${statuses}" var="type" path="status"/>
+                </div>
                 <div class="form-group">
                     <label class="info-title">Name </label>
                     <form:input path="name" type="name" class="form-control unicase-form-control text-input"/>
@@ -45,6 +55,9 @@
                     <form:input path="description" type="text" class="form-control unicase-form-control text-input"/>
                         <%--<input type="text" class="">--%>
                 </div>
+
+
+
                 <div class="form-group">
                     <label class="info-title">Left Count </label>
                     <form:input path="leftCount" type="number" class="form-control unicase-form-control text-input"/>
@@ -52,48 +65,35 @@
 
                 </div>
 
-                <h5>Parameters: </h5>
-                <%--<c:forEach items="${parameterss}" var="par">--%>
-                <%--<div class="form-group">--%>
-                    <%--<label class="info-title">${par.parameter.name}: </label>--%>
+                <h4>Parameters: </h4>
 
-                    <%--<c:choose>--%>
-                        <%--<c:when test="${par.parameter.parameterType == 'param_num'}">--%>
-                            <%--<input type="number" id = "${par.parameter.name}" class="form-control unicase-form-control text-input"--%>
-                                   <%--value="${par.numValue}"/>--%>
-                        <%--</c:when>--%>
-                        <%--<c:otherwise>--%>
-                            <%--<input type="text" id = "${par.parameter.name}" class="form-control unicase-form-control text-input"--%>
-                                   <%--value="${par.stringValue}"/>--%>
-                        <%--</c:otherwise>--%>
-                    <%--</c:choose>--%>
+                <c:forEach items="${goods.goodsParameterList}" varStatus="status" var="par">
+                    <%--<div class="form-group">--%>
+                    <label class="info-title">${par.parameter.name}</label>
+                    <c:choose>
+                        <c:when test="${par.parameter.parameterType == 'param_num'}">
+                            <input type="number" name="goodsParameterList[${status.index}].numValue"
+                                   class="form-control unicase-form-control text-input" value="${par.numValue}"/>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text"   name="goodsParameterList[${status.index}].stringValue"
+                                   class="form-control unicase-form-control text-input" value="${par.stringValue}"/>
+                        </c:otherwise>
+                    </c:choose>
 
-                <%--</div>--%>
-                <%--</c:forEach>--%>
+                    <i hidden>
+                        <input name="goodsParameterList[${status.index}].id" value="${par.id}"/>
+                    </i>
 
-                <c:forEach items="${parameterss}" var="par">
-                    <div class="form-group">
-                        <label class="info-title">${par.parameter.name}: </label>
-
-                        <c:choose>
-                            <c:when test="${par.parameter.parameterType == 'param_num'}">
-                                <input  type="number" id = "${par.parameter.name}" class="form-control unicase-form-control text-input"
-                                       value="${par.numValue}"/>
-                            </c:when>
-                            <c:otherwise>
-                                <input type="text" id = "${par.parameter.name}" class="form-control unicase-form-control text-input"
-                                       value="${par.stringValue}" />
-                            </c:otherwise>
-                        </c:choose>
-
-                    </div>
+                    <%--</div>--%>
                 </c:forEach>
 
-                <script>
-                    function addParameters(){
-                       // alert("${parameterss}");
-                    }
-                </script>
+                <%--<script>--%>
+                    <%--function addParameters() {--%>
+                        <%--alert(${parameterss});--%>
+
+                    <%--}--%>
+                <%--</script>--%>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" onclick="addParameters()">Save Changes</button>

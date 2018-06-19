@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
-import com.tsystems.javaschool.brajnikov.internetstore.util.OrderStatusEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
 import lombok.Data;
 
 import javax.persistence.*;

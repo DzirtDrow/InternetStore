@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import com.tsystems.javaschool.brajnikov.internetstore.enums.GoodsStatusEnum;
 import lombok.Data;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -36,6 +37,10 @@ public class GoodsEntity implements Serializable {
 
     @Column(name = "sales_count")
     private int salesCount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private GoodsStatusEnum status;
 
     @ManyToOne//(fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.FALSE)

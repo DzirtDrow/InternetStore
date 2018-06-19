@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository("goodsDao")
-public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implements GoodsDao {
+public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity, Integer> implements GoodsDao {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -21,16 +21,20 @@ public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity,Integer> implem
     public List<GoodsEntity> findAllGoods() {
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from GoodsEntity order by id asc");
-        return (List<GoodsEntity>)query.getResultList();
+        return (List<GoodsEntity>) query.getResultList();
     }
 
     @Override
     public List<GoodsEntity> getTopList(int count) {
-        Query query = sessionFactory.getCurrentSession()
+            Query query = sessionFactory.getCurrentSession()
                 .createQuery("from GoodsEntity order by salesCount desc");
         List<GoodsEntity> queryResult = (List<GoodsEntity>) query.getResultList();
+        int t = count;
+        if (queryResult.size() < count) {
+            t = queryResult.size();
+        }
         List<GoodsEntity> result = new ArrayList<>();
-        for(int i = 0; i < count; i++){
+        for (int i = 0; i < t; i++) {
             result.add(queryResult.get(i));
 
         }

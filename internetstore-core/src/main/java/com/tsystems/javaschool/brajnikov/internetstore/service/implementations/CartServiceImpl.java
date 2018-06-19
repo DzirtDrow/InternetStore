@@ -9,7 +9,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
-import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

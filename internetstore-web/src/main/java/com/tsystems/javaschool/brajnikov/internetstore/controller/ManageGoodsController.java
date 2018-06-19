@@ -1,9 +1,11 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
+import com.tsystems.javaschool.brajnikov.internetstore.enums.GoodsStatusEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.DeletingGoodsException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsParameterEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsParameterService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import com.tsystems.javaschool.brajnikov.internetstore.validation.GoodsValidator;
 import org.slf4j.Logger;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,8 @@ public class ManageGoodsController extends AbstractController {
     static final Logger logger = LoggerFactory.getLogger(ManageGoodsController.class);
     @Autowired
     private GoodsValidator goodsValidator;
+    @Autowired
+    private GoodsParameterService goodsParameterService;
 
     /**
      * Add goods page.
@@ -69,12 +72,12 @@ public class ManageGoodsController extends AbstractController {
 
         model.addAttribute("categories", categoryService.getCategoryDtoList());
         if (bindingResult.hasErrors()) {
-
             return new ModelAndView("addgoods");
         }
 
         logger.info("Adding new goods {}", goodsEntity.getName());
         if (goodsEntity.getPrice() > 0) {
+            goodsEntity.setStatus(GoodsStatusEnum.ACTIVE);
             goodsService.addGoods(goodsEntity);
             return new ModelAndView("redirect:/goodslist/");
         } else {
@@ -153,7 +156,10 @@ public class ManageGoodsController extends AbstractController {
             if (!goodsService.isInOrder(goodsService.findGoodsById(Integer.parseInt(id)))) {
                 goodsService.deleteGoodsById(Integer.parseInt(id));
             } else {
-                throw new DeletingGoodsException("You can not delete this goods, because it is in some orders");
+                GoodsEntity archivedGoods = goodsService.findGoodsById(Integer.parseInt(id));
+                archivedGoods.setStatus(GoodsStatusEnum.ARCHIVED);
+                goodsService.updateGoods(archivedGoods);
+                //throw new DeletingGoodsException("You can not delete this goods, because it is in some orders");
             }
 
         }
@@ -173,23 +179,11 @@ public class ManageGoodsController extends AbstractController {
         GoodsEntity goods = null;
         if (id != null) {
             goods = goodsService.findGoodsById(id);
-            //model.addAttribute("goods", goods);
         }
         model.addAttribute("goods", goods);
-//        List<ParameterEntity> parameters = null;
-//        if (goods != null) {
-//            CategoryEntity category = goods.getCategory(); //TODO
-//            parameters = category.getParameters();//categoryService.getParametersByCategory(category);
-//
-//        }
-        List<GoodsParameterEntity> goodsParameterEntityList = goods.getGoodsParameterList();
-//        if(goodsParameterEntityList.isEmpty()){
-//            goodsParameterEntityList = new ArrayList<GoodsParameterEntity>();
-//        }
+        model.addAttribute("categories", categoryService.getCategoryDtoList());
+        model.addAttribute("statuses", GoodsStatusEnum.values());
 
-        model.addAttribute("parameterss", goodsParameterEntityList);
-
-//        model.addAttribute("paramlist", goods.getGoodsParameterList());
         logger.info("Showing goods edit page");
         return "/editgoods";
     }
@@ -202,12 +196,31 @@ public class ManageGoodsController extends AbstractController {
      */
     @RequestMapping(value = "/editgoods", method = RequestMethod.POST)
     public ModelAndView editGoods(@ModelAttribute("goods") GoodsEntity goodsEntity,
-                                  @ModelAttribute("parameterss") ArrayList<GoodsParameterEntity> parameterEntityList,
+//                                  @ModelAttribute("parameterss") ArrayList<GoodsParameterEntity> goodsParameterEntityArrayList,
                                   BindingResult bindingResult) {
 
 
         GoodsEntity oldGoods = goodsService.findGoodsById(goodsEntity.getId());
-        goodsEntity.setCategory(oldGoods.getCategory());
+        goodsEntity.setCategory(categoryService.getCategoryById(goodsEntity.getCategory().getId()));
+
+
+        for (GoodsParameterEntity param : goodsEntity.getGoodsParameterList()) {
+            goodsParameterService.updateGoodsParameter(param);
+
+        }
+//        for (GoodsParameterEntity oldParam: oldGoodsParameterList) {
+//            for (GoodsParameterEntity newParam: goodsEntity.getGoodsParameterList()) {
+//                if(oldParam.getId() == newParam.getId()){
+//                    if(oldParam.getParameter().getParameterType() == ParameterTypeEnum.param_num){
+//                        oldParam.setNumValue(newParam.getNumValue());
+//                    } else {
+//                        oldParam.setStringValue(newParam.getStringValue());
+//                    }
+//                }
+//            }
+//        }
+//        goodsEntity.setGoodsParameterList(oldGoodsParameterList);
+
         goodsService.updateGoods(goodsEntity);
         logger.info("Updating goods {}", goodsEntity);
         return new ModelAndView("redirect:/goodslist");

@@ -19,7 +19,7 @@ public class TestMQController {
     @ResponseBody
     String queue1() {
         logger.info("Emit to promo queue");
-        template.convertAndSend("promo_queue","RPOMO.MESSAGE");
+        template.convertAndSend("promo_queue","PROMO.MESSAGE");
 
         //template.convertAndSend("store-exchange", "promo.basic", "");
         return "Emit to queue";

@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `internet_store_db`.`cart_item`
   CONSTRAINT cart_item_cart_id_fk
   FOREIGN KEY (cart_id) REFERENCES cart (id),
   CONSTRAINT cart_item_order_id_fk
-  FOREIGN KEY (order_id) REFERENCES `order` (id)
+  FOREIGN KEY (order_id) REFERENCES `orders` (id)
 )
   ENGINE = InnoDB;
 

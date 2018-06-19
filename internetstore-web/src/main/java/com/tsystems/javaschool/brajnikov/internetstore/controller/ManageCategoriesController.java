@@ -4,7 +4,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.ParameterService;
-import com.tsystems.javaschool.brajnikov.internetstore.util.ParameterTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.ParameterTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

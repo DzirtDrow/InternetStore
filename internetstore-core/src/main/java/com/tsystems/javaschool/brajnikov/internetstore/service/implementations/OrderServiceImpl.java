@@ -5,9 +5,9 @@ import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyExce
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
-import com.tsystems.javaschool.brajnikov.internetstore.util.CartItemTypeEnum;
-import com.tsystems.javaschool.brajnikov.internetstore.util.OrderStatusEnum;
-import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

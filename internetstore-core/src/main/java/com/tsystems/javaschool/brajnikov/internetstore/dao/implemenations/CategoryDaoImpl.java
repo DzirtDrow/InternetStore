@@ -5,7 +5,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CategoryDa
 import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.util.SortingTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,7 +22,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
     @SuppressWarnings("unchecked")
     public List<GoodsEntity> getGoodsListByCategory(CategoryEntity category) {
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("from GoodsEntity where category = :categoryParam");
+                .createQuery("from GoodsEntity where category = :categoryParam and status = 'ACTIVE'");
         query.setParameter("categoryParam", category);
         return (List<GoodsEntity>) query.getResultList();
     }
@@ -66,6 +66,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
                         " where category = :categoryParam " +
                         " and price >= :priceMinParam  " +
                         " and price <= :priceMaxParam " +
+                        " and status = 'ACTIVE'" +
                         " order by price " + ste);
         query.setParameter("categoryParam", category);
         query.setParameter("priceMinParam", priceMin); //TODO check not null
