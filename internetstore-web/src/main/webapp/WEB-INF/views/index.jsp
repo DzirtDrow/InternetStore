@@ -32,10 +32,7 @@
                 <div class="col-md-12">
                     <h2 class="heading-title">Welcome to Internet Shop!</h2>
                     <span class="title-tag">To get started, select the product category!</span>
-                    <a href="test">TEST</a>
-                    <%--<c:forEach items="${catdtolist}" var="category">--%>
-                        <%--<span>${category.name}</span>--%>
-                    <%--</c:forEach>--%>
+
 
                 </div>
             </div><!-- /.row -->

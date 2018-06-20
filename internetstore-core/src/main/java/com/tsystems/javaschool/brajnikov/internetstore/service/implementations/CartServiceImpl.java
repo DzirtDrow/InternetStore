@@ -2,14 +2,14 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartItemDao;
+import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
-import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +28,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private SessionCart sessionCart;
+    private OrdersDao ordersDao;
 
     public boolean addGoodsToCart(int userId, GoodsEntity goodsEntity) {
 
@@ -117,7 +117,18 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    public void loadSessionCart(int userId) {
-        //TODO load session cart to user order here
-    }
+//    public void loadSessionCart(int userId, SessionCart sessionCart) {
+//        List<CartItemEntity> sessionCartList = sessionCart.getCartItemsList();
+//
+//        for (CartItemEntity sessionCartItem:sessionCartList) {
+//            UserEntity user = userDao.findById(userId);
+//
+//
+//            cartItemDao.create(sessionCartItem);
+//
+//        }
+//
+//
+//        //TODO load session cart to user order here
+//    }
 }

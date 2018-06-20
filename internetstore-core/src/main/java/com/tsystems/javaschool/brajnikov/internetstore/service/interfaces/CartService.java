@@ -1,6 +1,9 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
-import com.tsystems.javaschool.brajnikov.internetstore.model.*;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
+import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 
 import java.util.List;
 
@@ -46,12 +49,6 @@ public interface CartService {
      */
     void decreaseItemsCount(int itemId);
 
-    /**
-     * Load session cart.
-     *
-     * @param id the id
-     */
-    void loadSessionCart(int id);
 
     /**
      * Gets cart total price.

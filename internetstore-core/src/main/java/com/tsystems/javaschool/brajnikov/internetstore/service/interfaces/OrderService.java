@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.NoGoodsInStockException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
@@ -71,4 +72,6 @@ public interface OrderService {
     List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type);
 
     List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type);
+
+    void createOrderFromSessionCart(UserEntity user, SessionCart sessionCart);
 }

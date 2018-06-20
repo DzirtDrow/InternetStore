@@ -1,9 +1,8 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.*;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.*;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.NoGoodsInStockException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
@@ -48,6 +47,8 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity order = new OrderEntity();
         order.setUser(cartEntity.getUser());
         order.setStatus(OrderStatusEnum.PENDING_PAYMENT);
+        order.setDeliveryType(OrderDeliveryTypeEnum.PICKUP);
+        order.setPaymentMethod(OrderPaymentMethodEnum.CASH);
         order.setSum(cartEntity.getSum());
         order.setOrder_date(new Date());
 
@@ -126,6 +127,42 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type) {
         return orderDao.getAllOrdersOrderByStatus(type);
+    }
+
+    @Override
+    public void createOrderFromSessionCart(UserEntity user, SessionCart sessionCart) {
+
+        List<CartItemEntity> itemsList = sessionCart.getCartItemsList();
+
+        OrderEntity order = new OrderEntity();
+        order.setUser(user);
+        order.setStatus(OrderStatusEnum.PENDING_PAYMENT);
+        order.setDeliveryType(OrderDeliveryTypeEnum.PICKUP);
+        order.setPaymentMethod(OrderPaymentMethodEnum.CASH);
+        order.setSum(sessionCart.getCartTotalPrice());
+        order.setOrder_date(new Date());
+
+        orderDao.create(order);
+
+        for (CartItemEntity item : itemsList) {
+
+            GoodsEntity goods = goodsDao.read(item.getGoods().getId());
+
+            item.setType(CartItemTypeEnum.type_order);
+            item.setOrder(order);
+            cartItemDao.create(item);
+
+            if (goods.getLeftCount() - item.getCount() > 0) {
+                goods.setLeftCount(goods.getLeftCount() - item.getCount());
+                goods.setSalesCount(goods.getSalesCount() + item.getCount());
+                goodsDao.update(goods);
+
+            } else {
+                //throw new NoGoodsInStockException("Goods " + "'" + goods.getId() + " : " + goods.getName() + "' have not items in stock;");
+            }
+        }
+        sessionCart.clear();
+        //orderDao.create(order);
     }
 
 

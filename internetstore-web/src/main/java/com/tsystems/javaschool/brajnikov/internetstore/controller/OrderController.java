@@ -1,6 +1,9 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderDeliveryTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderPaymentMethodEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.NoGoodsInStockException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
@@ -15,8 +18,10 @@ import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserSe
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,16 +37,14 @@ public class OrderController extends AbstractController {
 
     @Autowired
     private OrderService orderService;
-
     @Autowired
     private CartService cartService;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private SessionCart sessionCart;
-
+    @Autowired
+    UserDetailsService userDetailsService;
     @Autowired
     private CustomAuthentificationSuccessHandler authHandler;
 
@@ -66,6 +69,8 @@ public class OrderController extends AbstractController {
 
             List<CartItemEntity> items = orderService.getOrderById(orderId).getOrderItems();
 
+            model.addAttribute("deliverytypes", OrderDeliveryTypeEnum.values());
+            model.addAttribute("paymentmethods", OrderPaymentMethodEnum.values());
             if (order.getUser().getId() == user.getId()) {
                 model.addAttribute("order", order);
                 model.addAttribute("items", items);
@@ -76,6 +81,19 @@ public class OrderController extends AbstractController {
             return "/accessdenied";
         }
         return "/order";
+    }
+
+    @RequestMapping(value = {"/order"}, method = RequestMethod.POST)
+    public String continueOrder(Model model, @ModelAttribute("order") OrderEntity order) {
+        OrderEntity oldOrder = orderService.getOrderById(order.getId());
+        oldOrder.setPaymentMethod(order.getPaymentMethod());
+        oldOrder.setDeliveryType(oldOrder.getDeliveryType());
+        if(order.getPaymentMethod() == OrderPaymentMethodEnum.CASH){
+            oldOrder.setStatus(OrderStatusEnum.PENDING_SHIPPING);
+            //orderService.updateOrder(order);
+        }
+        orderService.updateOrder(oldOrder);
+        return "redirect:/order?id=" + order.getId();
     }
 
     /**
@@ -141,7 +159,8 @@ public class OrderController extends AbstractController {
             }
         } else {
             if ((sessionCart.getCartItemsList() != null) && (!sessionCart.getCartItemsList().isEmpty())) {
-                authHandler.setOrderFlag(true);
+                //authHandler.setOrderFlag(true);
+                sessionCart.setOrderFlag(true);
                 return "/login";
             } else {
                 return "redirect:/cart";

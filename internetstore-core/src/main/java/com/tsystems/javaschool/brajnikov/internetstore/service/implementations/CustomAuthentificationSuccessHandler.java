@@ -13,19 +13,14 @@ import java.io.IOException;
 @Component
 public class CustomAuthentificationSuccessHandler implements AuthenticationSuccessHandler {
 
-    private boolean orderFlag = false;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        isOrderFlag();
-        orderFlag = false;
+
+        //HttpSession session = httpServletRequest.getSession();
+        //User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        httpServletResponse.sendRedirect("home");
     }
 
-    public boolean isOrderFlag() {
-        return orderFlag;
-    }
-
-    public void setOrderFlag(boolean orderFlag) {
-        this.orderFlag = orderFlag;
-    }
 }

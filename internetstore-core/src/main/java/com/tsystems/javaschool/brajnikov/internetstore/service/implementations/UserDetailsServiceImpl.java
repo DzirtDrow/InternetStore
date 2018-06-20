@@ -3,7 +3,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartService;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,22 +18,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("userDetailsServiceImpl")
-@Transactional(readOnly = true)
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;
 
     @Autowired
-    private CartService cartService;
+    private OrderService orderService;
+
+    private SessionCart sessionCart;
 
     @Autowired
-    private SessionCart sessionCart;
+    public void setSessionCart(SessionCart sessionCart) {
+        this.sessionCart = sessionCart;
+    }
 
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-
         UserEntity currentUser = userDao.findByName(username);
+
+        if(sessionCart.isOrderFlag()){
+            orderService.createOrderFromSessionCart(currentUser, sessionCart);
+
+        }
+        sessionCart.setOrderFlag(false);
 
         if(currentUser == null) {
             throw new UsernameNotFoundException("Username not found");
@@ -45,5 +54,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 true, true,true,true,
                 grantList);
     }
+
+
 
 }
