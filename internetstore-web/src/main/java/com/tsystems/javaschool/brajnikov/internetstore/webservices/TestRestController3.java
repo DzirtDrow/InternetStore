@@ -22,7 +22,6 @@ public class TestRestController3 {
 
     @RequestMapping(value = "/topgoods", produces = "application/json")
     public List<GoodsDto> getGoods() {
-        //List<GoodsDto> topSales = new ArrayList<>();//
         List<GoodsDto> topSales = goodsService.getTopSales(10);
         //Response response = Response.ok(goods).build();
         return topSales;

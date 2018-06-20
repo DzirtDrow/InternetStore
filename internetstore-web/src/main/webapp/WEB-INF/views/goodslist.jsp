@@ -113,8 +113,7 @@
                                     &nbsp;&nbsp;
                                     <c:choose>
                                         <c:when test="${loop.index == pageListHolder.page}">${loop.index+1}</c:when>
-                                        <c:otherwise><a
-                                                href="/internet-store/goodslist/${loop.index}">${loop.index+1}</a></c:otherwise>
+                                        <c:otherwise><a href="/internet-store/goodslist/${loop.index}">${loop.index+1}</a></c:otherwise>
                                     </c:choose>
                                     &nbsp;&nbsp;
                                 </c:forEach>

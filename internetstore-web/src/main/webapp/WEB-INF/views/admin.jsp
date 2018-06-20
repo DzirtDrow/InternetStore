@@ -29,6 +29,7 @@
                                 <li><a class="btn-link" href="${pageContext.request.contextPath}/managecategories">Categories Managment</a></li>
                                 <li><a class="btn-link" href="${pageContext.request.contextPath}/goodslist">Goods Managment</a></li>
                                 <li><a class="btn-link" href="${pageContext.request.contextPath}/list">Users Managment</a></li>
+                                <li><a class="btn-link" href="${pageContext.request.contextPath}/promo/promotionlist">Promotions Managment</a></li>
                             </ul>
                         </div>
                     </div>

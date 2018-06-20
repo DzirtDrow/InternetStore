@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.webservices;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.TopGoodsList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -14,14 +15,17 @@ public class TestMQController {
 
     @Autowired
     RabbitTemplate template;
+    @Autowired
+    TopGoodsList topGoodsList;
 
     @RequestMapping("/emit")
     @ResponseBody
     String queue1() {
         logger.info("Emit to promo queue");
-        template.convertAndSend("promo_queue","PROMO.MESSAGE");
+        template.convertAndSend("promo_queue","GOODS.MESSAGE");
 
-        //template.convertAndSend("store-exchange", "promo.basic", "");
+        topGoodsList.updateTopGoods();
+
         return "Emit to queue";
     }
 }

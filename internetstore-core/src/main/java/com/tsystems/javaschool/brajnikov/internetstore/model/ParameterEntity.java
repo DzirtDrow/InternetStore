@@ -21,6 +21,8 @@ public class ParameterEntity implements Serializable{
     @Column(name = "description")
     private String description;
 
+    @Column(name = "unit")
+    private String unit;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "param_type")

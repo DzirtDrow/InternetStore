@@ -200,29 +200,24 @@ public class ManageGoodsController extends AbstractController {
                                   BindingResult bindingResult) {
 
 
-        GoodsEntity oldGoods = goodsService.findGoodsById(goodsEntity.getId());
         goodsEntity.setCategory(categoryService.getCategoryById(goodsEntity.getCategory().getId()));
 
-
-        for (GoodsParameterEntity param : goodsEntity.getGoodsParameterList()) {
-            goodsParameterService.updateGoodsParameter(param);
-
+        if (goodsEntity.getGoodsParameterList() != null) {
+            for (GoodsParameterEntity param : goodsEntity.getGoodsParameterList()) {
+                goodsParameterService.updateGoodsParameter(param);
+            }
         }
-//        for (GoodsParameterEntity oldParam: oldGoodsParameterList) {
-//            for (GoodsParameterEntity newParam: goodsEntity.getGoodsParameterList()) {
-//                if(oldParam.getId() == newParam.getId()){
-//                    if(oldParam.getParameter().getParameterType() == ParameterTypeEnum.param_num){
-//                        oldParam.setNumValue(newParam.getNumValue());
-//                    } else {
-//                        oldParam.setStringValue(newParam.getStringValue());
-//                    }
-//                }
-//            }
-//        }
-//        goodsEntity.setGoodsParameterList(oldGoodsParameterList);
-
         goodsService.updateGoods(goodsEntity);
         logger.info("Updating goods {}", goodsEntity);
         return new ModelAndView("redirect:/goodslist");
     }
+
+    @RequestMapping(value = "/alignparameters", method = RequestMethod.GET)
+    public String alignGoodsParameter(Model model, @RequestParam("id") Integer id) {
+
+        goodsService.alignGoodsParametersToCategory(goodsService.findGoodsById(id));
+        return "redirect:/editgoods?id=" + id;
+    }
+
+
 }

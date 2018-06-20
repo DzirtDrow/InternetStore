@@ -15,7 +15,9 @@ public class CustomAuthentificationSuccessHandler implements AuthenticationSucce
 
     private boolean orderFlag = false;
 
+    @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+        isOrderFlag();
         orderFlag = false;
     }
 

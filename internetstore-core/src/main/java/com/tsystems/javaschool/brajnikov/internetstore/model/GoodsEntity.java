@@ -47,7 +47,7 @@ public class GoodsEntity implements Serializable {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-    @OneToMany(mappedBy = "goods", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "goods", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<GoodsParameterEntity> goodsParameterList;
 
     @Override

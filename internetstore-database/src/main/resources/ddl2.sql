@@ -185,3 +185,6 @@ CREATE TABLE IF NOT EXISTS `internet_store_db`.`promotion`
   ENGINE = InnoDB;
 
 ALTER TABLE `internet_store_db`.`goods` ADD sales_count INT NULL;
+ALTER TABLE `internet_store_db`.`goods` ADD status ENUM('ACTIVE', 'ARCHIVED') NULL;
+ALTER TABLE `internet_store_db`.`orders` ADD pay_method ENUM('CASH', 'CARD') NULL;
+ALTER TABLE `internet_store_db`.`orders` ADD delivery_type ENUM('DELIVERY', 'PICKUP') NULL;

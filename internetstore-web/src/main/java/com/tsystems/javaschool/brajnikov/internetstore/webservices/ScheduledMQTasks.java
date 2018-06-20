@@ -1,5 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.webservices;
 
+import com.tsystems.javaschool.brajnikov.internetstore.dto.TopGoodsList;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -12,11 +13,18 @@ public class ScheduledMQTasks {
 
     @Autowired
     RabbitTemplate template;
+    @Autowired
+    TopGoodsList topGoodsList;
 
-    @Scheduled(fixedDelay = 10000)
-    public void reportCurrentTime() {
+//    @PostConstruct
+//    public void init(){
+//        template.convertAndSend("promo_queue", "GOODS.MESSAGE");
+//    }
+    @Scheduled(fixedDelay = 120000) //2 minutes
+    public void checkTopGods() {
+        if (topGoodsList.updateTopGoods()) {
+            template.convertAndSend("promo_queue", "GOODS.MESSAGE");
+        }
 
-        //TODO check top goods list
-        //template.convertAndSend("promo_queue","TEST.MESSAGE");
     }
 }

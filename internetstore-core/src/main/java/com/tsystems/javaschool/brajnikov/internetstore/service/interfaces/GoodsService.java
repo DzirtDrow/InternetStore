@@ -57,4 +57,6 @@ public interface GoodsService {
     List<GoodsDto> getTopSales(int count);
 
     CategoryEntity findCategoryByGoods(GoodsEntity goods);
+
+    void alignGoodsParametersToCategory(GoodsEntity goodsById);
 }

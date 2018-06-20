@@ -40,4 +40,24 @@ public class PromotionServiceImpl implements PromotionService {
     public List<PromotionEntity> getPromotionList() {
         return promotionDao.getList();
     }
+
+    @Override
+    public PromotionEntity getPromotionById(Integer id) {
+        return promotionDao.read(id);
+    }
+
+    @Override
+    public void updatePromotion(PromotionEntity promo) {
+        promotionDao.update(promo);
+    }
+
+    @Override
+    public void createPromotion(PromotionEntity promo) {
+        promotionDao.create(promo);
+    }
+
+    @Override
+    public void deletePromotionById(Integer id) {
+        promotionDao.delete(promotionDao.read(id));
+    }
 }

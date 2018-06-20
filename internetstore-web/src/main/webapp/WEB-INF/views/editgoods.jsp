@@ -56,8 +56,6 @@
                         <%--<input type="text" class="">--%>
                 </div>
 
-
-
                 <div class="form-group">
                     <label class="info-title">Left Count </label>
                     <form:input path="leftCount" type="number" class="form-control unicase-form-control text-input"/>
@@ -68,7 +66,7 @@
                 <h4>Parameters: </h4>
 
                 <c:forEach items="${goods.goodsParameterList}" varStatus="status" var="par">
-                    <%--<div class="form-group">--%>
+                    <div class="form-group">
                     <label class="info-title">${par.parameter.name}</label>
                     <c:choose>
                         <c:when test="${par.parameter.parameterType == 'param_num'}">
@@ -85,7 +83,7 @@
                         <input name="goodsParameterList[${status.index}].id" value="${par.id}"/>
                     </i>
 
-                    <%--</div>--%>
+                    </div>
                 </c:forEach>
 
                 <%--<script>--%>
@@ -96,7 +94,8 @@
                 <%--</script>--%>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" onclick="addParameters()">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a class="btn btn-danger" href="${pageContext.request.contextPath}/alignparameters?id=${goods.id}" title="Make parameters as in the category">Align to category</a>
                 </div>
                     <%--</div>--%>
             </div>

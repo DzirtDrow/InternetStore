@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.interfaces;
 
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.NoGoodsInStockException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
@@ -26,7 +27,7 @@ public interface OrderService {
      * @return Id of the created order
      * @throws CartIsEmptyException the cart is empty exception
      */
-    int createOrderByCart(CartEntity cartEntity) throws CartIsEmptyException;
+    int createOrderByCart(CartEntity cartEntity) throws CartIsEmptyException, NoGoodsInStockException;
 
     /**
      * Gets order by id.

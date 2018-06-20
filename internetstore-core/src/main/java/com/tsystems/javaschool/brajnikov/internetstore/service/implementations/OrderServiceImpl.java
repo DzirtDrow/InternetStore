@@ -1,13 +1,14 @@
 package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.*;
-import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
-import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
-import com.tsystems.javaschool.brajnikov.internetstore.model.*;
-import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.NoGoodsInStockException;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
+import com.tsystems.javaschool.brajnikov.internetstore.model.*;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,11 +38,11 @@ public class OrderServiceImpl implements OrderService {
         orderDao.create(orderEntity);
     }
 
-    public int createOrderByCart(CartEntity cartEntity) throws CartIsEmptyException {
+    public int createOrderByCart(CartEntity cartEntity) throws CartIsEmptyException, NoGoodsInStockException {
 
         List<CartItemEntity> itemsList = cartEntity.getCartItems();
 
-        if(itemsList.isEmpty()){
+        if (itemsList.isEmpty()) {
             throw new CartIsEmptyException();
         }
         OrderEntity order = new OrderEntity();
@@ -59,11 +60,16 @@ public class OrderServiceImpl implements OrderService {
 
             GoodsEntity goods = goodsDao.read(item.getGoods().getId());
 
-            goods.setLeftCount(goods.getLeftCount() - item.getCount());//TODO check sub zero
+            if (goods.getLeftCount() - item.getCount() > 0) {
+                goods.setLeftCount(goods.getLeftCount() - item.getCount());
 
-            goodsDao.update(goods);
+                goods.setSalesCount(goods.getSalesCount() + item.getCount());
+                goodsDao.update(goods);
 
-            cartItemDao.update(item);
+                cartItemDao.update(item);
+            } else {
+                throw new NoGoodsInStockException("Goods " + "'" + goods.getId() + " : " + goods.getName() + "' have not items in stock;");
+            }
         }
         orderDao.create(order);
 
@@ -95,16 +101,16 @@ public class OrderServiceImpl implements OrderService {
 
     public void pushOrderStatus(OrderEntity orderEntity) {
         OrderStatusEnum status = orderEntity.getStatus();
-        if(status == OrderStatusEnum.PROCESSING){
+        if (status == OrderStatusEnum.PROCESSING) {
             status = OrderStatusEnum.PENDING_PAYMENT;
 
-        } else if(status == OrderStatusEnum.PENDING_PAYMENT){
+        } else if (status == OrderStatusEnum.PENDING_PAYMENT) {
             status = OrderStatusEnum.PENDING_SHIPPING;
 
-        }  else if(status == OrderStatusEnum.PENDING_SHIPPING){
+        } else if (status == OrderStatusEnum.PENDING_SHIPPING) {
             status = OrderStatusEnum.SHIPPED;
 
-        }  else if(status == OrderStatusEnum.SHIPPED){
+        } else if (status == OrderStatusEnum.SHIPPED) {
             status = OrderStatusEnum.DELIVERED;
 
         }

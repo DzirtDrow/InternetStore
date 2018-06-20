@@ -12,52 +12,7 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
-<%--<div class="products">--%>
-<%--<div class="product-list product">--%>
-<%--<div class="row product-list-row">--%>
-<%--<div class="col col-sm-4 col-lg-2">--%>
-<%--<div class="product-image">--%>
-<%--<img src="<c:url value='/static/images/products/p1.jpg'/>" height="110">--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<!-- /.col -->--%>
-<%--<div class="col col-sm-8 col-lg-8">--%>
-<%--<div class="product-info">--%>
-<%--<h3 class="name">${goods.name}--%>
-<%--</h3>--%>
-<%--<div class="rating rateit-small"></div>--%>
-<%--<div class="product-price"><span--%>
-<%--class="price">Price:  $${goods.price}</span>--%>
-<%--</div>--%>
-<%--<!-- /.product-price -->--%>
-<%--<div class="description m-t-10">--%>
-<%--${goods.description}--%>
-<%--<br>--%>
-<%--</div>--%>
-<%--<div class="action">--%>
-<%--<c:choose>--%>
-<%--<c:when test="${goods.leftCount > 0}">--%>
-<%--<div class="action">--%>
-<%--<a href="addtocart?id=${goods.id}"--%>
-<%--class="btn btn-primary">Add to cart</a>--%>
-<%--</div>--%>
-<%--</c:when>--%>
-<%--<c:otherwise>--%>
-<%--<div class="action">--%>
-<%--<a href=""--%>
-<%--class="btn btn-primary" disabled="true">Out of stock</a>--%>
-<%--</div>--%>
-<%--</c:otherwise>--%>
-<%--</c:choose>--%>
-<%--&lt;%&ndash;<a href="addtocart?id=${goods.id}" class="btn btn-primary">Add to cart</a>&ndash;%&gt;--%>
-<%--</div>--%>
-<%--<!-- /.cart -->--%>
 
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
 <div class="breadcrumb">
     <div class="container">
         <div class="breadcrumb-inner">
@@ -90,7 +45,7 @@
                     ${goodsparam.parameter.name} :
                     <c:choose>
                         <c:when test="${goodsparam.parameter.parameterType == 'param_num'}">
-                            <b>${goodsparam.numValue}</b><br/>
+                            <b>${goodsparam.numValue}  ${goodsparam.parameter.unit}</b><br/>
                         </c:when>
                         <c:otherwise>
                             <b>${goodsparam.stringValue}</b><br/>

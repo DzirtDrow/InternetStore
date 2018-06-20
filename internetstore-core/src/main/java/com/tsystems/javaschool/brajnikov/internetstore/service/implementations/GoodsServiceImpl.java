@@ -5,14 +5,15 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.GoodsParameterDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.GoodsDto;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.ParameterTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.ParameterTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service("goodsService")
@@ -106,5 +107,39 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsDao.findCategoryByGoods(goods);
     }
 
+    @Override
+    public void alignGoodsParametersToCategory(GoodsEntity goods) {
+        List<GoodsParameterEntity> goodsParameterList = goods.getGoodsParameterList();
+        List<ParameterEntity> goodsParameters = new ArrayList<>();
+        for (GoodsParameterEntity goodsParam: goodsParameterList) {
+            goodsParameters.add(goodsParam.getParameter()); //now we got list of ParameterEntity by Goods
+        }
 
+        CategoryEntity category = goods.getCategory();
+        List<ParameterEntity> categoryParameters = category.getParameters();
+
+        Iterator<GoodsParameterEntity> goodsP = goodsParameterList.iterator();
+
+        while (goodsP.hasNext()){
+            GoodsParameterEntity temp = goodsP.next();
+            if(!categoryParameters.contains(temp.getParameter())){
+                //goodsP.remove();
+                goodsParameterDao.delete(temp);
+            }
+        }
+
+
+        for (ParameterEntity catP: categoryParameters) {
+            if(!goodsParameters.contains(catP)){
+                //goodsParameters.add(catP);
+                GoodsParameterEntity newGoodsParameter = new GoodsParameterEntity();
+                newGoodsParameter.setStringValue("");
+                newGoodsParameter.setNumValue(0);
+                newGoodsParameter.setParameter(catP);
+                newGoodsParameter.setGoods(goods);
+                goodsParameterDao.create(newGoodsParameter);
+            }
+        }
+
+    }
 }

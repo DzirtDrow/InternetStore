@@ -40,6 +40,12 @@
                     <form:input path="description" type="descriptiom"
                                 class="form-control unicase-form-control text-area"/>
                 </div>
+
+                <div class="form-group">
+                    <label class="info-title">Parameter unit: </label>
+                    <form:input path="unit" type="text"
+                                class="form-control unicase-form-control text-area"/>
+                </div>
                 <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Add</button>
 
             </form:form>

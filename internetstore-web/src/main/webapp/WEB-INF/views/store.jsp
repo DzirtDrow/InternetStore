@@ -42,20 +42,22 @@
                                 <%--<a>${parameters.description}</a>--%>
                                 <%--</c:forEach>--%>
                                 Price filter:
-                                <input type="text" id="pricemin" size="4" value="${pricefilter.min}"/> -
-                                <input type="text" id="pricemax" size="4" value="${pricefilter.max}"/>
+                                <input type="number" id="pricemin" size="4" value="${pricefilter.min}"/> -
+                                <input type="number" id="pricemax" size="4" value="${pricefilter.max}"/>
                                     <script>
                                         function someFunc(){
 
                                             var minb = document.getElementById("pricemin").value;
                                             var maxb = document.getElementById("pricemax").value;
-                                            if(minb){
+                                            var min = minb;
+                                            var max = maxb;
+                                            if(minb<0){
                                                 document.getElementById("pricemin").value = 0;
-                                                var min = 0;
+                                                min = 0;
                                             }
-                                            if(maxb){
+                                            if(maxb>1000000){
                                                 document.getElementById("pricemax").value = ${pricefilter.max};
-                                                var max = ${pricefilter.max};
+                                                max = ${pricefilter.max};
                                             }
 
                                             var sorttype = document.getElementById("sorttypeselect").value;

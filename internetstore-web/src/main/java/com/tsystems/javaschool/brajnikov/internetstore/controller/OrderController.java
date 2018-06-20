@@ -2,6 +2,7 @@ package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.CartIsEmptyException;
+import com.tsystems.javaschool.brajnikov.internetstore.exception.NoGoodsInStockException;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.OrdersNotFoundException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartItemEntity;
@@ -134,6 +135,8 @@ public class OrderController extends AbstractController {
                 id = orderService.createOrderByCart(cart);
 
             } catch (CartIsEmptyException e) {
+                return "/cart";
+            } catch (NoGoodsInStockException e){
                 return "/cart";
             }
         } else {

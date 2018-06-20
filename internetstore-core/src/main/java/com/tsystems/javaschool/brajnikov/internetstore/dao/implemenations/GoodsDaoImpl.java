@@ -27,7 +27,7 @@ public class GoodsDaoImpl extends AbstractGenericDao<GoodsEntity, Integer> imple
     @Override
     public List<GoodsEntity> getTopList(int count) {
             Query query = sessionFactory.getCurrentSession()
-                .createQuery("from GoodsEntity order by salesCount desc");
+                .createQuery("from GoodsEntity where status = 'ACTIVE' order by salesCount desc");
         List<GoodsEntity> queryResult = (List<GoodsEntity>) query.getResultList();
         int t = count;
         if (queryResult.size() < count) {
