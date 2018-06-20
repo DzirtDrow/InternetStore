@@ -28,7 +28,9 @@
                                 <div class="shopping-cart-table ">
                                     <div class="table-responsive">
                                         <table class="table">
-                                            <h4>Goods in order:</h4>
+                                            <h4>User: ${order.user.name}</h4>
+                                            <h5>Address: ${order.user.address.address}</h5>
+                                            <h6>Goods in order:</h6>
                                             <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -65,32 +67,42 @@
                         </h4>
                     </div>
                     <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
-                                        <div class="table">
+                    <div><h4>Payment method: <a>${order.paymentMethod}</a></h4></div>
+                    <div><h4>Delivery type: <a>${order.deliveryType}</a></h4></div>
+                    <div class="table">
+
+
+
                         <h4>Status:
 
                             <c:choose>
                                 <c:when test="${order.status == 'PROCESSING'}">
-                                    <font color="blue"><span class="cart-product-info center-block">Processing</span></font>
+                                    <font color="blue"><span
+                                            class="cart-product-info center-block">Processing</span></font>
                                 </c:when>
                                 <c:when test="${order.status == 'PENDING_PAYMENT'}">
-                                    <font color="red"><span class="cart-product-info center-block">Waiting for payment</span></font>
+                                    <font color="red"><span
+                                            class="cart-product-info center-block">Waiting for payment</span></font>
                                 </c:when>
                                 <c:when test="${order.status == 'PENDING_SHIPPING'}">
                                     <font color="#483d8b"><span class="cart-product-info center-block">Waiting for shipping</span></font>
                                 </c:when>
 
                                 <c:when test="${order.status == 'SHIPPED'}">
-                                    <font color="green"><span class="cart-product-info center-block">Shipped</span></font>
+                                    <font color="green"><span
+                                            class="cart-product-info center-block">Shipped</span></font>
                                 </c:when>
                                 <c:when test="${order.status == 'DELIVERED'}">
-                                    <font color="blue"><span class="cart-product-info center-block">Issued to Consumer</span></font>
+                                    <font color="blue"><span
+                                            class="cart-product-info center-block">Issued to Consumer</span></font>
                                 </c:when>
                                 <c:otherwise>
                                     <span class="cart-product-info center-block">${order.status}</span>
                                 </c:otherwise>
                             </c:choose>
                             <br>
-                            <a href="<c:url value='/changeorderstatus?id=${order.id}'/>" class="btn btn-primary btn-sm">Push order Status</a>
+                            <a href="<c:url value='/changeorderstatus?id=${order.id}'/>" class="btn btn-primary btn-sm">Push
+                                order Status</a>
                         </h4>
                     </div>
 

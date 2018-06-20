@@ -28,7 +28,7 @@
                                 <%--<a href="/internet-store/manageorders/orderbydatedesc" class="btn btn-default">v</a>--%>
                                 <th class="cart-product-quantity">
                                     <div class="quant-input">
-                                        <a class = "text-left inline">Date</a>
+                                        <a class="text-left inline">Date</a>
 
                                         <div class="arrows">
                                             <div class="arrow plus gradient"><span class="ir"><a
@@ -42,7 +42,8 @@
                                     </div>
                                 </th>
                                 <th class="cart-description item">User</th>
-                                <%--<th class="cart-edit item">Edit</th>--%>
+                                <th class="cart-edit item">Payment method</th>
+                                <th class="cart-edit item">Delivery Type</th>
                                 <th class="cart-qty item">Order Price</th>
                                 <th class="cart-sub-total item">
                                     <a href="/internet-store/manageorders/orderbystatusasc">Order Status</a>
@@ -79,6 +80,13 @@
                                         </div>
                                     </td>
 
+
+                                    <td class="cart-product-sub-total">
+                                        <span class="cart-sub-total-price">${orders.paymentMethod}</span>
+                                    </td>
+                                    <td class="cart-product-sub-total">
+                                        <span class="cart-sub-total-price">${orders.deliveryType}</span>
+                                    </td>
                                     <td class="cart-product-sub-total">
                                         <span class="cart-sub-total-price">$${orders.sum}</span>
                                     </td>

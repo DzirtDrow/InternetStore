@@ -18,8 +18,6 @@
         <div class="row ">
             <h2>Order Info</h2>
             <form:form modelAttribute="order" method="post">
-
-
             <div class="body-content outer-top-xs">
                 <div class="container">
                     <div class="row ">
@@ -64,7 +62,14 @@
                 </div>
 
                 <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
-
+                <div class="form-group">
+                    <label class="info-title">Payment method: </label>
+                    <%--<form:select cssClass="form-control selection-handle" items="${statuses}" var="type" path="status"/>--%>
+                </div>
+                <div class="form-group">
+                    <label class="info-title">Delivery type: </label>
+                    <%--<form:select cssClass="form-control selection-handle" items="${statuses}" var="type" path="status"/>--%>
+                </div>
                 <div class="table"><h4>Status: <a>
 
 
@@ -90,12 +95,14 @@
                         </c:otherwise>
                     </c:choose>
                 </a></h4></div>
+
                 <c:choose>
                     <c:when test="${order.status == 'PENDING_PAYMENT'}">
                         <a class="btn  btn-primary " href="<c:url value='/orderPay?id=${order.id}'/> "> PAY </a>
                     </c:when>
                 </c:choose>
                 </form:form>
+
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.model;
 
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderDeliveryTypeEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderPaymentMethodEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
 import lombok.Data;
 
@@ -31,6 +33,14 @@ public class OrderEntity implements Serializable{
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status;
+
+    @Column(name = "pay_method")
+    @Enumerated(EnumType.STRING)
+    private OrderPaymentMethodEnum paymentMethod;
+
+    @Column(name = "delivery_type")
+    @Enumerated(EnumType.STRING)
+    private OrderDeliveryTypeEnum deliveryType;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

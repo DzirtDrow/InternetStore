@@ -64,7 +64,8 @@
                                             </c:when>
 
                                             <c:when test="${orders.status == 'SHIPPED'}">
-                                                <font color="green"><span class="cart-product-info center-block">Shipped</span></font>
+                                                <font color="green"><span
+                                                        class="cart-product-info center-block">Shipped</span></font>
                                             </c:when>
                                             <c:when test="${orders.status == 'DELIVERED'}">
                                                 <font color="blue"><span class="cart-product-info center-block">Issued to Consumer</span></font>
