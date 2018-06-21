@@ -41,6 +41,9 @@ public class UserEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
+    @Column(name = "spent_count")
+    private int spentCount;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<OrderEntity> orders;
 

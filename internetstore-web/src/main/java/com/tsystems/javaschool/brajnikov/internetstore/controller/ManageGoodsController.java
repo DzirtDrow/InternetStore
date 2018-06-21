@@ -4,9 +4,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.enums.GoodsStatusEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.DeletingGoodsException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsParameterEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
-import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsParameterService;
-import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
+import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.*;
 import com.tsystems.javaschool.brajnikov.internetstore.validation.GoodsValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +33,9 @@ public class ManageGoodsController extends AbstractController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private OrderService orderService;
+
     /**
      * The Logger.
      */
@@ -43,6 +44,8 @@ public class ManageGoodsController extends AbstractController {
     private GoodsValidator goodsValidator;
     @Autowired
     private GoodsParameterService goodsParameterService;
+    @Autowired
+    private UserService userService;
 
     /**
      * Add goods page.
@@ -218,6 +221,14 @@ public class ManageGoodsController extends AbstractController {
         goodsService.alignGoodsParametersToCategory(goodsService.findGoodsById(id));
         return "redirect:/editgoods?id=" + id;
     }
+    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    public String statisticsPage(Model model) {
+        model.addAttribute("topgoods",goodsService.getTopSales(10));
+        model.addAttribute("topusers", userService.getTopUsers(10));
+        model.addAttribute("monthproceed",orderService.getMonthProceed() );
+        model.addAttribute("weekproceed", orderService.getWeekProceed());
 
+        return "/statistics";
+    }
 
 }

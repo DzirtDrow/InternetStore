@@ -3,11 +3,11 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.AddressDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dto.UserRequestDto;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.RoleEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedException;
 import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ import java.util.Locale;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDao dao;
+    private UserDao userDao;
 
     @Autowired
     private AddressDao addressDao;
@@ -36,22 +36,22 @@ public class UserServiceImpl implements UserService {
 
 
     public UserEntity findById(int id) {
-        return dao.findById(id);
+        return userDao.findById(id);
     }
 
     public List<UserEntity> findAllUsers() {
-        return dao.findAllUsers();
+        return userDao.findAllUsers();
     }
 
     public UserEntity findByEmail(String useremail) {
-        return dao.findByEmail(useremail);
+        return userDao.findByEmail(useremail);
     }
 
     public UserEntity findByName(String username) {
         UserEntity userEntity;
         try {
-           userEntity = dao.findByName(username);
-        } catch (NoResultException ex){
+            userEntity = userDao.findByName(username);
+        } catch (NoResultException ex) {
             return null;
         }
         return userEntity;
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     public void registerUser(UserRequestDto user) throws EmailIsUsedException {
 
-        if (dao.findByEmail(user.getEmail()) != null) {
+        if (userDao.findByEmail(user.getEmail()) != null) {
             throw new EmailIsUsedException();
         }
         UserEntity userEntity = new UserEntity();
@@ -68,16 +68,16 @@ public class UserServiceImpl implements UserService {
         userEntity.setRole(RoleEnum.user);
         userEntity.setEmail(user.getEmail());
 
-        dao.create(userEntity);
+        userDao.create(userEntity);
 
     }
 
     public void updateUser(UserEntity userEntity) {
-        dao.update(userEntity);
+        userDao.update(userEntity);
     }
 
     public void updateUserByDto(UserRequestDto userRequestDto) {
-        UserEntity user = dao.findByEmail(userRequestDto.getEmail());
+        UserEntity user = userDao.findByEmail(userRequestDto.getEmail());
         user.setLastname(userRequestDto.getLastname());
         user.setAddress(userRequestDto.getAddressEntity()); //TODO ???
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
@@ -89,12 +89,17 @@ public class UserServiceImpl implements UserService {
         }
         user.setDate(date);
 
-        dao.update(user);
+        userDao.update(user);
 
     }
 
+    @Override
+    public List<UserEntity> getTopUsers(int i) {
+        return userDao.getTopUsers(i);
+    }
+
     public AddressEntity getUserAddress(UserEntity user) {
-        if(user.getAddress() == null) {
+        if (user.getAddress() == null) {
             AddressEntity newAddress = new AddressEntity();
             newAddress.setAddress("");
             newAddress.setCoordinates("");
@@ -108,6 +113,6 @@ public class UserServiceImpl implements UserService {
 
     public void save(UserEntity userEntity) {
         userEntity.setPassword(bCryptPasswordEncoder.encode(userEntity.getPassword()));
-        dao.create(userEntity);
+        userDao.create(userEntity);
     }
 }

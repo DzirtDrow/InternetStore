@@ -35,4 +35,8 @@ public interface OrdersDao extends GenericDao<OrderEntity, Integer> {
     List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type);
 
     List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type);
+
+    Integer getWeekProceed();
+
+    Integer getMonthProceed();
 }

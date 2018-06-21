@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository("userDao")
@@ -41,6 +42,29 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
 
     public List<UserEntity> findAllUsers() {
         return getList();
+    }
+
+    @Override
+    public void updateSpentCount(UserEntity user, int summ) {
+        user.setSpentCount(user.getSpentCount() + summ);
+        update(user);
+    }
+
+    @Override
+    public List<UserEntity> getTopUsers(int count) {
+        Query query = sessionFactory.getCurrentSession()
+                .createQuery("from UserEntity order by spentCount desc");
+        List<UserEntity> queryResult = (List<UserEntity>) query.getResultList();
+        int t = count;
+        if (queryResult.size() < count) {
+            t = queryResult.size();
+        }
+        List<UserEntity> result = new ArrayList<>();
+        for (int i = 0; i < t; i++) {
+            result.add(queryResult.get(i));
+
+        }
+        return result;
     }
 
 }

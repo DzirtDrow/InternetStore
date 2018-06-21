@@ -48,7 +48,7 @@
                                     </td>
 
                                     <td class="cart-product-sub-total">
-                                        <span class="cart-sub-total-price">$${orders.sum}</span>
+                                        <span class="cart-sub-total-price">$${orders.summ}</span>
                                     </td>
 
                                     <td>

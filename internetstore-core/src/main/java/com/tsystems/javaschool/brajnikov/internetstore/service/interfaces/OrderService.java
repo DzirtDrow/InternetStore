@@ -68,10 +68,13 @@ public interface OrderService {
      */
     void pushOrderStatus(OrderEntity orderEntity);
 
-
     List<OrderEntity> getAllOrdersOrderByDate(SortingTypeEnum type);
 
     List<OrderEntity> getAllOrdersOrderByStatus(SortingTypeEnum type);
 
     void createOrderFromSessionCart(UserEntity user, SessionCart sessionCart);
+
+    Integer getWeekProceed();
+    Integer getMonthProceed();
+
 }

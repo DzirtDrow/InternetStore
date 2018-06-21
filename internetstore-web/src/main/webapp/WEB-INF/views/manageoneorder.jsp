@@ -66,7 +66,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
+                    <div class="table"><h4>Total price: <a>$${order.summ}</a></h4></div>
                     <div><h4>Payment method: <a>${order.paymentMethod}</a></h4></div>
                     <div><h4>Delivery type: <a>${order.deliveryType}</a></h4></div>
                     <div class="table">

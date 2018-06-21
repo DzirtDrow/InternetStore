@@ -75,4 +75,6 @@ public interface UserService {
     void updateUser(UserEntity userEntity);
 
     void updateUserByDto(UserRequestDto userRequestDto);
+
+    List<UserEntity> getTopUsers(int i);
 }

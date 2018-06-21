@@ -188,3 +188,4 @@ ALTER TABLE `internet_store_db`.`goods` ADD sales_count INT NULL;
 ALTER TABLE `internet_store_db`.`goods` ADD status ENUM('ACTIVE', 'ARCHIVED') NULL;
 ALTER TABLE `internet_store_db`.`orders` ADD pay_method ENUM('CASH', 'CARD') NULL;
 ALTER TABLE `internet_store_db`.`orders` ADD delivery_type ENUM('DELIVERY', 'PICKUP') NULL;
+ALTER TABLE `internet_store_db`.`orders` CHANGE sum summ INT(11);

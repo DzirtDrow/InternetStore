@@ -27,8 +27,8 @@ public class OrderEntity implements Serializable{
     private Date order_date;
 
     @Basic
-    @Column(name = "sum")
-    private int sum;
+    @Column(name = "summ")
+    private int summ;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -55,7 +55,7 @@ public class OrderEntity implements Serializable{
         return "OrderEntity{" +
                 "id=" + id +
                 ", order_date=" + order_date +
-                ", sum=" + sum +
+                ", sum=" + summ +
                 ", user=" + user +
                 '}';
     }

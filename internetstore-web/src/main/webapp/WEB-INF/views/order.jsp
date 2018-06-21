@@ -64,7 +64,7 @@
                         </h4>
                     </div>
 
-                    <div class="table"><h4>Total price: <a>$${order.sum}</a></h4></div>
+                    <div class="table"><h4>Total price: <a>$${order.summ}</a></h4></div>
                     <div class="table"><h4>Status: <a>
                         <c:choose>
                             <c:when test="${order.status == 'PROCESSING'}">

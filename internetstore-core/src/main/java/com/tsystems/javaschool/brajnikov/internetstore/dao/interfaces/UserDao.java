@@ -40,4 +40,8 @@ public interface UserDao extends GenericDao<UserEntity, Integer>{
      * @return the list of {@link UserEntity}
      */
     List<UserEntity> findAllUsers();
+
+    void updateSpentCount(UserEntity user, int summ);
+
+    List<UserEntity> getTopUsers(int i);
 }

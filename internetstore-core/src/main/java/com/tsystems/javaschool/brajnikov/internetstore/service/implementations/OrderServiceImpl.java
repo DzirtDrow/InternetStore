@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatusEnum.PENDING_PAYMENT);
         order.setDeliveryType(OrderDeliveryTypeEnum.PICKUP);
         order.setPaymentMethod(OrderPaymentMethodEnum.CASH);
-        order.setSum(cartEntity.getSum());
+        order.setSumm(cartEntity.getSum());
         order.setOrder_date(new Date());
 
         orderDao.create(order);//TODO ????
@@ -106,6 +106,7 @@ public class OrderServiceImpl implements OrderService {
             status = OrderStatusEnum.PENDING_PAYMENT;
 
         } else if (status == OrderStatusEnum.PENDING_PAYMENT) {
+            userDao.updateSpentCount(orderEntity.getUser(), orderEntity.getSumm());
             status = OrderStatusEnum.PENDING_SHIPPING;
 
         } else if (status == OrderStatusEnum.PENDING_SHIPPING) {
@@ -139,7 +140,7 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus(OrderStatusEnum.PENDING_PAYMENT);
         order.setDeliveryType(OrderDeliveryTypeEnum.PICKUP);
         order.setPaymentMethod(OrderPaymentMethodEnum.CASH);
-        order.setSum(sessionCart.getCartTotalPrice());
+        order.setSumm(sessionCart.getCartTotalPrice());
         order.setOrder_date(new Date());
 
         orderDao.create(order);
@@ -164,6 +165,17 @@ public class OrderServiceImpl implements OrderService {
         sessionCart.clear();
         //orderDao.create(order);
     }
+
+    @Override
+    public Integer getWeekProceed() {
+        return orderDao.getWeekProceed();
+    }
+
+    @Override
+    public Integer getMonthProceed() {
+        return orderDao.getMonthProceed();
+    }
+
 
 
 }
