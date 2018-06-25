@@ -41,7 +41,19 @@ public interface UserDao extends GenericDao<UserEntity, Integer>{
      */
     List<UserEntity> findAllUsers();
 
+    /**
+     * Update spent count.
+     *
+     * @param user the user
+     * @param summ the summ
+     */
     void updateSpentCount(UserEntity user, int summ);
 
+    /**
+     * Gets top users.
+     *
+     * @param i the
+     * @return the top users
+     */
     List<UserEntity> getTopUsers(int i);
 }

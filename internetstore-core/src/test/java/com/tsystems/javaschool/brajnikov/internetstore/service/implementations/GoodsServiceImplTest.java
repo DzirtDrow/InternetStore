@@ -12,6 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -59,14 +60,32 @@ public class GoodsServiceImplTest {
 
     @Test
     public void deleteGoods() {
+        initMocks(this);
+        GoodsEntity goods = new GoodsEntity();
+        goodsService.deleteGoods(goods);
+
+        verify(goodsDao).delete(goods);
     }
 
     @Test
     public void updateGoods() {
+        initMocks(this);
+        GoodsEntity goods = new GoodsEntity();
+        goodsService.updateGoods(goods);
+
+        verify(goodsDao).update(goods);
     }
 
     @Test
     public void deleteGoodsById() {
+        initMocks(this);
+        GoodsEntity goods = new GoodsEntity();
+        goods.setId(100);
+        when(goodsDao.read(100)).thenReturn(goods);
+
+        goodsService.deleteGoodsById(100);
+
+        verify(goodsDao).delete(goods);
     }
 
 

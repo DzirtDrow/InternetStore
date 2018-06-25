@@ -16,10 +16,10 @@ public class TopGoodsList {
     @Autowired
     private GoodsService goodsService;
 
-    List<GoodsDto> topGoods = new ArrayList<>();//goodsService.getTopSales(10);
+    List<GoodsDto> topGoods = new ArrayList<>();
 
     public boolean updateTopGoods() {
-        List<GoodsDto> newList = goodsService.getTopSales(10);
+        List<GoodsDto> newList = goodsService.getTopSales(9);
         if (newList.size() != topGoods.size()) {
             topGoods = newList;
             return true;

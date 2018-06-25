@@ -25,7 +25,7 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
     public List<OrderEntity> getOrdersByUser(UserEntity userEntity) throws OrdersNotFoundException {
 
         Query query = sessionFactory.getCurrentSession()
-                .createQuery("from OrderEntity where user = :userParam order by order_date desc ");
+                .createQuery("from OrderEntity where user = :userParam order by  id desc ");
         query.setParameter("userParam", userEntity);
 
         return (List<OrderEntity>) query.getResultList();
@@ -49,8 +49,7 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
                                 "where goods.id = :goodsParam"
                 );
         query.setParameter("goodsParam", goods.getId());
-        List<OrderEntity> result = (List<OrderEntity>) query.getResultList();
-        return result;
+        return (List<OrderEntity>) query.getResultList();
     }
 
     @Override
@@ -73,9 +72,6 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
         Date currentDate = new Date();
         Date weekDate = new Date();
         weekDate.setTime(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000);
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        //String currentDateString = currentDate.getYear() + "-"+ currentDate.getMonth() + "-" + currentDate.getDay();
-        //String weekDateString = weekDate.getYear() + "-"+ weekDate.getMonth() + "-" + weekDate.getDay();
         Query query = sessionFactory.getCurrentSession()
                 .createQuery("from OrderEntity where order_date between :wd and :cd");
         query.setParameter("wd", weekDate);
@@ -93,7 +89,7 @@ public class OrdersDaoImpl extends AbstractGenericDao<OrderEntity, Integer> impl
     public Integer getMonthProceed() {
         Date currentDate = new Date();
         Date monthDate = new Date();
-        Long milsInMonth = new Long(1);
+        Long milsInMonth = 1L;
         milsInMonth = milsInMonth * 31 * 24 * 60 * 60 * 1000;
         monthDate.setTime(currentDate.getTime() - milsInMonth);
         Query query = sessionFactory.getCurrentSession()

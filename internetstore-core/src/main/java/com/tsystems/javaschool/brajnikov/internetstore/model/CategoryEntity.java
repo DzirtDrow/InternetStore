@@ -33,5 +33,5 @@ public class CategoryEntity implements Serializable {
     @JoinTable(name = "category_parameter",
                 joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "parameter_id"))
-    private List<ParameterEntity> parameters = new ArrayList<ParameterEntity>();
+    private List<ParameterEntity> parameters = new ArrayList<>();
 }

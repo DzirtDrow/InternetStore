@@ -4,6 +4,8 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,8 @@ import javax.persistence.Query;
 public class CartDaoImpl extends AbstractGenericDao<CartEntity,Integer> implements CartDao{
     @Autowired
     private SessionFactory sessionFactory;
+
+    static final Logger logger = LoggerFactory.getLogger(CartDaoImpl.class);
 
     public CartEntity findCartByUser(UserEntity userEntity) {
         Query query = sessionFactory.getCurrentSession()

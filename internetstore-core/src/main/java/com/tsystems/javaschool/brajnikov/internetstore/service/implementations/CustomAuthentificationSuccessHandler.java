@@ -17,8 +17,6 @@ public class CustomAuthentificationSuccessHandler implements AuthenticationSucce
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
-        //HttpSession session = httpServletRequest.getSession();
-        //User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         httpServletResponse.setStatus(HttpServletResponse.SC_OK);
         httpServletResponse.sendRedirect("home");
     }

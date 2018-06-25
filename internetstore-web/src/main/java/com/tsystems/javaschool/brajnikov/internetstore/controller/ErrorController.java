@@ -25,7 +25,7 @@ public class ErrorController {
 
         mav.addObject("errorMsg", errorMsg);
 
-        logger.error("Exceprion handling {}", ex);
+        logger.error("Exception handling {}", ex);
         return mav;
     }
 

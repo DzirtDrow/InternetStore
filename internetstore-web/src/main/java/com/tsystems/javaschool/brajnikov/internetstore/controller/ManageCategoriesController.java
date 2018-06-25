@@ -62,11 +62,10 @@ public class ManageCategoriesController extends AbstractController {
         for (int i = 0; i < parameters.size(); i++) {
             int pi = parameters.get(i).getId();
             if (pi == idparam) {
-                //ParameterEntity p = parameters.get(i);
                 parameters.remove(i);
                 categoryEntity.setParameters(parameters);
                 categoryService.updateCategory(categoryEntity);
-            } //TODO replace to service
+            }
         }
         return "redirect:/editcategory?id=" + idcategory;
     }

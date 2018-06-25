@@ -7,5 +7,4 @@ public class CategoryDto {
 
     private int id;
     private String name;
-//    private List<GoodsDto> goodsList;
 }

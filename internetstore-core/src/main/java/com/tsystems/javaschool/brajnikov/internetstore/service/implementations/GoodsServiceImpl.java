@@ -41,7 +41,7 @@ public class GoodsServiceImpl implements GoodsService {
 
         CategoryEntity category = categoryDao.read(goodsEntity.getCategory().getId());
 
-        List<ParameterEntity> possibleParameters = category.getParameters();//TODO ???
+        List<ParameterEntity> possibleParameters = category.getParameters();
 
         for (ParameterEntity param : possibleParameters) {
             GoodsParameterEntity goodsParameter = new GoodsParameterEntity();
@@ -76,11 +76,7 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean isInOrder(GoodsEntity goods) {
 
         List<OrderEntity> ordersList = ordersDao.getOrdersByGoods(goods);
-        if (!ordersList.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+        return !ordersList.isEmpty();
     }
 
     @Override
@@ -123,7 +119,6 @@ public class GoodsServiceImpl implements GoodsService {
         while (goodsP.hasNext()){
             GoodsParameterEntity temp = goodsP.next();
             if(!categoryParameters.contains(temp.getParameter())){
-                //goodsP.remove();
                 goodsParameterDao.delete(temp);
             }
         }
@@ -131,7 +126,6 @@ public class GoodsServiceImpl implements GoodsService {
 
         for (ParameterEntity catP: categoryParameters) {
             if(!goodsParameters.contains(catP)){
-                //goodsParameters.add(catP);
                 GoodsParameterEntity newGoodsParameter = new GoodsParameterEntity();
                 newGoodsParameter.setStringValue("");
                 newGoodsParameter.setNumValue(0);

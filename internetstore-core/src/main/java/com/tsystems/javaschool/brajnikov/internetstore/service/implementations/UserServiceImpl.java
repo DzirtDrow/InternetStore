@@ -8,6 +8,8 @@ import com.tsystems.javaschool.brajnikov.internetstore.exception.EmailIsUsedExce
 import com.tsystems.javaschool.brajnikov.internetstore.model.AddressEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     public UserEntity findById(int id) {
         return userDao.findById(id);
@@ -52,6 +55,8 @@ public class UserServiceImpl implements UserService {
         try {
             userEntity = userDao.findByName(username);
         } catch (NoResultException ex) {
+
+            logger.error("Exception in UserServiceImpl in method findByName: {}", ex);
             return null;
         }
         return userEntity;
@@ -79,13 +84,13 @@ public class UserServiceImpl implements UserService {
     public void updateUserByDto(UserRequestDto userRequestDto) {
         UserEntity user = userDao.findByEmail(userRequestDto.getEmail());
         user.setLastname(userRequestDto.getLastname());
-        user.setAddress(userRequestDto.getAddressEntity()); //TODO ???
+        user.setAddress(userRequestDto.getAddressEntity());
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         Date date = null;
         try {
             date = format.parse(userRequestDto.getDate());
-        } catch (ParseException e) {
-            e.printStackTrace(); //TODO logger
+        } catch (ParseException ex) {
+            logger.error("{} in UserServiceImpl in method updateUserByDto: {}",new Date(), ex );
         }
         user.setDate(date);
 

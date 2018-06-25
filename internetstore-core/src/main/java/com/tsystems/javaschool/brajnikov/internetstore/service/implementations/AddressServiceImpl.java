@@ -16,14 +16,11 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     public void updateAddress(AddressEntity addressEntity) {
         if (addressDao.read(addressEntity.getId()) != null) {
-            //addressDao.update(addressEntity);
             AddressEntity addr = addressDao.read(addressEntity.getId());
             addr.setUser(addressEntity.getUser());
             addr.setAddress(addressEntity.getAddress());
             addr.setCoordinates(addressEntity.getCoordinates());
             addressDao.update(addr);
-
-            System.out.println(addressEntity.toString());
         } else {
             addressDao.create(addressEntity);
         }
@@ -33,9 +30,6 @@ public class AddressServiceImpl implements AddressService {
     @Transactional
     public AddressEntity findAddressByUserId(int id) {
 
-        AddressEntity addressEntity = addressDao.getAddressByUserId(id);
-
-//TODO
-        return addressEntity;
+        return addressDao.getAddressByUserId(id);
     }
 }

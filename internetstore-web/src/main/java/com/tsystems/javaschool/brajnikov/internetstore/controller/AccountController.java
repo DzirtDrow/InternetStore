@@ -67,10 +67,10 @@ public class AccountController extends AbstractController {
                               Model model) {
 
         UserEntity user = userService.findByEmail(userRequestDto.getEmail());
-        address.setUser(user); //TODO
+        address.setUser(user);
 
         if(addressService.findAddressByUserId(user.getId()) == null){
-            address.setId(userService.findByEmail(userRequestDto.getEmail()).getAddress().getId()); //TODO monstro!, i set address id from user
+            address.setId(userService.findByEmail(userRequestDto.getEmail()).getAddress().getId());
         }
 
         addressService.updateAddress(address);

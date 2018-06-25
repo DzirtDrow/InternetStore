@@ -26,7 +26,7 @@ public class UserRequestDto {
     @Size(min = 4, max = 32)
     private String confirmPassword;
 
-    private AddressEntity addressEntity; //TODO make AdressDTO
+    private AddressEntity addressEntity;
 
     private RoleEnum role;
 

@@ -84,7 +84,7 @@ public class ManageGoodsController extends AbstractController {
             goodsService.addGoods(goodsEntity);
             return new ModelAndView("redirect:/goodslist/");
         } else {
-            //return new ModelAndView("redirect:/addgoods?error=neg");
+
         }
         return new ModelAndView("redirect:/goodslist/");
     }
@@ -103,8 +103,10 @@ public class ManageGoodsController extends AbstractController {
 //        return "/goodslist";
 //    }
     @RequestMapping(value = {"/goodslist/{type}", "/goodslist"}, method = RequestMethod.GET)
-    public String listGoods(@PathVariable Map<String, String> pathVariablesMap, Model model, HttpServletRequest req) {
+    public String listGoods(@PathVariable Map<String, String> pathVariablesMap,
+                            Model model, HttpServletRequest req) {
         String type = pathVariablesMap.get("type");
+
         logger.info("Showing goods list for manager");
         PagedListHolder<GoodsEntity> goodsPage = null;
 
@@ -223,6 +225,7 @@ public class ManageGoodsController extends AbstractController {
     }
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public String statisticsPage(Model model) {
+        model.addAttribute("topgoodscount", new Integer(9));
         model.addAttribute("topgoods",goodsService.getTopSales(10));
         model.addAttribute("topusers", userService.getTopUsers(10));
         model.addAttribute("monthproceed",orderService.getMonthProceed() );

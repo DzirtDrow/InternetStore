@@ -28,14 +28,47 @@ public interface CategoryDao extends GenericDao<CategoryEntity, Integer> {
     List<CategoryEntity> getCategoryList();
 
 
+    /**
+     * Gets parameter list by category.
+     *
+     * @param category the category
+     * @return the parameter list by category
+     */
     List<ParameterEntity> getParameterListByCategory(CategoryEntity category);
 
+    /**
+     * Gets goods list by filter.
+     *
+     * @param category the category
+     * @param priceMin the price min
+     * @param priceMax the price max
+     * @param sorttype the sorttype
+     * @return the goods list by filter
+     */
     List<GoodsEntity> getGoodsListByFilter(CategoryEntity category, Integer priceMin, Integer priceMax, String sorttype);
 
+    /**
+     * Gets max price for category.
+     *
+     * @param categoryEntity the category entity
+     * @return the max price for category
+     */
     Integer getMaxPriceForCategory(CategoryEntity categoryEntity);
 
+    /**
+     * Find category by name category entity.
+     *
+     * @param name the name
+     * @return the category entity
+     */
     CategoryEntity findCategoryByName(String name);
 
+    /**
+     * Delete category by id boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     boolean deleteCategoryById(Integer id);
 
 }

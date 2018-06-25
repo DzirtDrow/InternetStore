@@ -77,4 +77,5 @@ public interface OrderService {
     Integer getWeekProceed();
     Integer getMonthProceed();
 
+    Integer reorderById(Integer orderId);
 }

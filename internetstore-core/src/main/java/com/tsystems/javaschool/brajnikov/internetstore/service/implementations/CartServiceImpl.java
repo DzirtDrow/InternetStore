@@ -2,7 +2,6 @@ package com.tsystems.javaschool.brajnikov.internetstore.service.implementations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CartItemDao;
-import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.OrdersDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.CartItemTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CartEntity;
@@ -27,8 +26,6 @@ public class CartServiceImpl implements CartService {
     private CartItemDao cartItemDao;
     @Autowired
     private UserDao userDao;
-    @Autowired
-    private OrdersDao ordersDao;
 
     public boolean addGoodsToCart(int userId, GoodsEntity goodsEntity) {
 
@@ -117,18 +114,4 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-//    public void loadSessionCart(int userId, SessionCart sessionCart) {
-//        List<CartItemEntity> sessionCartList = sessionCart.getCartItemsList();
-//
-//        for (CartItemEntity sessionCartItem:sessionCartList) {
-//            UserEntity user = userDao.findById(userId);
-//
-//
-//            cartItemDao.create(sessionCartItem);
-//
-//        }
-//
-//
-//        //TODO load session cart to user order here
-//    }
 }

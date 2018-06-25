@@ -26,7 +26,6 @@
 </div><!-- /.breadcrumb -->
 <%@include file="categories-bar.jsp" %>
 
-
 <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
     <!-- /.contact-row -->
     <div class="search-area">
@@ -77,11 +76,7 @@
 
                                     &nbsp
                                     <a id="setbtn" onclick="someFunc()" class="btn btn-link">Apply</a>
-                                <%--<form:form  role="form" modelAttribute="pricefilter" action="${pageContext.request.contextPath}/store" method="get">--%>
-                                <%--<form:input path="min" size="1" type="number"/> ---%>
-                                <%--<form:input path="max" type="number"/>--%>
-                                <%--<button type="submit" class="btn btn-primary" >Set</button>--%>
-                                <%--</form:form>--%>
+
 
                                 <c:forEach items="${goods}" var="goods">
 
@@ -89,7 +84,7 @@
                                         <div class="products">
                                             <div class="product-list product">
                                                 <div class="row product-list-row">
-                                                    <div class="col col-sm-4 col-lg-2">
+                                                    <div class="col col-sm-2 col-lg-2">
                                                         <div class="product-image">
                                                             <img src="<c:url value='/static/images/products/p1.jpg'/>"
                                                                  height="110">

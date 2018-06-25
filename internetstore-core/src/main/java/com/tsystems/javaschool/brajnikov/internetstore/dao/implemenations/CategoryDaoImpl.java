@@ -2,11 +2,13 @@ package com.tsystems.javaschool.brajnikov.internetstore.dao.implemenations;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.CategoryDao;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.model.CategoryEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.GoodsEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.ParameterEntity;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +21,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
     @Autowired
     private SessionFactory sessionFactory;
 
+    static final Logger logger = LoggerFactory.getLogger(CategoryDaoImpl.class);
     @SuppressWarnings("unchecked")
     public List<GoodsEntity> getGoodsListByCategory(CategoryEntity category) {
         Query query = sessionFactory.getCurrentSession()
@@ -69,10 +72,9 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
                         " and status = 'ACTIVE'" +
                         " order by price " + ste);
         query.setParameter("categoryParam", category);
-        query.setParameter("priceMinParam", priceMin); //TODO check not null
+        query.setParameter("priceMinParam", priceMin);
         query.setParameter("priceMaxParam", priceMax);
-        List<GoodsEntity> result = (List<GoodsEntity>) query.getResultList();
-        return result;
+        return (List<GoodsEntity>) query.getResultList();
     }
 
     @Override
@@ -90,8 +92,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
             return 0;
         }
         GoodsEntity goods = goodsEntityList.get(0);
-        Integer result = goods.getPrice();
-        return result;
+        return goods.getPrice();
     }
 
     @Override
@@ -114,6 +115,7 @@ public class CategoryDaoImpl extends AbstractGenericDao<CategoryEntity, Integer>
         try {
             delete(read(id));
         } catch (Exception e) {
+            logger.error("Exception in CategoryDaoImpl in deleteCategoryById method {}", e);
             return false;
         }
         return true;

@@ -23,6 +23,7 @@
                             <thead>
                             <tr>
                                 <%--<th class="cart-description item">Image</th>--%>
+                                <th class="cart-product-name item">Order Id</th>
                                 <th class="cart-product-name item">Order Date</th>
                                 <%--<th class="cart-edit item">Edit</th>--%>
                                 <th class="cart-qty item">Order Price</th>
@@ -36,15 +37,16 @@
                                     <td class="cart-product-name-info">
                                         <h4 class='cart-product-description'>
                                             <a href="order?id=${orders.id}">
+                                                    ${orders.id}
+                                            </a>
+                                        </h4>
+                                    </td>
+                                    <td class="cart-product-name-info">
+                                        <h4 class='cart-product-description'>
+                                            <a href="order?id=${orders.id}">
                                                 <fmt:formatDate value="${orders.order_date}" pattern="dd.MM.yyyy"/>
                                             </a>
                                         </h4>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <div class="rating rateit-small"></div>
-                                            </div>
-
-                                        </div>
                                     </td>
 
                                     <td class="cart-product-sub-total">
@@ -81,8 +83,8 @@
                                     <td>
                                         <a href="<c:url value='/order?id=${orders.id}'/>"
                                            class="btn  btn-primary ">Order Page</a>
-                                        <a href="<c:url value='#'/>"
-                                           class="btn  btn-primary " disabled="true">Reorder</a>
+                                        <a href="<c:url value='/reorder?id=${orders.id}'/>"
+                                           class="btn  btn-primary ">Reorder</a>
 
                                     </td>
 

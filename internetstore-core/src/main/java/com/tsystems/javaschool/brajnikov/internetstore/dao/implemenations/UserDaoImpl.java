@@ -4,6 +4,8 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.AbstractGenericDao;
 import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +19,8 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
     @Autowired
     private SessionFactory sessionFactory;
 
+    static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+
     public UserEntity findById(int id) {
         return read(id);
     }
@@ -27,8 +31,10 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
 
         UserEntity userEntity = null;
         try {
-            userEntity = (UserEntity)query.getSingleResult();
+            userEntity = (UserEntity) query.getSingleResult();
         } catch (NoResultException e) {
+            logger.error("UserDaoImpl Error in findByEmail method with parameter:{}", email);
+
             return null;
         }
         return userEntity;
@@ -37,7 +43,7 @@ public class UserDaoImpl extends AbstractGenericDao<UserEntity, Integer> impleme
     public UserEntity findByName(String username) {
         Query query = sessionFactory.getCurrentSession().createQuery("from UserEntity where name = :paramName");
         query.setParameter("paramName", username);
-        return (UserEntity)query.getSingleResult();
+        return (UserEntity) query.getSingleResult();
     }
 
     public List<UserEntity> findAllUsers() {

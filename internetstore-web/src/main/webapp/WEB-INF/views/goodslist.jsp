@@ -21,7 +21,6 @@
     <span class="lead">List of Goods </span>
 </div>
 
-
 <div>
     <c:set var="pageListHolder" value="${goods}" scope="session"/>
     <div class="body-content outer-top-xs">
@@ -31,11 +30,17 @@
                     <div class="shopping-cart-table ">
                         <div class="table-responsive">
                             <div>
+
+
                                 <span style="float:right;">
                                   Page ${pageListHolder.page + 1} of ${pageListHolder.pageCount};<br/>  Goods on page: 10.
                                     <br/>Total goods count: ${goodsCount}
                                 </span>
 
+                                <%--<div>--%>
+                                    <%--<input type="text" value=""/>--%>
+                                    <%--<a class="btn-primary" onclick="">search</a>--%>
+                                <%--</div>--%>
 
                                 <div>
                                 <span style="float:left;">

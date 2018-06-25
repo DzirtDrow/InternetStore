@@ -16,5 +16,11 @@ public interface AddressDao extends GenericDao<AddressEntity, Integer>{
      */
     AddressEntity getAddressByUser(UserEntity user);
 
+    /**
+     * Gets address by user id.
+     *
+     * @param id the id
+     * @return the address by user id
+     */
     AddressEntity getAddressByUserId(int id);
 }

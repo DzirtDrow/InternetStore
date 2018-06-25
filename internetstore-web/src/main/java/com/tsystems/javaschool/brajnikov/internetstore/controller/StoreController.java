@@ -1,6 +1,7 @@
 package com.tsystems.javaschool.brajnikov.internetstore.controller;
 
 import com.tsystems.javaschool.brajnikov.internetstore.dto.SessionCart;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.filter.PriceFilter;
 import com.tsystems.javaschool.brajnikov.internetstore.model.*;
 import com.tsystems.javaschool.brajnikov.internetstore.service.implementations.CustomAuthentificationSuccessHandler;
@@ -8,7 +9,6 @@ import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CartSe
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.CategoryService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.GoodsService;
 import com.tsystems.javaschool.brajnikov.internetstore.service.interfaces.UserService;
-import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,15 +93,13 @@ public class StoreController extends AbstractController {
         List<ParameterEntity> parameterEntityList = categoryEntity.getParameters();
         model.addAttribute("parameters", parameterEntityList);
 
-        if(priceMin == null) {
+        if (priceMin == null) {
             priceMin = 0;
         }
-        if(priceMax == null) {
+        if (priceMax == null) {
             priceMax = categoryService.getMaxPriceForCategory(categoryEntity);
         }
         List<GoodsEntity> goodsByCategory = categoryService.getGoodsListByCategory(categoryId);
-        //model.addAttribute("goods", goodsByCategory);
-
 
         List<GoodsEntity> goodsByFilters = categoryService.getGoodsListByFilter(categoryEntity, priceMin, priceMax, sorttype);
         model.addAttribute("goods", goodsByFilters);
@@ -133,11 +131,8 @@ public class StoreController extends AbstractController {
                     //success
                 } else {
                     result.rejectValue("name", "Size.userForm.username");
-
-                    //errorr (if goods count =0)
                 }
             } else {
-                //TODO сделать то же для sessioncart
                 sessionCart.addItemToSessionCart(goodsService.findGoodsById(id));
             }
         }
@@ -200,18 +195,19 @@ public class StoreController extends AbstractController {
     public String increaseItemCount(Model model, @RequestParam("id") Integer id) {
         if (!isCurrentAuthenticationAnonymous()) {
             if (id != null) {
-                //TODO check items count
                 CartItemEntity item = cartService.getCartItemById(id);
                 if (item.getCount() < goodsService.findGoodsById(item.getGoods().getId()).getLeftCount()) {
                     cartService.increaseItemsCount(id);
-                } else {
-                    //TODO Должна быть ошибка преаышения количества
                 }
 
             }
         } else {
-            //TODO для sessioncart сделать то же
-            sessionCart.increaseItemCount(id);
+            CartItemEntity item = sessionCart.getSessionCartItemById(id);
+            if (item != null) {
+                if (item.getCount() < goodsService.findGoodsById(item.getGoods().getId()).getLeftCount()) {
+                    sessionCart.increaseItemCount(id);
+                }
+            }
         }
         return "redirect:/cart";
     }
@@ -219,7 +215,7 @@ public class StoreController extends AbstractController {
     /**
      * Decrease item count string.
      *
-     * @param model the model
+     * @param model the modelcart
      * @param id    the id
      * @return the string
      */

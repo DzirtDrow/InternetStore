@@ -14,7 +14,6 @@ import java.util.Map;
  * Session cart - need to support cart in session scope
  */
 @Component("sessionCart")
-//@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Data
 public class SessionCart {
 
@@ -31,14 +30,19 @@ public class SessionCart {
         return cartTotalPrice;
     }
 
-    private Map<Integer, CartItemEntity> goodsInCart = new HashMap<Integer, CartItemEntity>();
+    private Map<Integer, CartItemEntity> goodsInCart = new HashMap<>();
     private boolean orderFlag = false;
     /**
      * Add item to session cart.
      *
      * @param goodsEntity the goods entity
      */
-    public void addItemToSessionCart(GoodsEntity goodsEntity) {
+    public boolean addItemToSessionCart(GoodsEntity goodsEntity) {
+
+        if (goodsEntity.getLeftCount() < 1) {
+            return false;
+        }
+
         int goodsId = goodsEntity.getId();
         if (goodsInCart.containsKey(goodsEntity.getId())) {
             goodsInCart.get(goodsId).setCount(goodsInCart.get(goodsId).getCount() + 1);
@@ -50,6 +54,7 @@ public class SessionCart {
             cartItemEntity.setId(goodsId);
             goodsInCart.put(goodsId, cartItemEntity);
         }
+        return true;
     }
 
     /**
@@ -105,5 +110,14 @@ public class SessionCart {
 
     public void clear() {
         goodsInCart.clear();
+    }
+
+    public CartItemEntity getSessionCartItemById(Integer id) {
+
+        if(goodsInCart.containsKey(id)){
+            return goodsInCart.get(id);
+        } else {
+            return null;
+        }
     }
 }

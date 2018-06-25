@@ -24,10 +24,7 @@ public class PromotionServiceImpl implements PromotionService {
 
     public List<PromotionDto> getPromotionDtoList() {
         List<PromotionDto> result;// = new ArrayList<>();
-//        Random r = new Random();
-//        for(int i = 0; i < r.nextInt(6) + 2; i++){
-//            result.add(new PromotionDto(i, "test" + i, "test desc" + i));
-//        }
+
 
         result = promotionDao.getPromotionList()
                 .stream()

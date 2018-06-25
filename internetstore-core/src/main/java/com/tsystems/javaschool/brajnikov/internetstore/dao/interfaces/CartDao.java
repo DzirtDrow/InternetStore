@@ -19,7 +19,7 @@ public interface CartDao extends GenericDao<CartEntity, Integer> {
     /**
      * Gets cart item from cart by goods.
      *
-     * @param cartEntity {@link CartEntity} the cart entity
+     * @param cartEntity  {@link CartEntity} the cart entity
      * @param goodsEntity {@link GoodsEntity}the goods entity
      * @return {@link CartItemEntity} from cart by goods
      */

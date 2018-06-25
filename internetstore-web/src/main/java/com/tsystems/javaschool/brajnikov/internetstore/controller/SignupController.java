@@ -63,15 +63,16 @@ public class SignupController extends AbstractController {
                            ModelMap model) {
         try {
             userValidator.validate(user, result);
-            if (result.hasErrors()){
-                    return "signup";
-                }
-                userService.registerUser(user);
-            } catch(EmailIsUsedException ex){
+            if (result.hasErrors()) {
                 return "signup";
             }
-            return "redirect:/index";
+            userService.registerUser(user);
+        } catch (EmailIsUsedException ex) {
+            logger.error("Exception in SignUp controller in save User method ", ex);
+            return "signup";
         }
-
-
+        return "redirect:/index";
     }
+
+
+}

@@ -159,7 +159,7 @@ public class OrderController extends AbstractController {
             }
         } else {
             if ((sessionCart.getCartItemsList() != null) && (!sessionCart.getCartItemsList().isEmpty())) {
-                //authHandler.setOrderFlag(true);
+
                 sessionCart.setOrderFlag(true);
                 return "/login";
             } else {
@@ -168,4 +168,13 @@ public class OrderController extends AbstractController {
         }
         return "redirect:/order?id=" + id;
     }
+
+
+    @RequestMapping(value = {"/reorder"}, method = RequestMethod.GET)
+    public String reOrder(Model model, @RequestParam("id") Integer orderId) {
+
+        Integer newOrderId = orderService.reorderById(orderId);
+        return "redirect:/order?id=" + newOrderId;
+    }
+
 }
