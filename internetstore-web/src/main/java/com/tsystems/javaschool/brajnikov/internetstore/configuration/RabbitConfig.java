@@ -1,6 +1,6 @@
 package com.tsystems.javaschool.brajnikov.internetstore.configuration;
 
-import com.tsystems.javaschool.brajnikov.internetstore.webservices.TestMQController;
+import com.tsystems.javaschool.brajnikov.internetstore.webservices.MQController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpAdmin;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfig{
 
-    static final Logger logger = LoggerFactory.getLogger(TestMQController.class);
+    static final Logger logger = LoggerFactory.getLogger(MQController.class);
 
     @Bean
     public ConnectionFactory connectionFactory() {

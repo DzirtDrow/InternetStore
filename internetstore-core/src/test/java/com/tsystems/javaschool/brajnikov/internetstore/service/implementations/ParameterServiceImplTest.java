@@ -11,6 +11,7 @@ import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -49,6 +50,14 @@ public class ParameterServiceImplTest {
 
     @Test
     public void addNewParameter() {
+        initMocks(this);
+
+        when(parameterDao.findByName("test")).thenReturn(null);
+
+        ParameterEntity parameter = new ParameterEntity();
+        parameterService.addNewParameter(parameter);
+
+        verify(parameterDao).create(parameter);
     }
 
     private ParameterEntity getTestParameter(int i) {

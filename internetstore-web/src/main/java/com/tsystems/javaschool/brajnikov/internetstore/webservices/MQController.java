@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class TestMQController {
-    static final Logger logger = LoggerFactory.getLogger(TestMQController.class);
+public class MQController {
+    static final Logger logger = LoggerFactory.getLogger(MQController.class);
 
     @Autowired
     RabbitTemplate template;

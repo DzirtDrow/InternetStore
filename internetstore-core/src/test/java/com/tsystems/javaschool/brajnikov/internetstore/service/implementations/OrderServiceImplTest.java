@@ -7,6 +7,7 @@ import com.tsystems.javaschool.brajnikov.internetstore.dao.interfaces.UserDao;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderDeliveryTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderPaymentMethodEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.enums.OrderStatusEnum;
+import com.tsystems.javaschool.brajnikov.internetstore.enums.SortingTypeEnum;
 import com.tsystems.javaschool.brajnikov.internetstore.model.OrderEntity;
 import com.tsystems.javaschool.brajnikov.internetstore.model.UserEntity;
 import org.junit.Test;
@@ -75,17 +76,7 @@ public class OrderServiceImplTest {
         assertEquals(2,orderList.size());
         assertEquals(100, orderList.get(0).getId());
     }
-
-    @Test
-    public void getOrdersListByUser() {
-        initMocks(this);
-        UserEntity testUser = getTestUser("name");
-//        try {
-//            when(orderDao.getOrdersByUser(testUser)).thenReturn(getTestOrderListByUser(testUser));
-//        } catch (OrdersNotFoundException e) {
-//            Assert.assertNotEquals("", thrown.getMessage());
-//        }
-    }
+    
 
     @Test
     public void updateOrder() {
@@ -96,28 +87,27 @@ public class OrderServiceImplTest {
         verify(orderDao).update(order);
     }
 
-    @Test
-    public void pushOrderStatus() {
-        initMocks(this);
-        OrderEntity order = new OrderEntity();
-        order.setStatus(OrderStatusEnum.PENDING_PAYMENT);
-
-        orderService.pushOrderStatus(order);
-
-        verify(orderDao).update(order);
-    }
 
     @Test
     public void getAllOrdersOrderByDate() {
+        initMocks(this);
+        SortingTypeEnum sort = SortingTypeEnum.ASC;
+
+        orderService.getAllOrdersOrderByDate(sort);
+
+        verify(orderDao).getAllOrdersOrderByDate(sort);
     }
 
     @Test
     public void getAllOrdersOrderByStatus() {
+        initMocks(this);
+        SortingTypeEnum sort = SortingTypeEnum.ASC;
+
+        orderService.getAllOrdersOrderByStatus(sort);
+
+        verify(orderDao).getAllOrdersOrderByStatus(sort);
     }
 
-    @Test
-    public void createOrderFromSessionCart() {
-    }
 
     @Test
     public void getWeekProceed() {

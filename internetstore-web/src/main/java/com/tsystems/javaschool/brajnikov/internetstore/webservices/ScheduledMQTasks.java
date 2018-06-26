@@ -16,11 +16,7 @@ public class ScheduledMQTasks {
     @Autowired
     TopGoodsList topGoodsList;
 
-//    @PostConstruct
-//    public void init(){
-//        template.convertAndSend("promo_queue", "GOODS.MESSAGE");
-//    }
-    @Scheduled(fixedDelay = 120000) //2 minutes
+    @Scheduled(fixedDelay = 600000) //10 minutes
     public void checkTopGods() {
         if (topGoodsList.updateTopGoods()) {
             template.convertAndSend("promo_queue", "GOODS.MESSAGE");
